@@ -24,8 +24,8 @@ export default class Server {
   }
 
   public routes = (): void => {
-    this.routers.forEach((router) => {
-      this.app.use('/api', cors(), router.router)
+    this.routers.forEach((routerConcreto) => {
+      this.app.use('/api', cors(), routerConcreto.router)
     })
   }
 
