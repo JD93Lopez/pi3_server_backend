@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import CitaControllerExpressPort from '../../../domain/port/driver/controller/CitaControllerExpressPort'
 import CitaUseCasePort from '../../../domain/port/driver/usecase/CitaUseCasePort'
-import Cita from '../../../domain/model/cita/Cita'
+import Cita from '../../../domain/model/icon/Icon'
 import CitaCreateUseCasePort from '../../../domain/port/driver/usecase/CitaCreateUseCasePort'
 import CitasClienteUseCasePort from '../../../domain/port/driver/usecase/CitasClienteUseCasePort'
 import GenerarTickerUseCasePort from '../../../domain/port/driver/usecase/GenerarTickerUseCasePort'

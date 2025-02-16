@@ -14,7 +14,7 @@ export default class NullCita extends AbstractCita {
       lugar: 'not found place in database',
       estado_cita: 'PENDIENTE',
       estado_ticket: 'PENDIENTE',
-      anotaciones: 'not found notes in database',
+      anotaciones: 'not found notes in database', 
       cliente: new NullCliente(),
     })
   }

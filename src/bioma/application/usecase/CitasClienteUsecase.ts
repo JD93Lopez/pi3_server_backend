@@ -1,5 +1,5 @@
-import NullCita from '../../domain/model/cita/NullCita'
-import Cita from '../../domain/model/cita/Cita'
+import NullCita from '../../domain/model/icon/Nullicon'
+import Cita from '../../domain/model/icon/Icon'
 import CitasClienteUseCasePort from '../../domain/port/driver/usecase/CitasClienteUseCasePort'
 import CitasClienteRetrieverServicePort from '../../domain/port/driver/service/CitasClienteRetrieverServicePort'
 

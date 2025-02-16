@@ -1,4 +1,4 @@
-import Cita from '../../../model/cita/Cita'
+import Cita from '../../../model/icon/Icon'
 
 export default interface CitaRetrieverServicePort {
   retrieve: () => Promise<Cita[]>

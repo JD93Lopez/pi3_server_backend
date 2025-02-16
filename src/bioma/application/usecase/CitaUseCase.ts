@@ -1,7 +1,7 @@
 import CitaRetrieverServicePort from '../../domain/port/driver/service/CitaRetrieverServicePort'
 import CitaUseCasePort from '../../domain/port/driver/usecase/CitaUseCasePort'
-import NullCita from '../../domain/model/cita/NullCita'
-import Cita from '../../domain/model/cita/Cita'
+import NullCita from '../../domain/model/icon/Nullicon'
+import Cita from '../../domain/model/icon/Icon'
 
 export default class CitaUsecase implements CitaUseCasePort {
   constructor(

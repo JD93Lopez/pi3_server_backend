@@ -1,5 +1,5 @@
-import { CitaTypes, EstadoCitaTypes, EstadoTicketTypes } from '../../domain/model/cita/AbstractCita'
-import Cita from '../../domain/model/cita/Cita'
+import { CitaTypes, EstadoCitaTypes, EstadoTicketTypes } from '../../domain/model/icon/AbstractIcon'
+import Cita from '../../domain/model/icon/Icon'
 import NullCliente from '../../domain/model/cliente/NullCliente'
 import CitaRepositoryPort from '../../domain/port/driven/CitaRepositoryPort'
 import CitaRetrieverServicePort from '../../domain/port/driver/service/CitaRetrieverServicePort'
