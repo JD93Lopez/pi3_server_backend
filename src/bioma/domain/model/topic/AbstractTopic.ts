@@ -1,4 +1,4 @@
-export abstract class abstractTopic {
+export abstract class AbstractTopic {
 
     protected id_topic: number;
     protected name: string;

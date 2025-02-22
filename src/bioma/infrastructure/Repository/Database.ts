@@ -1,15 +1,21 @@
 import mysql, { Connection } from 'mysql2/promise';
 
+
 export default class Database {
     private static connection: Connection;
 
     public static async getConnection(): Promise<Connection> {
         if (!Database.connection) {
             Database.connection = await mysql.createConnection({
-                host: 'localhost',  
-                user: 'root',  
-                password: 'root',  
-                database: 'desweb_pf'
+                host: 'mysql-memosauria-hpaolahz1-743c.f.aivencloud.com',
+                port: 10770,
+                user: 'avnadmin',  
+                password: 'AVNS_2Iqt6zk1Rp61GoOnqV6',  
+                database: 'memosauria',
+                ssl: {
+                    ca: './ca.pem',
+                    rejectUnauthorized: false // Desactivar la validación del certificado
+                }
             });
             console.log('Conexión a la base de datos establecida');
         }

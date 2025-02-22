@@ -1,6 +1,6 @@
 import RouterExpress from '../../../../express/domain/RouterExpress'
-import ClientRouterExpressPort from '../../../domain/port/driver/router/ClientRouterExpressPort'
-import ClientControllerExpressPort from '../../../domain/port/driver/controller/ClientControllerExpressPort'
+import ClientRouterExpressPort from '../../../domain/ports/driver/router/ClientRouterExpressPort'
+import ClientControllerExpressPort from '../../../domain/ports/driver/controller/ClientControllerExpressPort'
 
 export default class ClientRouterExpress extends RouterExpress implements ClientRouterExpressPort {
   constructor(

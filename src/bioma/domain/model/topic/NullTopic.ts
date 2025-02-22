@@ -1,9 +1,10 @@
-import { abstractTopic } from "./AbstractTopic";
+import { AbstractTopic } from "./AbstractTopic";
 
-export class NullUser extends abstractTopic {
+
+export class NullTopic extends AbstractTopic {
     constructor() {
         super(
-          "",
+          0,
           "",
           ""
         );

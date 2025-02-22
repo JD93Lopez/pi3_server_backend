@@ -1,9 +1,9 @@
 import { AbstractTheme } from "./AbstractTheme";
 
-export class NullUser extends AbstractTheme {
+export class NullTheme extends AbstractTheme {
     constructor() {
         super(
-            -1,
+            0,
             "/default.png"
         );
     }

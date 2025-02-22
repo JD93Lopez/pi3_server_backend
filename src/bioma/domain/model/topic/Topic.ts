@@ -1,8 +1,9 @@
-import { abstractTopic } from "./AbstractTopic";
+import { AbstractTopic } from "./AbstractTopic";
 
-export class Flashcard extends abstractTopic {
 
-    constructor(id_topic: string, name: string, descriptiopn: string) {
+export class Flashcard extends AbstractTopic {
+
+    constructor(id_topic: number, name: string, descriptiopn: string) {
         super(id_topic, name, descriptiopn);
     }
     

@@ -1,13 +1,14 @@
-import { abstractFlashcard } from "./AbstractFlashcard";
+import { AbstractFlashcard } from "./AbstractFlashcard";
 
-export class NullUser extends abstractFlashcard {
+export class NullFlashcard extends AbstractFlashcard {
     constructor() {
         super(
             {
-                id_flashcard: -1,
-                question: 'NONE',
-                answer: 'NONE',
-                learned: false  
+                id_flashcard: 0,
+                question: "",
+                answer: "",
+                learned: false,
+                last_date: new Date()
             }
         );
     }
