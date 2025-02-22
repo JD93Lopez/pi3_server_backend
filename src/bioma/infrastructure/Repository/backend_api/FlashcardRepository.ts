@@ -13,12 +13,12 @@ export default class FlashcardRepository implements FlashcardRepositoryPort {
     
     const citasFromDB = await this.citaDBC.getFlashcards()
     
-    return citasFromDB.map((flashcard: any) => ({
+    return citasFromDB.map((flashcard: FlashcardInterface) => ({
         id_flashcard: flashcard.id_flashcard,
         question: flashcard.question,
         answer: flashcard.answer,
         learned: flashcard.learned,
-        last_date: flashcard.date
+        last_date: flashcard.last_date
     }))
   }
   

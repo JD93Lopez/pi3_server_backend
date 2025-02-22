@@ -21,21 +21,18 @@ export class OrganizerService implements OrganizerServicePort {
         unlearnedFlashcards.sort((a, b) => {
             return a.getLastDateAdded().getTime() - b.getLastDateAdded().getTime();
         });
-
-        // rellenar organizedFlashcards con 2 flashcards no aprendidas y una aprendida hasta terminar
-        // si se vacia alguno las demas van al final
-
         return this.interleaveFlashcards(unlearnedFlashcards, learnedFlashcards);
-
+        
     }
-
+    
+    
+    // rellenar organizedFlashcards con 2 flashcards no aprendidas y una aprendida hasta terminar
     private interleaveFlashcards(unlearned: AbstractFlashcard[], learned: AbstractFlashcard[]): AbstractFlashcard[] {
         const organized: AbstractFlashcard[] = [];
         let uIndex = 0;
         let lIndex = 0;
 
         while (uIndex < unlearned.length || lIndex < learned.length) {
-            // Agregar hasta 2 no aprendidas
             for (let i = 0; i < 2; i++) {
                 if (uIndex < unlearned.length) {
                     if (unlearned[uIndex] !== undefined ) {
@@ -44,14 +41,10 @@ export class OrganizerService implements OrganizerServicePort {
                     uIndex++;
                 }
             }
-            
-            // Agregar 1 aprendida si hay disponibles
-
             if (lIndex < learned.length) {
                 organized.push(learned[lIndex++] as AbstractFlashcard);
             }
         }
-
         return organized;
     }
 

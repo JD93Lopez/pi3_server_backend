@@ -27,8 +27,7 @@ export abstract class AbstractFlashcard {
     getLastDateAdded(): Date {
         return this.last_date;
     }
-
-
+    
 }
 
 export interface FlashcardAttributes {

@@ -12,8 +12,6 @@ export class GetOrganizedFlashcardsUseCase {
     let flashcards = await this.flashcardRetriever.getFlashcards();
     
     flashcards = this.flashcardOrganizer.prioritize(flashcards);
-    console.log('imprime aqui ', flashcards);
-
     return flashcards;
   }
 }

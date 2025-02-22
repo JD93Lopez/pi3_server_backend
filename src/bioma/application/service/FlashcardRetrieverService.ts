@@ -1,22 +1,17 @@
 import { AbstractFlashcard } from "../../domain/model/flashcard/AbstractFlashcard";
-import { Flashcard } from "../../domain/model/flashcard/Flashcard";
 import { FlashcardRepositoryPort } from "../../domain/ports/driven/FlashcardRepositoryPort";
 import { FlashcardRetrieverServicePort } from "../../domain/ports/driver/service/FlashcardRetrieverServicePort";
+import FlashcardHelper from "../../helper/FlashcardHelper";
 
 export class FlashcardRetrieverService implements FlashcardRetrieverServicePort {
 
     constructor(private flashcardRepository: FlashcardRepositoryPort) {}
 
     async getFlashcards(): Promise<AbstractFlashcard[]> {
+
         const flashcards = await this.flashcardRepository.findAll();
-
-        return flashcards.map(flashcard => (new Flashcard({
-            id_flashcard: flashcard.id_flashcard,
-            question: flashcard.question,
-            answer: flashcard.answer,
-            learned: flashcard.learned,
-            last_date: flashcard.last_date
-        })));
+        //Este helper lo pasa de la forma que viene de la base de datos a la forma que se necesita en el dominio
+        const flashcardHelper = new FlashcardHelper();
+        return flashcardHelper.databaseToDomainFlashcard(flashcards);
     }
-
 }
