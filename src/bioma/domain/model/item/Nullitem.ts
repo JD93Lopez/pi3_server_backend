@@ -1,6 +1,6 @@
 import { AbstractItem } from "./AbstractItem";
 
-export class NullUser extends AbstractItem {
+export class NullItem extends AbstractItem {
     constructor() {
         super(
             -1,

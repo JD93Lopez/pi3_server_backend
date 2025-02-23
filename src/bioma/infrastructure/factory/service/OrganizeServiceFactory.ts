@@ -1,0 +1,8 @@
+import { OrganizerService } from '../../../application/service/OrganizerService'
+import { OrganizerServicePort } from '../../../domain/ports/driver/service/OrganizerServicePort'
+
+export default class OrganizeServiceFactory {
+  public static readonly create = (): OrganizerServicePort  => {
+    return new OrganizerService()
+  }
+}

@@ -1,9 +1,8 @@
-import { UserInterface } from "../types/userInterface";
-import { abstractUser } from "./AbstractUser";
+import UserAttributes, { AbstractUser } from "./AbstractUser";
 
-export class User  extends abstractUser {
+export class User extends AbstractUser {
 
-    constructor(userAttributes: UserInterface) {
+    constructor(userAttributes: UserAttributes) {
         super(userAttributes);
     }
 
@@ -12,3 +11,6 @@ export class User  extends abstractUser {
     }
 
 }
+
+
+

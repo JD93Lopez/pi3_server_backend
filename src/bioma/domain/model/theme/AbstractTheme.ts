@@ -1,10 +1,10 @@
 export abstract class AbstractTheme {
 
-    protected id_item: number;
+    protected id_theme: number;
     protected image: string;
 
-    constructor(id_item: number, image: string) {
-        this.id_item = id_item;
+    constructor(id_theme: number, image: string) {
+        this.id_theme = id_theme;
         this.image = image;
     }
     

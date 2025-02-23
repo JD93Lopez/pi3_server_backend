@@ -1,6 +1,6 @@
 import { AbstractIcon } from "./AbstractIcon";
 
-export class NullkIcon extends AbstractIcon {
+export class NullIcon extends AbstractIcon {
 
     constructor() {
         super(

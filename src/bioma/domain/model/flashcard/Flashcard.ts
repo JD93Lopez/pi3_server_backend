@@ -1,9 +1,8 @@
-import { FlashcardInterface } from "../types/flashcardInterface";
-import { abstractFlashcard } from "./AbstractFlashcard";
+import { AbstractFlashcard, FlashcardAttributes } from "./AbstractFlashcard";
 
-export class Flashcard extends abstractFlashcard {
+export class Flashcard extends AbstractFlashcard {
 
-    constructor(cardAttributes: FlashcardInterface) {
+    constructor(cardAttributes: FlashcardAttributes) {
         super(cardAttributes);
     } 
 
