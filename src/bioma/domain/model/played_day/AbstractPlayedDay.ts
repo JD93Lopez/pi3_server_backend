@@ -12,7 +12,6 @@ export abstract class AbstractPlayedDay {
         this.received_xp = dato.received_xp;
     }
     
-    
     abstract isNull(): boolean;
 
 }

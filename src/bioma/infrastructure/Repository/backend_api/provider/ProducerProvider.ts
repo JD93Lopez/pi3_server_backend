@@ -1,6 +1,6 @@
 import NullAgente from '../../../../domain/model/producer/NullAgente'
 import Agente from '../../../../domain/model/producer/Agente'
-import CitaDataInterface from '../../../../domain/types/CitaDataInterface'
+import CitaDataInterface from '../../../../domain/dctos/CitaDataInterface'
 
 export default class ProducerProvider {
   public static get = (movie: CitaDataInterface): Agente[] => {

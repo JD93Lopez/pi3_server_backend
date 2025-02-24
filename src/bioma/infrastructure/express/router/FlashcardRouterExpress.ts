@@ -15,9 +15,13 @@ export default class FlashcardRouterExpress extends RouterExpress implements Fla
   }
 
   public getFlashcardRoutes = (): void => {
-    this.router.get(
-      '/v1.0/flashcard/get/organized',
-      this.flashcardController.getOrganizedFlashcards.bind(this.flashcardController)
+    this.router.post(
+      '/v1.0/flashcard/topic/organized',
+      this.flashcardController.getOrganizedFlashcardsByTopic.bind(this.flashcardController)
+    ),
+    this.router.post(
+      '/v1.0/flashcard/creation',
+      this.flashcardController.getOrganizedFlashcardsByTopic.bind(this.flashcardController)
     )
   }
 }

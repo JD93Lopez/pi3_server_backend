@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
 export interface FlashcardControllerExpressPort {
-   getOrganizedFlashcards(_req: Request, res: Response): Promise<void>
+   getOrganizedFlashcardsByTopic(_req: Request, res: Response): Promise<void>
+   createFlashcards(_req: Request, res: Response): Promise<void>
 }
