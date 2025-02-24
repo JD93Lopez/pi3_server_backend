@@ -1,4 +1,5 @@
-import { FlashcardInterface } from "../../types/FlashcardInterface";
+import { FlashcardDcto} from "../../dctos/FlashcardDcto";  
 export interface FlashcardRepositoryPort {
-    findAll(): Promise<FlashcardInterface[]>
+    findAll(): Promise<FlashcardDcto[]>
+    findByTopic(topic_id: number): Promise<FlashcardDcto[]>
 }

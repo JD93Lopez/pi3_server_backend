@@ -7,6 +7,7 @@ export abstract class AbstractFlashcard {
     protected answer: string;
     protected learned: boolean;
     protected last_date: Date;
+    
 
     constructor(cardAttributes: FlashcardAttributes) {
         this.id_flashcard = cardAttributes.id_flashcard;
@@ -23,8 +24,24 @@ export abstract class AbstractFlashcard {
     isLearned(): boolean {
         return this.learned;
     }
-    
-    getLastDateAdded(): Date {
+
+    getIdFlashcard(): number {
+        return this.id_flashcard;
+    }
+
+    getQuestion(): string {
+        return this.question;
+    }
+
+    getAnswer(): string {
+        return this.answer;
+    }
+
+    getLearned(): boolean {
+        return this.learned;
+    }
+
+    getLastDate(): Date {
         return this.last_date;
     }
     

@@ -1,10 +1,10 @@
-import { AbstractTopic } from "./AbstractTopic";
+import { AbstractTopic, TopicAttributes } from "./AbstractTopic";
 
 
-export class Flashcard extends AbstractTopic {
+export class Topic extends AbstractTopic {
 
-    constructor(id_topic: number, name: string, descriptiopn: string) {
-        super(id_topic, name, descriptiopn);
+    constructor(topicAttributes: TopicAttributes) {
+        super(topicAttributes);
     }
     
     isNull(): boolean {

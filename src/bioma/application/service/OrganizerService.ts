@@ -15,11 +15,11 @@ export class OrganizerService implements OrganizerServicePort {
 
         // ordenar learnedFlashcards por fecha de aprendizaje
         learnedFlashcards.sort((a, b) => {
-            return a.getLastDateAdded().getTime() - b.getLastDateAdded().getTime();
+            return a.getLastDate().getTime() - b.getLastDate().getTime();
         });
 
         unlearnedFlashcards.sort((a, b) => {
-            return a.getLastDateAdded().getTime() - b.getLastDateAdded().getTime();
+            return a.getLastDate().getTime() - b.getLastDate().getTime();
         });
         return this.interleaveFlashcards(unlearnedFlashcards, learnedFlashcards);
         

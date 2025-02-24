@@ -1,6 +1,5 @@
-import { BiomeInterface } from "./BiomeInterface";
 
-export interface UserInterface {
+export interface UserDcto {
     id_user: number;
     user_name: string;
     email: string,
@@ -18,6 +17,5 @@ export interface UserInterface {
     streak: string;
     last_date_added: Date;
     league: string; 
-    biomes: BiomeInterface[];
 }
 

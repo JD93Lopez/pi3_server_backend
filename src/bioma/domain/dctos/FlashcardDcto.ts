@@ -1,4 +1,4 @@
-export interface FlashcardDto {
+export interface FlashcardDcto {
     id_flashcard: number;
     question: string;
     answer: string;

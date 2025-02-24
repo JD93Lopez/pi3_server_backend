@@ -1,4 +1,5 @@
-import { AbstractPerson, typeSex } from "../shared/AbstractPerson";
+import { AbstractBiome } from "../biome/AbstractBiome";
+import { AbstractPerson, typeSex } from "../person/AbstractPerson";
 
 export abstract class AbstractUser extends AbstractPerson {
 
@@ -12,9 +13,13 @@ export abstract class AbstractUser extends AbstractPerson {
     protected time_played_total: number;
     protected questions_learned_total: number;
     protected received_xp_total: number;
+    protected biomes: AbstractBiome[];
     
     constructor(dato: UserAttributes) {
-        super(dato.name, dato.email, dato.education, dato.birthdate, dato.telephone, dato.sex, dato.occupation);
+        super({
+            name: dato.name, email: dato.email, education: dato.education, birthdate: dato.birthdate, 
+            telephone: dato.telephone, sex: dato.sex, occupation: dato.occupation
+        });
         this.id_user = dato.id_user;
         this.user_name = dato.user_name;
         this.password = dato.password;
@@ -25,7 +30,7 @@ export abstract class AbstractUser extends AbstractPerson {
         this.time_played_total = dato.time_played_total;
         this.questions_learned_total = dato.questions_learned_total;
         this.received_xp_total = dato.received_xp_total;
-        
+        this.biomes = dato.biomes;
     }
 
     abstract isNull(): boolean;
@@ -50,4 +55,5 @@ export default interface UserAttributes {
     streak: string;
     last_date_added: Date;
     league: string; 
+    biomes: AbstractBiome[];
 }
