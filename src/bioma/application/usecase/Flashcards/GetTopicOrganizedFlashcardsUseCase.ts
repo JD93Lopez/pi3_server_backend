@@ -1,7 +1,7 @@
-import { AbstractFlashcard } from "../../domain/model/flashcard/AbstractFlashcard";
-import { FlashcardByTopicRetrieverServicePort } from "../../domain/ports/driver/service/FlashcardByTopicRetrieverServicePort";
-import { OrganizerServicePort } from "../../domain/ports/driver/service/OrganizerServicePort";
-import { GetOrganizedFlashcardsByTopicUseCasePort } from "../../domain/ports/driver/usecase/GetOrganizedFlashcardsByTopicUseCasePort";
+import { AbstractFlashcard } from "../../../domain/model/flashcard/AbstractFlashcard";
+import { FlashcardByTopicRetrieverServicePort } from "../../../domain/ports/driver/service/FlashcardByTopicRetrieverServicePort";
+import { OrganizerServicePort } from "../../../domain/ports/driver/service/OrganizerServicePort";
+import { GetOrganizedFlashcardsByTopicUseCasePort } from "../../../domain/ports/driver/usecase/GetOrganizedFlashcardsByTopicUseCasePort";
 
 export class GetTopicOrganizedFlashcardsUseCase implements GetOrganizedFlashcardsByTopicUseCasePort {
   constructor(

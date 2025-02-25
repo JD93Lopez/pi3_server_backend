@@ -33,6 +33,50 @@ export abstract class AbstractUser extends AbstractPerson {
         this.biomes = dato.biomes;
     }
 
+    getIdUser(): number {
+        return this.id_user;
+    }
+
+    getUserName(): string {
+        return this.user_name;
+    }
+
+    getPassword(): string {
+        return this.password;
+    }
+
+    getPetName(): string {
+        return this.pet_name;
+    }
+
+    getStreak(): string {
+        return this.streak;
+    }
+
+    getLastDateAdded(): Date {
+        return this.last_date_added;
+    }
+
+    getLeague(): string {
+        return this.league;
+    }
+
+    getTimePlayedTotal(): number {
+        return this.time_played_total;
+    }
+
+    getQuestionsLearnedTotal(): number {
+        return this.questions_learned_total;
+    }
+
+    getReceivedXpTotal(): number {
+        return this.received_xp_total;
+    }
+
+    getBiomes(): AbstractBiome[] {
+        return this.biomes;
+    }
+
     abstract isNull(): boolean;
 
 }

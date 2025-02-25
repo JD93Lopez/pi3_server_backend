@@ -7,6 +7,14 @@ export abstract class AbstractTheme {
         this.id_theme = id_theme;
         this.image = image;
     }
+
+    getIdTheme(): number {
+        return this.id_theme;  
+    }
+
+    getImage(): string {
+        return this.image;
+    }
     
     abstract isNull(): boolean;
 }

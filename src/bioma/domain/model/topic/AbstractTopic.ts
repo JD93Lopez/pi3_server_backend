@@ -23,6 +23,18 @@ export abstract class AbstractTopic {
         return this.id_topic;  
     }
 
+    getName(): string {
+        return this.name;
+    }
+
+    getDescription(): string {
+        return this.description;
+    }
+
+    getIcon(): AbstractIcon {
+        return this.icon;
+    }
+
     getFlashcards(): AbstractFlashcard[] {
         return this.flashcards;
     }
