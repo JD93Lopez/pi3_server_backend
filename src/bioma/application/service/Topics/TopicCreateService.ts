@@ -1,5 +1,5 @@
-import { AbstractTopic } from "../../domain/model/topic/AbstractTopic";
-import { TopicRepositoryPort } from "../../domain/ports/driven/TopicRepositoryPort";
+import { AbstractTopic } from "../../../domain/model/topic/AbstractTopic";
+import { TopicRepositoryPort } from "../../../domain/ports/driven/TopicRepositoryPort";
 
 export class TopicCreateService {
 

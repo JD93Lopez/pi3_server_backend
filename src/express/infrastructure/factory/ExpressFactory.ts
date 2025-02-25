@@ -1,6 +1,6 @@
 import Server from '../server/Server'
 import OrganizeServiceFactory from '../../../bioma/infrastructure/factory/service/OrganizeServiceFactory'
-import { GetTopicOrganizedFlashcardsUseCase } from '../../../bioma/application/usecase/GetTopicOrganizedFlashcardsUseCase'
+import { GetTopicOrganizedFlashcardsUseCase } from '../../../bioma/application/usecase/Flashcards/GetTopicOrganizedFlashcardsUseCase'
 import FlashcardControllerExpress from '../../../bioma/infrastructure/express/controller/FlashcardControllerExpress'
 import FlashcardRouterExpress from '../../../bioma/infrastructure/express/router/FlashcardRouterExpress'
 import FlashcardByTopicRetrieverServiceFactory from '../../../bioma/infrastructure/factory/service/FlashcardByTopicRetrieverServiceFactory'

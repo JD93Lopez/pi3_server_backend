@@ -1,4 +1,4 @@
-import { FlashcardRetrieverService } from '../../../application/service/FlashcardRetrieverService'
+import { FlashcardRetrieverService } from '../../../application/service/Flashcards/FlashcardRetrieverService'
 import { FlashcardRetrieverServicePort } from '../../../domain/ports/driver/service/FlashcardRetrieverServicePort'
 import FlashcardRepositoryFactory from '../repository/FlashcardRepositoryFactory'
 

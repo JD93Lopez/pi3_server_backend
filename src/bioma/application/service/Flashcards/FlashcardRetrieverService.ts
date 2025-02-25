@@ -1,7 +1,7 @@
-import { AbstractFlashcard } from "../../domain/model/flashcard/AbstractFlashcard";
-import { FlashcardRepositoryPort } from "../../domain/ports/driven/FlashcardRepositoryPort";
-import { FlashcardRetrieverServicePort } from "../../domain/ports/driver/service/FlashcardRetrieverServicePort";
-import FlashcardHelper from "../helper/FlashcardHelper";
+import { AbstractFlashcard } from "../../../domain/model/flashcard/AbstractFlashcard";
+import { FlashcardRepositoryPort } from "../../../domain/ports/driven/FlashcardRepositoryPort";
+import { FlashcardRetrieverServicePort } from "../../../domain/ports/driver/service/FlashcardRetrieverServicePort";
+import FlashcardHelper from "../../helper/FlashcardHelper";
 
 export class FlashcardRetrieverService implements FlashcardRetrieverServicePort {
 
