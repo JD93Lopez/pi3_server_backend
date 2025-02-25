@@ -1,3 +1,5 @@
+import { TopicDoc } from "../../domain/docs/TopicDoc";
+import Icon from "../../domain/model/icon/Icon";
 import { AbstractTopic } from "../../domain/model/topic/AbstractTopic";
 import { Topic } from "../../domain/model/topic/Topic";
 import { TopicInterface } from "../../domain/types/TopicInterface";
@@ -19,4 +21,15 @@ export default class TopicHelper {
             }),
         });
     }
+
+    databaseToDomainTopic(topic: TopicDoc): AbstractTopic {
+        return new Topic({
+            id_topic: topic.id_topic,
+            name: topic.name,
+            description: topic.description,
+            icon: new Icon(topic.ICONS_id_icon,""),
+            flashcards: []
+        });
+    }
+
 }
