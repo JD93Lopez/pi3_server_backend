@@ -1,5 +1,5 @@
 
-export interface UserDcto {
+export interface UserDoc {
     id_user: number;
     user_name: string;
     email: string,

@@ -1,6 +1,6 @@
 import Cliente from "../../../../domain/model/cliente/Cliente"
 import NullCliente from "../../../../domain/model/cliente/NullCliente"
-import CitaDataInterface from "../../../../domain/dctos/CitaDataInterface"
+import CitaDataInterface from "../../../../domain/docs/CitaDataInterface"
 
 export default class DirectorProvider {
   public static readonly get = (movie: CitaDataInterface): Cliente => {

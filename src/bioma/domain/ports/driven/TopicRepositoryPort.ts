@@ -1,5 +1,5 @@
-import { TopicDto } from "../../dctos/TopicDto";
+import { TopicDoc } from "../../docs/TopicDoc";
 
 export interface TopicRepositoryPort {
-    save (topic: TopicDto, biome_id: number): Promise<number>
+    save (topic: TopicDoc, biome_id: number): Promise<number>
 }
