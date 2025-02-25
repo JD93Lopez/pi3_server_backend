@@ -1,8 +1,9 @@
 import { Request, Response } from "express"
 import { CreateTopicUseCasePort } from "../../../domain/ports/driver/usecase/CreateTopicUseCasePort"
 import CreateTopicInterface from "../../../domain/types/CreateTopicInterface"
+import { TopicControllerExpressPort } from "../../../domain/ports/driver/controller/TopicControllerExpressPort"
 
-export default class FlashcardControllerExpress {
+export default class TopicControllerExpress implements TopicControllerExpressPort {
   constructor(
     private readonly createTopicUseCase: CreateTopicUseCasePort,
   ) {}

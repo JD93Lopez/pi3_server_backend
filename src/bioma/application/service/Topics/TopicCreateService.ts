@@ -1,7 +1,8 @@
 import { AbstractTopic } from "../../../domain/model/topic/AbstractTopic";
 import { TopicRepositoryPort } from "../../../domain/ports/driven/TopicRepositoryPort";
+import { CreateTopicServicePort } from "../../../domain/ports/driver/service/CreateTopicServicePort";
 
-export class TopicCreateService {
+export class TopicCreateService implements CreateTopicServicePort {
 
     constructor(private topicRepository: TopicRepositoryPort) {}
 
@@ -10,7 +11,6 @@ export class TopicCreateService {
         const topicDoc = {
             name: topic.getName(),
             description: topic.getDescription(),
-            icon_id: topic.getIcon().getIdIcon(),
             ICONS_id_icon: topic.getIcon().getIdIcon(),
             BIOMES_id_biome: id_biome,
             id_topic: -1,
