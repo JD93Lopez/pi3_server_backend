@@ -1,5 +1,5 @@
-import { CreateFlashcardsUseCasePort } from "../../domain/ports/driver/usecase/CreateFlashcardsUseCasePort";
-import TopicHelper from "../helper/TopicHelper";
+import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecase/CreateFlashcardsUseCasePort";
+import TopicHelper from "../../helper/TopicHelper";
 
 export class CreateFlashcardsUseCase implements CreateFlashcardsUseCasePort {
 
