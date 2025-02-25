@@ -1,5 +1,5 @@
 import { Flashcard } from "../../../domain/model/flashcard/Flashcard";
-import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/CreateFlashcardServicePort";
+import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/FlashcardCreateServicePort";
 import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecase/CreateFlashcardsUseCasePort";
 import { TopicInterface } from "../../../domain/types/TopicInterface";
 import TopicHelper from "../../helper/TopicHelper";
@@ -24,6 +24,7 @@ export class CreateFlashcardsUseCase implements CreateFlashcardsUseCasePort {
         });
 
         const result = await Promise.all(promise);
+        console.log('console log in the create Flashcards use case', result);
         return result;
     }
 }

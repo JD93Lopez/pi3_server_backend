@@ -2,11 +2,14 @@ import { Request, Response } from "express"
 import { GetOrganizedFlashcardsByTopicUseCasePort } from "../../../domain/ports/driver/usecase/GetOrganizedFlashcardsByTopicUseCasePort"
 import { FlashcardControllerExpressPort } from "../../../domain/ports/driver/controller/FlashcardControllerExpressPort"
 import GetOrganizedFlashcardsByTopicInterface from "../../../domain/types/endpoint/GetOrganizedFlashcardsByTopicInterface"
+import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecase/CreateFlashcardsUseCasePort"
+import CreateFlashcardsInterface from "../../../domain/types/endpoint/CreateFlashcards"
 
 export default class FlashcardControllerExpress implements FlashcardControllerExpressPort
 {
   constructor(
     private readonly organizeUseCase: GetOrganizedFlashcardsByTopicUseCasePort,
+    private readonly createFlashcardsUseCase: CreateFlashcardsUseCasePort
   ) {}
 
   public async getOrganizedFlashcardsByTopic(req: Request, res: Response): Promise<void> {
@@ -40,13 +43,26 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
     if(!body) {
       res.status(400).json({ message: 'Bad request body' })  
     }
-    const topic = body.topic
+    let createFlashcardsInterface = null;
+    try {
+      createFlashcardsInterface = body as CreateFlashcardsInterface
+    }
+    catch (error) {
+      res.status(400).json({ message: 'Bad request interface' })
+    }
+    if(!createFlashcardsInterface) {
+      res.status(400).json({ message: 'Bad request interface' })
+      return
+    }
+    const topic = createFlashcardsInterface.topic
     if(!topic) {
       res.status(400).json({ message: 'Bad request topic' })
     }
     
-
-    res.status(200).json({ message: 'Success' })
+    await this.createFlashcardsUseCase.createFlashcards(topic);
+    
+    res.status(200).json({ message: 'Success'})
   }
+
   
 }
