@@ -18,6 +18,10 @@ export default class TopicRouterExpress extends RouterExpress implements TopicRo
     this.router.post(
       '/v1.0/topic/creation',
       this.topicController.createTopic.bind(this.topicController)
+    ),
+    this.router.post(
+      '/v1.0/topic/biome',
+      this.topicController.getTopics.bind(this.topicController)
     )
   }
 }

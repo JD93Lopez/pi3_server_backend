@@ -2,10 +2,13 @@ import { Request, Response } from "express"
 import { CreateTopicUseCasePort } from "../../../domain/ports/driver/usecase/CreateTopicUseCasePort"
 import CreateTopicInterface from "../../../domain/types/endpoint/CreateTopicInterface"
 import { TopicControllerExpressPort } from "../../../domain/ports/driver/controller/TopicControllerExpressPort"
+import { GetTopicByBiomeUseCasePort } from "../../../domain/ports/driver/usecase/GetTopicByBiomeUseCasePort"
+import GetTopicsByBiomeInterface from "../../../domain/types/endpoint/GetTopicsByBiomeInterface"
 
 export default class TopicControllerExpress implements TopicControllerExpressPort {
   constructor(
     private readonly createTopicUseCase: CreateTopicUseCasePort,
+    private readonly getTopicsByBiomeUseCase: GetTopicByBiomeUseCasePort
   ) {}
 
   public async createTopic(req: Request, res: Response): Promise<void> {
@@ -37,6 +40,31 @@ export default class TopicControllerExpress implements TopicControllerExpressPor
     const id = await this.createTopicUseCase.createTopic(biome_id, topic)
 
     res.status(200).json({ message: 'Success', data: id })
+  }
+
+  public async getTopics(req: Request, res: Response): Promise<void> {
+    const body = req.body
+    if(!body) {
+      res.status(400).json({ message: 'Bad request body' })  
+    }
+    //cast to interface
+    let getTopicsInterface = null
+    try {
+      getTopicsInterface = body as GetTopicsByBiomeInterface
+    } catch (error) {
+      res.status(400).json({ message: 'Bad request number' })
+    }
+    if(!getTopicsInterface) {
+      res.status(400).json({ message: 'Bad request number' })
+      return
+    }
+    //validate
+    const biome_id = getTopicsInterface.biome_id
+    if(!biome_id) {
+      res.status(400).json({ message: 'Bad request biome_id' })
+    }
+    const topics = await this.getTopicsByBiomeUseCase.getTopicsByBiome(biome_id)
+    res.status(200).json({ message: 'Success', data: topics })
   }
   
 }
