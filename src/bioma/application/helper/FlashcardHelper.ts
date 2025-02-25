@@ -20,8 +20,8 @@ export default class FlashcardHelper {
     endpointToDomainFlashcard(flashcard: FlashcardInterface): AbstractFlashcard {
         return new Flashcard({
             id_flashcard: flashcard.id_flashcard,
-            question: flashcard.question,
-            answer: flashcard.answer,
+            question: flashcard.pregunta,
+            answer: flashcard.respuesta,
             learned: flashcard.learned,
             last_date: flashcard.last_date
         });

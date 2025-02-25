@@ -23,8 +23,8 @@ export class CreateFlashcardsUseCase implements CreateFlashcardsUseCasePort {
             return result;
         });
 
-        const result = await Promise.all(promise);
-        console.log('console log in the create Flashcards use case', result);
+        const result =  Promise.all(promise);
+        
         return result;
     }
 }

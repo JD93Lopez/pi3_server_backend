@@ -59,9 +59,9 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
       res.status(400).json({ message: 'Bad request topic' })
     }
     
-    await this.createFlashcardsUseCase.createFlashcards(topic);
+    const ids = await this.createFlashcardsUseCase.createFlashcards(topic);
     
-    res.status(200).json({ message: 'Success'})
+    res.status(200).json({ message: 'Success', data: ids })
   }
 
   
