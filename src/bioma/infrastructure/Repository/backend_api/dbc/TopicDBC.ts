@@ -17,4 +17,11 @@ export default class TopicDBC {
         }
         return res[key];
     }
+
+    public async getTopicsByBiome(biome_id: number): Promise<any> {
+        await Database.getConnection()
+        const query = `call GetTopicsByBiome(${biome_id})`
+        let res = await Database.executeQuery(query)
+        return res[0]
+    }
 }
