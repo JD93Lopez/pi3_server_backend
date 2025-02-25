@@ -1,7 +1,7 @@
 export interface FlashcardInterface {
     id_flashcard: number;
-    question: string;
-    answer: string;
+    pregunta: string;
+    respuesta: string;
     learned: boolean;
     last_date: Date;
 }
