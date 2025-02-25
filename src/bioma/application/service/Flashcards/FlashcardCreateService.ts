@@ -1,7 +1,7 @@
 import { FlashcardDoc } from "../../../domain/docs/FlashcardDoc";
 import { AbstractFlashcard } from "../../../domain/model/flashcard/AbstractFlashcard";
 import { FlashcardRepositoryPort } from "../../../domain/ports/driven/FlashcardRepositoryPort";
-import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/CreateFlashcardServicePort";
+import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/FlashcardCreateServicePort";
 
 export class FlashcardCreateService implements FlashcardCreateServicePort {
 
@@ -18,7 +18,7 @@ export class FlashcardCreateService implements FlashcardCreateServicePort {
             TOPICS_id_topic: id_topic
         }
 
-        const id = await this.flashcardRepository.createFlashcard(flashcardDoc);
+        const id = await this.flashcardRepository.save(flashcardDoc);
 
         return id;
         
