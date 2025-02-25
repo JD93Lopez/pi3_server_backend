@@ -13,5 +13,10 @@ export default class TopicRepository implements TopicRepositoryPort {
     const idTopicFromDB = await this.createTopicDBC.createTopic(topic.name, topic.description, topic.ICONS_id_icon, topic.BIOMES_id_biome)
     return idTopicFromDB
   }
+
+  async getByBiomeId(biome_id: number): Promise<TopicDoc[]> {
+    const topicsFromDB = await this.createTopicDBC.getTopicsByBiome(biome_id)
+    return topicsFromDB
+  }
   
 }

@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { GetOrganizedFlashcardsByTopicUseCasePort } from "../../../domain/ports/driver/usecase/GetOrganizedFlashcardsByTopicUseCasePort"
 import { FlashcardControllerExpressPort } from "../../../domain/ports/driver/controller/FlashcardControllerExpressPort"
+import GetOrganizedFlashcardsByTopicInterface from "../../../domain/types/endpoint/GetOrganizedFlashcardsByTopicInterface"
 
 export default class FlashcardControllerExpress implements FlashcardControllerExpressPort
 {
@@ -14,7 +15,17 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
     if(!body) {
       res.status(400).json({ message: 'Bad request body' })  
     }
-    const id_topic = body.id_topic
+    let getOrganizedInterface = null
+    try {
+      getOrganizedInterface = body as GetOrganizedFlashcardsByTopicInterface
+    } catch (error) {
+      res.status(400).json({ message: 'Bad request interface' })
+    }
+    if(!getOrganizedInterface) {
+      res.status(400).json({ message: 'Bad request interface' })
+      return
+    }
+    const id_topic = getOrganizedInterface.topic_id
     if(!id_topic) {
       res.status(400).json({ message: 'Bad request id topic' })
     }
