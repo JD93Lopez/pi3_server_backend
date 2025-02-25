@@ -1,3 +1,5 @@
+import { TopicInterface } from "../../../types/TopicInterface";
+
 export interface CreateFlashcardsUseCasePort {
-    createFlashcards(topic: any): Promise<number[]>
+    createFlashcards(topic: TopicInterface): Promise<number[]>
 }
