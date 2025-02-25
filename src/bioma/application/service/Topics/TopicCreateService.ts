@@ -11,12 +11,12 @@ export class TopicCreateService {
             name: topic.getName(),
             description: topic.getDescription(),
             icon_id: topic.getIcon().getIdIcon(),
-            id_topic: -1,
             ICONS_id_icon: topic.getIcon().getIdIcon(),
-            BIOMES_id_biome: -1
+            BIOMES_id_biome: id_biome,
+            id_topic: -1,
         }
 
-        const id = await this.topicRepository.save( topicDoc, id_biome );
+        const id = await this.topicRepository.save( topicDoc );
 
         return id
     }
