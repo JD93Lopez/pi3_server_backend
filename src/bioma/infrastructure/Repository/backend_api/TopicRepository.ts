@@ -1,4 +1,4 @@
-import { TopicDto } from "../../../domain/dtos/TopicDto"
+import { TopicDto } from "../../../domain/dctos/TopicDto"
 import TopicDBC from "./dbc/TopicDBC"
 
 export default class FlashcardRepository {
