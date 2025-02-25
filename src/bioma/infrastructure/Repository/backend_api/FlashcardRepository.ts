@@ -1,5 +1,5 @@
 import FlashcardDBC from "./dbc/FlashcardDBC"
-import { FlashcardDcto } from "../../../domain/dctos/FlashcardDcto"
+import { FlashcardDoc } from "../../../domain/docs/FlashcardDoc"
 import { FlashcardRepositoryPort } from "../../../domain/ports/driven/FlashcardRepositoryPort"
 
 export default class FlashcardRepository implements FlashcardRepositoryPort {
@@ -9,11 +9,11 @@ export default class FlashcardRepository implements FlashcardRepositoryPort {
     this.citaDBC = new FlashcardDBC()
   }
 
-  findAll = async (): Promise<FlashcardDcto[]> => {
+  findAll = async (): Promise<FlashcardDoc[]> => {
     
     const citasFromDB = await this.citaDBC.getFlashcards()
     
-    return citasFromDB.map((flashcard: FlashcardDcto) => ({
+    return citasFromDB.map((flashcard: FlashcardDoc) => ({
         id_flashcard: flashcard.id_flashcard,
         question: flashcard.question,
         answer: flashcard.answer,
@@ -22,11 +22,11 @@ export default class FlashcardRepository implements FlashcardRepositoryPort {
     }))
   }
 
-  findByTopic = async (topic_id: number): Promise<FlashcardDcto[]> => {
+  findByTopic = async (topic_id: number): Promise<FlashcardDoc[]> => {
     
     const citasFromDB = await this.citaDBC.getFlashcardsByTopic(topic_id)
     
-    return citasFromDB.map((flashcard: FlashcardDcto) => ({
+    return citasFromDB.map((flashcard: FlashcardDoc) => ({
         id_flashcard: flashcard.id_flashcard,
         question: flashcard.question,
         answer: flashcard.answer,

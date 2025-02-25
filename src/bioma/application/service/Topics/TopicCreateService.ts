@@ -7,14 +7,16 @@ export class TopicCreateService {
 
     async createTopic( id_biome: number, topic: AbstractTopic ): Promise<number> {
         
-        const topicDto = {
+        const topicDoc = {
             name: topic.getName(),
             description: topic.getDescription(),
             icon_id: topic.getIcon().getIdIcon(),
-            id_topic: -1
+            id_topic: -1,
+            ICONS_id_icon: topic.getIcon().getIdIcon(),
+            BIOMES_id_biome: -1
         }
 
-        const id = await this.topicRepository.save( topicDto, id_biome );
+        const id = await this.topicRepository.save( topicDoc, id_biome );
 
         return id
     }

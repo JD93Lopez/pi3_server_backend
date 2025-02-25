@@ -1,11 +1,11 @@
-import { FlashcardDcto } from "../../domain/dctos/FlashcardDcto";
+import { FlashcardDoc } from "../../domain/docs/FlashcardDoc";
 import { AbstractFlashcard } from "../../domain/model/flashcard/AbstractFlashcard";
 import { Flashcard } from "../../domain/model/flashcard/Flashcard";
 import { FlashcardInterface } from "../../domain/types/FlashcardInterface";
 
 export default class FlashcardHelper {
 
-    databaseToDomainFlashcard(flashcard: FlashcardDcto[]): AbstractFlashcard[] {
+    databaseToDomainFlashcard(flashcard: FlashcardDoc[]): AbstractFlashcard[] {
         return flashcard.map((oneflashcard) => {
             return new Flashcard({
                 id_flashcard: oneflashcard.id_flashcard,
