@@ -10,6 +10,18 @@ export abstract class AbstractItem {
         this.image = image;
         this.cost = cost;
     }
+
+    getIdItem(): number {
+        return this.id_item;  
+    }
+
+    getImage(): string {
+        return this.image;
+    }
+
+    getCost(): number {
+        return this.cost;
+    }
     
     abstract isNull(): boolean;
 }

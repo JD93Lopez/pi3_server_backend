@@ -14,6 +14,22 @@ export abstract class AbstractPlayedDay {
     
     abstract isNull(): boolean;
 
+    getDate(): Date {
+        return this.date;
+    }
+
+    getTimePlayed(): number {
+        return this.time_played;
+    }
+
+    getQuestionsLearned(): number {
+        return this.questions_learned;
+    }
+
+    getReceivedXp(): number {
+        return this.received_xp;
+    }
+
 }
 
 export interface PlayedDayAttributes {

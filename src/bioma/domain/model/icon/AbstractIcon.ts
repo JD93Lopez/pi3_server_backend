@@ -7,6 +7,14 @@ export abstract class AbstractIcon {
         this.id_icon = id_icon;
         this.image = image;
     }
+
+    getIdIcon(): number {
+        return this.id_icon;  
+    }
+
+    getImage(): string {
+        return this.image;
+    }
     
     abstract isNull(): boolean;
 }

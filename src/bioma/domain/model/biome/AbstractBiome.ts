@@ -15,6 +15,22 @@ export abstract class AbstractBiome {
         this.topics = biomeAttributes.topics;
     }
 
+    getIdBiome(): number {
+        return this.id_biome;  
+    }
+
+    getName(): string {
+        return this.name;
+    }   
+
+    getTheme(): AbstractTheme {
+        return this.theme;
+    }
+
+    getTopics(): AbstractTopic[] {
+        return this.topics;
+    }
+
     abstract isNull(): boolean;
 }
 

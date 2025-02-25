@@ -20,7 +20,7 @@ export abstract class AbstractFlashcard {
     abstract isNull(): boolean;
 
     
-    //TODO: Implement the method to check if the flashcard is learned
+    //TODO: Implement the method to check if the flashcard is learned ??? TODO borrar esto, el learned se actualiza en la db
     isLearned(): boolean {
         return this.learned;
     }

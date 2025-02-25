@@ -19,6 +19,34 @@ export abstract class AbstractPerson {
         this.sex = personAttributes.sex;
         this.occupation = personAttributes.occupation;
     }
+
+    getName(): string {
+        return this.name;
+    }
+
+    getEmail(): string {
+        return this.email;
+    }
+
+    getEducation(): string {
+        return this.education;
+    }
+
+    getBirthdate(): Date {
+        return this.birthdate;
+    }
+
+    getTelephone(): string {
+        return this.telephone;
+    }
+
+    getSex(): string {
+        return this.sex;
+    }
+
+    getOccupation(): string {
+        return this.occupation;
+    }
 }
 
 export interface PersonAttributes {
