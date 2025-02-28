@@ -6,9 +6,10 @@ import TopicHelper from "../../helper/TopicHelper";
 
 
 export class CreateFlashcardsUseCase implements CreateFlashcardsUseCasePort {
-      constructor(
-        private flashcardCreateService: FlashcardCreateServicePort,
-      ) {}
+   
+    constructor(
+      private flashcardCreateService: FlashcardCreateServicePort,
+    ) {}
 
     async createFlashcards(topicClient: TopicInterface): Promise<number[]> {
         

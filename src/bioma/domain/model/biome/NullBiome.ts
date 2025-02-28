@@ -1,28 +1,21 @@
-import { AbstractTheme } from "../theme/AbstractTheme";
-import { AbstractTopic } from "../topic/AbstractTopic";
+import { NullTheme } from "../theme/NullTheme";
+import { AbstractBiome } from "./AbstractBiome";
 
-export abstract class AbstractBiome {
-    
-    protected id_biome: number;
-    protected name: string;
-    protected theme: AbstractTheme;
-    protected topics: AbstractTopic[];
-
-    constructor(
-        biomeAttributes: BiomeAttributes
-    ) {
-        this.id_biome = biomeAttributes.id_biome;
-        this.name = biomeAttributes.name;
-        this.theme = biomeAttributes.theme;
-        this.topics = biomeAttributes.topics;
+export default class NullBiome extends AbstractBiome {
+     
+    constructor() {
+        super(
+            {
+                id_biome: 0,
+                name: "",
+                theme: new NullTheme(),
+                topics: []
+            }
+        );
     }
 
-    abstract isNull(): boolean;
+    isNull(): boolean {
+        return true;
+    }
 }
 
-export interface BiomeAttributes {
-    id_biome: number;
-    name: string;
-    theme: AbstractTheme;
-    topics: AbstractTopic[];
-}
