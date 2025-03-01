@@ -39,6 +39,16 @@ export default class FlashcardRepository implements FlashcardRepositoryPort {
     
     const flashcardIdFromDB = await this.flashcardDBC.createFlashcard(flashcard.question, flashcard.answer, flashcard.learned, flashcard.TOPICS_id_topic); 
     return flashcardIdFromDB;  
-      
+  
   }
+
+  update = async (flashcard: FlashcardDoc): Promise<number> => {
+      
+      // Retorna 1 si la acualización fue exitosa
+      const dbResponse = await this.flashcardDBC.updateFlashcard(flashcard.id_flashcard,  flashcard.learned, flashcard.last_date); 
+      return dbResponse;  
+
+      
+    }
+
 }
