@@ -3,6 +3,6 @@ export interface FlashcardDoc {
     question: string;
     answer: string;
     learned: boolean;
-    last_date: Date;
+    last_date: string;
     TOPICS_id_topic: number;
 }

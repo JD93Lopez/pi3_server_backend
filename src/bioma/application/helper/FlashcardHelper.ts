@@ -12,7 +12,7 @@ export default class FlashcardHelper {
                 question: oneflashcard.question,
                 answer: oneflashcard.answer,
                 learned: oneflashcard.learned,
-                last_date: oneflashcard.last_date
+                last_date: new Date(oneflashcard.last_date)
             });
         });
     }
@@ -23,7 +23,7 @@ export default class FlashcardHelper {
             question: flashcard.pregunta,
             answer: flashcard.respuesta,
             learned: flashcard.learned,
-            last_date: flashcard.last_date
+            last_date: new Date(flashcard.last_date)
         });
 
     }
