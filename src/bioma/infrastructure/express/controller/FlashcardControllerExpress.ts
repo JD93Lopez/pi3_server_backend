@@ -91,7 +91,7 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
       return;
     }
 
-    const flashcards = updateFlashcardsInterface.Flashcards;
+    const flashcards = updateFlashcardsInterface.flashcards;
     if (!flashcards) {
       res.status(400).json({ message: 'Bad request flashcards' });
       return;

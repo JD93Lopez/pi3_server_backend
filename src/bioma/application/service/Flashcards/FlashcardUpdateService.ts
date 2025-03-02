@@ -10,10 +10,23 @@ export default class FlashcardUpdateService implements FlashcardUpdateServicePor
 
     async updateFlashcard(flashcard: AbstractFlashcard): Promise<number> {
 
+        const date = flashcard.getLastDate();
+
+        const timestamp = date.getFullYear() + '-' +
+        ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+        ('0' + date.getDate()).slice(-2) + ' ' +
+        ('0' + date.getHours()).slice(-2) + ':' +
+        ('0' + date.getMinutes()).slice(-2) + ':' +
+        ('0' + date.getSeconds()).slice(-2);
+        
+
         const flashcardDoc = {
             id_flashcard: flashcard.getIdFlashcard(),
             learned: flashcard.getLearned(),
-            last_date: flashcard.getLastDate(),
+            last_date: timestamp,
+            question: '',
+            answer: '',
+            TOPICS_id_topic: -1
         }
 
         const response = await this.flashcardRepository.update(flashcardDoc);
