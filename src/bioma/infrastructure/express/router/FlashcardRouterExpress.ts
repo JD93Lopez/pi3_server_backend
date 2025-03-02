@@ -22,6 +22,10 @@ export default class FlashcardRouterExpress extends RouterExpress implements Fla
     this.router.post(
       '/v1.0/flashcard/topic/creation',
       this.flashcardController.createFlashcards.bind(this.flashcardController)
+    ),
+    this.router.put(
+      '/v1.0/flashcard/update',
+      this.flashcardController.updateFlashcards.bind(this.flashcardController)
     )
   }
 }

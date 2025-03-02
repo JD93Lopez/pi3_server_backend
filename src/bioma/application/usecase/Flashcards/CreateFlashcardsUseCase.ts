@@ -20,7 +20,7 @@ export class CreateFlashcardsUseCase implements CreateFlashcardsUseCasePort {
         const flashcards = topicDomain.getFlashcards();
 
         const promise = flashcards.map(async (flashcard: Flashcard) => {
-           const result = await this.flashcardCreateService.createFlashcard(id_topic, flashcard); 
+            const result = await this.flashcardCreateService.createFlashcard(id_topic, flashcard); 
             return result;
         });
 
