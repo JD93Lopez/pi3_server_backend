@@ -6,6 +6,7 @@ import FlashcardRouterExpress from "../../../../bioma/infrastructure/express/rou
 import FlashcardByTopicRetrieverServiceFactory from "../../../../bioma/infrastructure/factory/service/FlashcardByTopicRetrieverServiceFactory"
 import FlashcardCreateServiceFactory from "../../../../bioma/infrastructure/factory/service/FlashcardCreateServiceFactory"
 import FlashcardsUpdateServiceFactory from "../../../../bioma/infrastructure/factory/service/FlashcardsUpdateServiceFactory"
+import FlashcardFromAiRetrieverServiceFactory from "../../../../bioma/infrastructure/factory/service/FlashcardFromAiRetrieverServiceFactory"
 import OrganizeServiceFactory from "../../../../bioma/infrastructure/factory/service/OrganizeServiceFactory"
 import RouterExpress from "../../../domain/RouterExpress"
 
@@ -14,8 +15,9 @@ export default class FlashcardRouterFactory {
 
         const flashcardRetrieverService = FlashcardByTopicRetrieverServiceFactory.create()
         const organizeService = OrganizeServiceFactory.create()
+        const flashcardAiRetrieverService = FlashcardFromAiRetrieverServiceFactory.create()
         // TODO: validate service
-        const organizeUseCase = new GetTopicOrganizedFlashcardsUseCase(flashcardRetrieverService, organizeService)
+        const organizeUseCase = new GetTopicOrganizedFlashcardsUseCase(flashcardRetrieverService, organizeService, flashcardAiRetrieverService)
         // TODO: validate use case
            
         // ------------- CREATE FLASHCARD  ----------------
