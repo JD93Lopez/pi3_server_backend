@@ -3,5 +3,5 @@ export interface FlashcardInterface {
     pregunta: string;
     respuesta: string;
     learned: boolean;
-    last_date: Date;
+    last_date: string;
 }

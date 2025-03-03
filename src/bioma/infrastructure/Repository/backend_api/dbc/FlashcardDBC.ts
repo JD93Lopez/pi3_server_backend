@@ -27,7 +27,7 @@ export default class FlashcardDBC {
         return res[key];
     }
 
-    public async updateFlashcard(flashcard_id: number, learned_status: boolean, last_date: Date): Promise<any> {
+    public async updateFlashcard(flashcard_id: number, learned_status: boolean, last_date: string): Promise<any> {
         await Database.getConnection()
         const query = "select UpdateFlashcardLearned(?, ?, ?)"
         const values = [flashcard_id, learned_status, last_date]

@@ -14,7 +14,7 @@ export class FlashcardCreateService implements FlashcardCreateServicePort {
             question: flashcard.getQuestion(),
             answer: flashcard.getAnswer(),
             learned: flashcard.getLearned(),
-            last_date: flashcard.getLastDate(),
+            last_date: flashcard.getLastDate().toISOString(),
             TOPICS_id_topic: id_topic
         }
 

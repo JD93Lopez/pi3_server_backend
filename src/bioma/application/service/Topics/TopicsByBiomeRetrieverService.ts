@@ -13,11 +13,11 @@ export class TopicsByBiomeRetrieverService implements TopicByBiomeRetrieverServi
         
         const topics = await this.topicRepository.getByBiomeId(id_biome);
 
-        const abstractTopics = topics.map((topic) => {
-            return topicHelper.databaseToDomainTopic(topic)
+        const abstractTopics = topics.map(async (topic) => {
+            return await topicHelper.databaseToDomainTopic(topic)
         });
 
-        return abstractTopics
+        return await Promise.all(abstractTopics);
     }
 
 }
