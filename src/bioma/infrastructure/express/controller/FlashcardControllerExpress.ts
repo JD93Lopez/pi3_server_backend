@@ -6,17 +6,20 @@ import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecas
 import CreateFlashcardsInterface from "../../../domain/types/endpoint/CreateFlashcards"
 import UpdateFlashcardsUseCasePort from "../../../domain/ports/driver/usecase/UpdateFlashcardsUseCasePort"
 import UpdateFlashcardsInterface from "../../../domain/types/endpoint/UpdateFlashcards"
+import CreateFlashcardsFromAiUseCasePort from "../../../domain/ports/driver/usecase/CreateFlashcardsFromAiUseCasePort"
+import CreateFlashcardsFromAi from "../../../domain/types/endpoint/CreateFlashcardsFromAi"
 
 export default class FlashcardControllerExpress implements FlashcardControllerExpressPort
 {
   constructor(
     private readonly organizeUseCase: GetOrganizedFlashcardsByTopicUseCasePort,
     private readonly createFlashcardsUseCase: CreateFlashcardsUseCasePort,
-    private readonly updateFlashcardsUseCase: UpdateFlashcardsUseCasePort
+    private readonly updateFlashcardsUseCase: UpdateFlashcardsUseCasePort,
+    private readonly createFlashcardsFromAiUseCase: CreateFlashcardsFromAiUseCasePort
 
   ) {}
 
-
+  
   public async getOrganizedFlashcardsByTopic(req: Request, res: Response): Promise<void> {
 
     const body = req.body
@@ -104,6 +107,68 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
       res.status(500).json({ message: 'Internal server error', error: error });
     }
   }
+
+  public async createFlashcardsFromAi(req: Request, res: Response): Promise<void> {
+    
+    const body = req.body;
+    if (!body) {
+      res.status(400).json({ message: 'Bad request body' });
+      return;
+    }
+
+
+    let createFlashcardsFromAiInterface = null;
+    try {
+      createFlashcardsFromAiInterface = body as CreateFlashcardsFromAi;
+    } catch (error) {
+      res.status(400).json({ message: 'Bad request interface' });
+      return;
+    }
+
+
+    if (!createFlashcardsFromAiInterface) {
+      res.status(400).json({ message: 'Bad request interface' });
+      return;
+    }
+
+
+    const topicId = createFlashcardsFromAiInterface.topicId;
+    if (!topicId) {
+      res.status(400).json({ message: 'Bad request topicId' });
+      return;
+    }
+
+    const nombreTema = createFlashcardsFromAiInterface.nombreTema;
+    if (!nombreTema) {
+      res.status(400).json({ message: 'Bad request nombreTema' });
+      return;
+    }
+
+    const descripcionTema = createFlashcardsFromAiInterface.descripcion;
+    if (!descripcionTema) {
+      res.status(400).json({ message: 'Bad request descripcion' });
+      return;
+    }
+
+    const wishedNumberOfCards = createFlashcardsFromAiInterface.wishedNumberOfCards;
+    if (!wishedNumberOfCards) {
+      res.status(400).json({ message: 'Bad request wishedNumberOfCards' });
+      return;
+    }
+
+
+    try {
+      const response = await this.createFlashcardsFromAiUseCase.createFlashcardsFromAi(topicId, nombreTema, descripcionTema, wishedNumberOfCards);
+
+
+      res.status(200).json({ message: 'Success', data: response });
+      
+    } catch (error) {
+      res.status(500).json({ message: 'Internal server error', error: error });
+    }
+  }
+
+
 
   
 }
