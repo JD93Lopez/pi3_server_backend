@@ -6,15 +6,16 @@ import UpdateBiomeUseCasePort from "../../../domain/ports/driver/usecase/UpdateB
 import UpdateBiomeInterface from "../../../domain/types/endpoint/UpdateBiome";
 import DeleteBiomeUseCasePort from "../../../domain/ports/driver/usecase/DeleteBiomeUseCasePort";
 import DeleteBiomeInterface from "../../../domain/types/endpoint/DeleteBiome";
-
+import GetBiomesByUserUseCasePort from "../../../domain/ports/driver/usecase/GetBiomesByUserUseCasePort";
+import GetBiomesByUserInterface from "../../../domain/types/endpoint/GetBiomesByUserInterface";
 export default class BiomeControllerExpress implements BiomeControllerExpressPort {
 
     constructor(
         private readonly createBiomeUseCase: CreateBiomeUseCasePort,
         private readonly updateBiomeUseCase: UpdateBiomeUseCasePort,
-        private readonly deleteBiomeUseCase: DeleteBiomeUseCasePort
+        private readonly deleteBiomeUseCase: DeleteBiomeUseCasePort,
+         private readonly getBiomesByUserUseCase: GetBiomesByUserUseCasePort
     ) {}
-
     async createBiome(req: Request, res: Response): Promise<void> {
         let createBiomeInterface = null;
 
@@ -138,6 +139,41 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
             console.error("Error creating biome:", error);
             res.status(500).json({ message: 'Internal server error' });
         }
+        res.status(200).json({ message: 'Success', data: idSavedBiome })
+         
+    };
 
+    async getBiomesByUser(req: Request, res: Response): Promise<void> {
+        
+        let getBiomesByUserInterface = null;
+
+        const body = req.body
+
+        if(!body) {
+            res.status(400).json({ message: 'Bad request body' })  
+        }
+
+        
+        try {
+            getBiomesByUserInterface = body as GetBiomesByUserInterface
+        }
+        catch (error) {
+            res.status(400).json({ message: 'Bad request interface' })
+        }
+
+        if(!getBiomesByUserInterface) {
+            res.status(400).json({ message: 'Bad request interface' })
+            return
+        }
+
+        const id_user = getBiomesByUserInterface.id_user
+
+        if(!id_user) {
+            res.status(400).json({ message: 'Bad request id_user' })
+        }
+
+        const biomes = await this.getBiomesByUserUseCase.getBiomesByUser(id_user)
+
+        res.status(200).json({ message: 'Success', data: biomes })
     }
 }

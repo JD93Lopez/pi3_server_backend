@@ -26,6 +26,10 @@ export default class BiomeRouterExpress extends RouterExpress implements BiomeRo
     this.router.delete(
       '/v1.0/biome/delete',
       this.biomeController.deleteBiome.bind(this.biomeController)
+    ),
+    this.router.get(
+      '/v1.0/biome/user',
+      this.biomeController.getBiomesByUser.bind(this.biomeController)
     )
   }
 }

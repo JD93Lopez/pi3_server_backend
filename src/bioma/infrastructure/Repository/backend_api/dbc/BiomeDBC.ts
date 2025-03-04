@@ -1,3 +1,4 @@
+import { BiomeDoc } from "../../../../domain/docs/BiomeDoc"
 import Database from "../../Database"
 
 export default class BiomeDBC {
@@ -16,12 +17,16 @@ export default class BiomeDBC {
         return res[key];
     }
 
-    public async getBiomesByUserId(userId: number): Promise<any> {
+    public async getBiomesByUserId(userId: number): Promise<BiomeDoc[]> {
         await Database.getConnection()
-        const query = `select * from GetBiomesByUserId(${userId})`
-        const res = await Database.executeQuery(query)
-        return res
+        const query = "call GetBiomesByUserId(?)"
+        const values = [userId]
+        let res = await Database.executeQuery(query, values)
+        res = res[0]
+        return res;
     }
+
+
     
     public async updateBiome(idBiome: number, newName: string, newThemeId: number): Promise<any> {
         await Database.getConnection();
