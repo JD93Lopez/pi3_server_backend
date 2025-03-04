@@ -24,4 +24,20 @@ export default class TopicDBC {
         let res = await Database.executeQuery(query)
         return res[0]
     }
+
+    public async deleteTopicById(topic_id: number): Promise<any> {
+        await Database.getConnection()
+        const query = "select DeleteTopicAndFlashcards(?)"
+        const params = [topic_id]
+        let res = await Database.executeQuery(query, params)
+
+        const key = Object.keys(res[0])[0]; // Obtiene la clave dinámica (ej: "DeleteTopicAndFlashcards(?)")
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+
+        return res[0][key] as number; // Retorna solo el número
+
+      
+    }
 }

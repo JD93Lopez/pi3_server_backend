@@ -18,5 +18,8 @@ export default class TopicRepository implements TopicRepositoryPort {
     const topicsFromDB = await this.createTopicDBC.getTopicsByBiome(biome_id)
     return topicsFromDB
   }
-  
+  async deleteTopicById(id: number): Promise<number> {
+    const deleted = await this.createTopicDBC.deleteTopicById(id)
+    return deleted
+  }
 }
