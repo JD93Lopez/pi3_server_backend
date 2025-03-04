@@ -22,15 +22,6 @@ export default class BiomeHelper {
           : [],
     });
   }
-        return new Biome({
-            id_biome: biomeClient.id_biome,
-            name: biomeClient.name,
-            theme: themeHelper.endpointToDomainTheme(biomeClient.theme),
-            topics: biomeClient.topics.map((topic) => {
-                return topicHelper.endpointToDomainTopic(topic)
-            })
-        });
-    }
 
     databaseToDomainBiome(biomeDoc: BiomeDoc, themeImage : string) : AbstractBiome {
         return new Biome({

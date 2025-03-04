@@ -26,12 +26,11 @@ export default class BiomeRouterFactory {
         const biomeDeleteService =  DeleteBiomeServiceFactory.delete()
         const biomeDeleteUseCase = new DeleteBiomeUseCase(biomeDeleteService);
 
-        const biomeController = new BiomeControllerExpress(biomeCreateUseCase, biomeUpdateUseCase, biomeDeleteUseCase);
         // --------- GET BIOMES BY USER ----------------
         const biomeGetByUserService =  BiomesByUserRetriverServiceFactory.create()
         const biomeGetByUserUseCase = new GetBiomesByUserUseCase(biomeGetByUserService);
 
-        const biomeController = new BiomeControllerExpress(biomeCreateUseCase, biomeGetByUserUseCase);
+        const biomeController = new BiomeControllerExpress(biomeCreateUseCase, biomeUpdateUseCase, biomeDeleteUseCase,biomeGetByUserUseCase);
         const biomeRouter = new BiomeRouterExpress(biomeController);
 
         return  biomeRouter;

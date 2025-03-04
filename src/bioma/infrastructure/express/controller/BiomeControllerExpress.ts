@@ -105,7 +105,6 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
         let deleteBiomeInterface = null    
         const body = req.body;
 
-
         if (!body) {
             res.status(400).json({ message: 'Bad request body' });
             return;
@@ -133,14 +132,13 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
             return;
         }
         try {
-            const idSavedBiome = await this.deleteBiomeUseCase.deleteBiome(id_user, biome);
-            res.status(200).json({ message: 'Success', data: idSavedBiome });
+            const deleteId = await this.deleteBiomeUseCase.deleteBiome(id_user, biome);
+            res.status(200).json({ message: 'Success', data: deleteId });
         } catch (error) {
-            console.error("Error creating biome:", error);
+            console.error("Error delete biome:", error);
             res.status(500).json({ message: 'Internal server error' });
         }
-        res.status(200).json({ message: 'Success', data: idSavedBiome })
-         
+
     };
 
     async getBiomesByUser(req: Request, res: Response): Promise<void> {
