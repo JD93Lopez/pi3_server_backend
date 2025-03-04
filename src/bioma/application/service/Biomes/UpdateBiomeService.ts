@@ -6,12 +6,12 @@ import { UpdateBiomeServicePort } from "../../../domain/ports/driver/service/Upd
 export class UpdateBiomeService implements UpdateBiomeServicePort {
   constructor(private biomeRepository: BiomeRepositoryPort) {}
 
-  async updateBiome(id_user: number, biome: AbstractBiome): Promise<number> {    
+  async updateBiome(biome: AbstractBiome): Promise<number> {    
     const biomeDoc: BiomeDoc = {
       id_biome: biome.getIdBiome(),
       name: biome.getName(),
       THEMES_id_theme: biome.getTheme().getIdTheme(),
-      USERS_id_user: id_user,
+      USERS_id_user: 0,
     };
 
     if (!biomeDoc.id_biome || biomeDoc.id_biome <= 0) {
