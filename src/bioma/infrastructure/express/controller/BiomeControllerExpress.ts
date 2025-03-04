@@ -2,46 +2,99 @@ import BiomeControllerExpressPort from "../../../domain/ports/driver/controller/
 import { Request, Response } from 'express';
 import { CreateBiomeUseCasePort } from "../../../domain/ports/driver/usecase/CreateBiomeUseCasePort";
 import CreateBiomeInterface from "../../../domain/types/endpoint/CreateBiome";
+import UpdateBiomeUseCasePort from "../../../domain/ports/driver/usecase/UpdateBiomeUseCasePort";
+import UpdateBiomeInterface from "../../../domain/types/endpoint/UpdateBiome";
 
 export default class BiomeControllerExpress implements BiomeControllerExpressPort {
 
-    constructor( private readonly createBiomeUseCase: CreateBiomeUseCasePort){}
+    constructor(
+        private readonly createBiomeUseCase: CreateBiomeUseCasePort,
+        private readonly updateBiomeUseCase: UpdateBiomeUseCasePort
+    ) {}
 
     async createBiome(req: Request, res: Response): Promise<void> {
-        
         let createBiomeInterface = null;
 
-        const body = req.body
+        const body = req.body;
 
-        if(!body) {
-            res.status(400).json({ message: 'Bad request body' })  
+        if (!body) {
+            res.status(400).json({ message: 'Bad request body' });
+            return;
         }
 
         try {
-            createBiomeInterface = body as CreateBiomeInterface
-        }
-        catch (error) {
-            res.status(400).json({ message: 'Bad request interface' })
-        }
-        
-        if(!createBiomeInterface) {
-            res.status(400).json({ message: 'Bad request interface' })
-            return
+            createBiomeInterface = body as CreateBiomeInterface;
+        } catch (error) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
         }
 
-        const biome = createBiomeInterface.biome
-        if(!biome) {
-            res.status(400).json({ message: 'Bad request biome' })
+        if (!createBiomeInterface) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
         }
 
-        const id_user = createBiomeInterface.id_user
-        if(!id_user) {
-            res.status(400).json({ message: 'Bad request id_user' })
+        const biome = createBiomeInterface.biome;
+        if (!biome) {
+            res.status(400).json({ message: 'Bad request biome' });
+            return;
         }
 
-        const idSavedBiome = await this.createBiomeUseCase.createBiome(id_user, biome)
+        const id_user = createBiomeInterface.id_user;
+        if (!id_user) {
+            res.status(400).json({ message: 'Bad request id_user' });
+            return;
+        }
 
-        res.status(200).json({ message: 'Success', data: idSavedBiome })
-         
+        try {
+            const idSavedBiome = await this.createBiomeUseCase.createBiome(id_user, biome);
+            res.status(200).json({ message: 'Success', data: idSavedBiome });
+        } catch (error) {
+            console.error("Error creating biome:", error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    async updateBiome(req: Request, res: Response): Promise<void> {
+        let updateBiomeInterface = null;
+
+        const body = req.body;
+
+        if (!body) {
+            res.status(400).json({ message: 'Bad request body' });
+            return;
+        }
+
+        try {
+            updateBiomeInterface = body as UpdateBiomeInterface;
+        } catch (error) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        if (!updateBiomeInterface) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        const biome = updateBiomeInterface.biome;
+        if (!biome) {
+            res.status(400).json({ message: 'Bad request biome' });
+            return;
+        }
+
+        const id_user = updateBiomeInterface.id_user;
+        if (!id_user) {
+            res.status(400).json({ message: 'Bad request id_user' });
+            return;
+        }
+
+        try {
+            const updatedBiomeId = await this.updateBiomeUseCase.updateBiome(id_user, biome);
+            res.status(200).json({ message: 'Success', data: updatedBiomeId });
+        } catch (error) {
+            console.error("Error updating biome:", error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
     }
 }

@@ -23,4 +23,25 @@ export default class BiomeDBC {
         return res
     }
     
+    public async updateBiome(idBiome: number, newName: string, newThemeId: number): Promise<number> {
+        await Database.getConnection();
+    
+        const query = "SELECT UpdateBiomeName(?, ?, ?) AS updatedBiomeId";
+        const values = [idBiome, newName, newThemeId];
+    
+        try {
+            const result = await Database.executeQuery(query, values);
+    
+            const updatedBiomeId = result[0]?.updatedBiomeId;
+    
+            if (updatedBiomeId === -1) {
+                throw new Error("Error updating biome. Biome ID may not exist.");
+            }
+    
+            return updatedBiomeId;
+        } catch (error) {
+            console.error("Error in updateBiome:", error);
+            throw new Error("Failed to update biome.");
+        }
+    }
 }

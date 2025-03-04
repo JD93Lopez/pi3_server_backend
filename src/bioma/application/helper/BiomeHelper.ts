@@ -5,17 +5,20 @@ import ThemeHelper from "./ThemeHelper";
 import TopicHelper from "./TopicHelper";
 
 export default class BiomeHelper {
-    endpointToDomainBiome(biomeClient: BiomeInterface) : AbstractBiome {
-        const themeHelper = new ThemeHelper();
-        const topicHelper = new TopicHelper();
+  endpointToDomainBiome(biomeClient: BiomeInterface): AbstractBiome {
+    const themeHelper = new ThemeHelper();
+    const topicHelper = new TopicHelper();
 
-        return new Biome({
-            id_biome: biomeClient.id_biome,
-            name: biomeClient.name,
-            theme: themeHelper.endpointToDomainTheme(biomeClient.theme),
-            topics: biomeClient.topics.map((topic) => {
-                return topicHelper.endpointToDomainTopic(topic)
-            })
-        });
-    }
+    return new Biome({
+      id_biome: biomeClient.id_biome,
+      name: biomeClient.name,
+      theme: themeHelper.endpointToDomainTheme(biomeClient.theme),
+      topics:
+        biomeClient.topics && Array.isArray(biomeClient.topics)
+          ? biomeClient.topics.map((topic) =>
+              topicHelper.endpointToDomainTopic(topic)
+            )
+          : [],
+    });
+  }
 }

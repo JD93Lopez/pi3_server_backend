@@ -18,7 +18,10 @@ export default class BiomeRepository implements BiomeRepositoryPort {
     const biomesFromDBC = await this.biomeDBC.getBiomesByUserId(userId)
     return biomesFromDBC
   }
-  
 
+  async update (biome: BiomeDoc): Promise<number> {
+    const updatedBiomeId = await this.biomeDBC.updateBiome(biome.id_biome, biome.name, biome.THEMES_id_theme)
+    return updatedBiomeId
+  }
   
 }

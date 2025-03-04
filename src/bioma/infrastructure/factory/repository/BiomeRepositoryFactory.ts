@@ -5,4 +5,7 @@ export default class BiomeRepositoryFactory {
     public static readonly create = (): BiomeRepositoryPort => {
         return new BiomeRepository()
     }
+    public static readonly update = (): BiomeRepositoryPort => {
+        return new BiomeRepository()
+    }
 }
