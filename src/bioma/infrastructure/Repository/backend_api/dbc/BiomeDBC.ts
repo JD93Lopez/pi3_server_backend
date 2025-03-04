@@ -23,7 +23,7 @@ export default class BiomeDBC {
         return res
     }
     
-    public async updateBiome(idBiome: number, newName: string, newThemeId: number): Promise<number> {
+    public async updateBiome(idBiome: number, newName: string, newThemeId: number): Promise<any> {
         await Database.getConnection();
     
         const query = "SELECT UpdateBiomeName(?, ?, ?) AS updatedBiomeId";
@@ -42,6 +42,29 @@ export default class BiomeDBC {
         } catch (error) {
             console.error("Error in updateBiome:", error);
             throw new Error("Failed to update biome.");
+        }
+    }
+    public async deleteBiome(idBiome: number): Promise<any> {
+        await Database.getConnection();
+
+        const query = "SELECT DeleteBiomeById(?) AS deletionResult";
+        const values = [idBiome];
+
+        try {
+            const result = await Database.executeQuery(query, values);
+
+            const deletionResult = result[0]?.deletionResult;
+
+            if (deletionResult === 1) {
+                return `Biome with ID ${idBiome} was successfully deleted.`;
+            } else if (deletionResult === 0) {
+                throw new Error(`Biome with ID ${idBiome} does not exist or could not be deleted.`);
+            } else {
+                throw new Error("Unexpected result from database function DeleteBiomeById.");
+            }
+        } catch (error) {
+            console.error("Error in deleteBiome:", error);
+            throw new Error("Failed to delete biome.");
         }
     }
 }

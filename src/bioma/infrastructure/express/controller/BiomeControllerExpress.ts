@@ -4,12 +4,15 @@ import { CreateBiomeUseCasePort } from "../../../domain/ports/driver/usecase/Cre
 import CreateBiomeInterface from "../../../domain/types/endpoint/CreateBiome";
 import UpdateBiomeUseCasePort from "../../../domain/ports/driver/usecase/UpdateBiomeUseCasePort";
 import UpdateBiomeInterface from "../../../domain/types/endpoint/UpdateBiome";
+import DeleteBiomeUseCasePort from "../../../domain/ports/driver/usecase/DeleteBiomeUseCasePort";
+import DeleteBiomeInterface from "../../../domain/types/endpoint/DeleteBiome";
 
 export default class BiomeControllerExpress implements BiomeControllerExpressPort {
 
     constructor(
         private readonly createBiomeUseCase: CreateBiomeUseCasePort,
-        private readonly updateBiomeUseCase: UpdateBiomeUseCasePort
+        private readonly updateBiomeUseCase: UpdateBiomeUseCasePort,
+        private readonly deleteBiomeUseCase: DeleteBiomeUseCasePort
     ) {}
 
     async createBiome(req: Request, res: Response): Promise<void> {
@@ -96,5 +99,45 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
             console.error("Error updating biome:", error);
             res.status(500).json({ message: 'Internal server error' });
         }
+    }
+    async deleteBiome(req: Request, res: Response): Promise<void> {
+        let deleteBiomeInterface = null    
+        const body = req.body;
+
+
+        if (!body) {
+            res.status(400).json({ message: 'Bad request body' });
+            return;
+        }
+        try {
+            deleteBiomeInterface = body as DeleteBiomeInterface;
+        } catch (error) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+        if (!deleteBiomeInterface) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        const biome = deleteBiomeInterface.biome;
+        if (!biome) {
+            res.status(400).json({ message: 'Bad request biome' });
+            return;
+        }
+
+        const id_user = deleteBiomeInterface.id_user;
+        if (!id_user) {
+            res.status(400).json({ message: 'Bad request id_user' });
+            return;
+        }
+        try {
+            const idSavedBiome = await this.deleteBiomeUseCase.deleteBiome(id_user, biome);
+            res.status(200).json({ message: 'Success', data: idSavedBiome });
+        } catch (error) {
+            console.error("Error creating biome:", error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+
     }
 }

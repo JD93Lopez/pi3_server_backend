@@ -8,4 +8,7 @@ export default class BiomeRepositoryFactory {
     public static readonly update = (): BiomeRepositoryPort => {
         return new BiomeRepository()
     }
+    public static readonly delete = (): BiomeRepositoryPort => {
+        return new BiomeRepository()
+    }
 }
