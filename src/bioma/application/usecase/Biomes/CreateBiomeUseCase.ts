@@ -13,7 +13,6 @@ export default class CreateBiomeUseCase implements CreateBiomeUseCasePort {
         const biomeHelper = new BiomeHelper();
         const biome = biomeHelper.endpointToDomainBiome(biomeClient);
 
-        console.log("Console log en use case de biome ", biome);
         
         return this.createBiomeService.createBiome(id_user, biome);
 
