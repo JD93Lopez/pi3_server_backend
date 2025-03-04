@@ -24,8 +24,8 @@ export default class BiomeRepository implements BiomeRepositoryPort {
     return updatedBiomeId
   }
   
-  async delete (biome: BiomeDoc): Promise<boolean> {
-    const deletionResult = await this.biomeDBC.deleteBiome(biome.id_biome)
+  async delete (id_biome: number): Promise<boolean> {
+    const deletionResult = await this.biomeDBC.deleteBiome(id_biome)
     return deletionResult
   }
 }

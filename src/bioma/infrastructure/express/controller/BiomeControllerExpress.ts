@@ -87,14 +87,8 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
             return;
         }
 
-        const id_user = updateBiomeInterface.id_user;
-        if (!id_user) {
-            res.status(400).json({ message: 'Bad request id_user' });
-            return;
-        }
-
         try {
-            const updatedBiomeId = await this.updateBiomeUseCase.updateBiome(id_user, biome);
+            const updatedBiomeId = await this.updateBiomeUseCase.updateBiome(biome);
             res.status(200).json({ message: 'Success', data: updatedBiomeId });
         } catch (error) {
             console.error("Error updating biome:", error);
@@ -120,19 +114,14 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
             return;
         }
 
-        const biome = deleteBiomeInterface.biome;
-        if (!biome) {
+        const id_biome = deleteBiomeInterface.id_biome;
+        if (!id_biome) {
             res.status(400).json({ message: 'Bad request biome' });
             return;
         }
 
-        const id_user = deleteBiomeInterface.id_user;
-        if (!id_user) {
-            res.status(400).json({ message: 'Bad request id_user' });
-            return;
-        }
         try {
-            const deleteId = await this.deleteBiomeUseCase.deleteBiome(id_user, biome);
+            const deleteId = await this.deleteBiomeUseCase.deleteBiome(id_biome);
             res.status(200).json({ message: 'Success', data: deleteId });
         } catch (error) {
             console.error("Error delete biome:", error);

@@ -9,13 +9,13 @@ export default class UpdateBiomeUseCase implements UpdateBiomeUseCasePort {
         private updateBiomeService: UpdateBiomeServicePort
     ) {}
 
-    async updateBiome(id_user: number, biomeClient: BiomeInterface): Promise<number> {
+    async updateBiome(biomeClient: BiomeInterface): Promise<number> {
         const biomeHelper = new BiomeHelper();
         const biome = biomeHelper.endpointToDomainBiome(biomeClient);
 
         console.log("Console log en use case de biome ", biome);
 
-        const updatedBiomeId = await this.updateBiomeService.updateBiome(id_user, biome);
+        const updatedBiomeId = await this.updateBiomeService.updateBiome(biome);
 
         return updatedBiomeId;
     }
