@@ -1,3 +1,4 @@
+import { IconDoc } from "../../../../domain/docs/IconDoc"
 import Database from "../../Database"
 
 export default class IconDBC {
@@ -8,5 +9,12 @@ export default class IconDBC {
         let res = await Database.executeQuery(query)
         return res[0]
     }
+
+    async getAllIcons(): Promise<IconDoc[]> {
+        await Database.getConnection();
+        const query = "SELECT * FROM ICONS";
+        const result = await Database.executeQuery(query);
+        return result as IconDoc[];
+      }
 
 }

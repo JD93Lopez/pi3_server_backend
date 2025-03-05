@@ -1,7 +1,7 @@
 import ThemeRepositoryPort from "../../../domain/ports/driven/ThemeRepositoryPort";
 import ThemeDBC from "./dbc/ThemeDBC";
 
-export default class themeRepository implements ThemeRepositoryPort{
+export default class ThemeRepository implements ThemeRepositoryPort{
     private readonly themeDBC: ThemeDBC;
 
     constructor() {
@@ -24,5 +24,10 @@ export default class themeRepository implements ThemeRepositoryPort{
         }
     }
 
+    getAllThemes = async (): Promise<any> => {
+        const themesFromDB = await this.themeDBC.getAllThemes()
+        console.log(themesFromDB);
+        return themesFromDB;
+    }
 
 }
