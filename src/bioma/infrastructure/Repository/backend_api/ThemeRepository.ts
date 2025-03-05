@@ -24,5 +24,10 @@ export default class themeRepository implements ThemeRepositoryPort{
         }
     }
 
+    getAllThemes = async (): Promise<any> => {
+        const themesFromDB = await this.themeDBC.getAllThemes()
+        console.log(themesFromDB);
+        return themesFromDB;
+    }
 
 }

@@ -1,3 +1,4 @@
+import { ThemeDoc } from "../../../../domain/docs/ThemeDoc"
 import Database from "../../Database"
 
 export default class ThemeDBC {
@@ -7,6 +8,13 @@ export default class ThemeDBC {
         const query = `select * from THEMES where id_theme = ${id_theme}`
         let res = await Database.executeQuery(query)
         return res[0]
+    }
+
+    public async getAllThemes(): Promise<ThemeDoc[]> {
+        await Database.getConnection()
+        const query = `SELECT * from THEMES`
+        let result = await Database.executeQuery(query)
+        return result as ThemeDoc[]
     }
 
 }
