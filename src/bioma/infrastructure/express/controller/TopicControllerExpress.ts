@@ -6,12 +6,15 @@ import { GetTopicByBiomeUseCasePort } from "../../../domain/ports/driver/usecase
 import GetTopicsByBiomeInterface from "../../../domain/types/endpoint/GetTopicsByBiomeInterface"
 import DeleteTopicByIdUseCasePort from "../../../domain/ports/driver/usecase/DeleteTopicByIdUseCasePort"
 import DeleteTopicByIdInterface from "../../../domain/types/endpoint/DeleteTopicByIdInterface"
+import UpdateTopicUseCasePort from "../../../domain/ports/driver/usecase/UpdateTopicUseCasePort"
+import UpdateTopicInterface from "../../../domain/types/endpoint/UpdateTopicInterface"
 
 export default class TopicControllerExpress implements TopicControllerExpressPort {
   constructor(
     private readonly createTopicUseCase: CreateTopicUseCasePort,
     private readonly getTopicsByBiomeUseCase: GetTopicByBiomeUseCasePort,
-    private readonly deleteTopicUseCase: DeleteTopicByIdUseCasePort
+    private readonly deleteTopicUseCase: DeleteTopicByIdUseCasePort,
+    private readonly updateTopicUseCase: UpdateTopicUseCasePort
   ) {}
 
   public async createTopic(req: Request, res: Response): Promise<void> {
@@ -98,6 +101,32 @@ export default class TopicControllerExpress implements TopicControllerExpressPor
     }
 
     res.status(200).json({ message: 'Success', data: result })
-  
+  }
+
+  public async updateTopic(req: Request, res: Response): Promise<void> {
+    const body = req.body
+    if(!body) {
+      res.status(400).json({ message: 'Bad request body' })  
+    }
+
+    let updateTopicInterface = null
+    try {
+      updateTopicInterface = body as UpdateTopicInterface
+    } catch (error) {
+      res.status(400).json({ message: 'Bad request interface' })
+    }
+    if(!updateTopicInterface) {
+      res.status(400).json({ message: 'Bad request interface' })
+      return
+    }
+    //validate
+    const topic = updateTopicInterface.topic
+    if(!topic) {
+      res.status(400).json({ message: 'Bad request topic' })
+    }
+
+    const id = await this.updateTopicUseCase.updateTopic(topic)
+
+    res.status(200).json({ message: 'Success', data: id })
   }
 }
