@@ -5,6 +5,7 @@ import GetThemeServiceFactory from "../../../../bioma/infrastructure/factory/ser
 import RouterExpress from "../../../domain/RouterExpress";
 
 export default class ThemeRouterFactory {
+    
     public static readonly create = (): RouterExpress => {
         const getThemeService = GetThemeServiceFactory.create()
         const getThemeUseCase = new GetThemesUseCase(getThemeService)

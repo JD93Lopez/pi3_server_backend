@@ -13,7 +13,6 @@ export default class UpdateBiomeUseCase implements UpdateBiomeUseCasePort {
         const biomeHelper = new BiomeHelper();
         const biome = biomeHelper.endpointToDomainBiome(biomeClient);
 
-        console.log("Console log en use case de biome ", biome);
 
         const updatedBiomeId = await this.updateBiomeService.updateBiome(biome);
 
