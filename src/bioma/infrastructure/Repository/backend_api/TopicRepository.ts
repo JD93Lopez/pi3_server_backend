@@ -22,4 +22,9 @@ export default class TopicRepository implements TopicRepositoryPort {
     const deleted = await this.createTopicDBC.deleteTopicById(id)
     return deleted
   }
+
+  async updateTopic(topic: TopicDoc): Promise<number> {
+    const updated = await this.createTopicDBC.updateTopic(topic.id_topic, topic.name, topic.ICONS_id_icon)
+    return updated
+  }
 }

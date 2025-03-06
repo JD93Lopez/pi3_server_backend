@@ -37,7 +37,19 @@ export default class TopicDBC {
         }
 
         return res[0][key] as number; // Retorna solo el número
-
-      
     }
+
+    public async updateTopic(topic_id: number, topic_name: String, icon_id: number): Promise<any> {
+        await Database.getConnection()
+        const query = "select UpdateTopicName(?, ?, ?)"
+        const params = [topic_id, topic_name, icon_id]
+        let res = await Database.executeQuery(query, params)
+        res = res[0]
+        const key = Object.keys(res)[0];
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+        return res[key];
+    }
+
 }

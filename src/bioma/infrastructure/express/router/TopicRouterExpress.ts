@@ -26,6 +26,10 @@ export default class TopicRouterExpress extends RouterExpress implements TopicRo
     this.router.delete(
       '/v1.0/topic/deletion',
       this.topicController.deleteTopic.bind(this.topicController)
+    ),
+    this.router.put(
+      '/v1.0/topic/update',
+      this.topicController.updateTopic.bind(this.topicController)
     )
 
   }

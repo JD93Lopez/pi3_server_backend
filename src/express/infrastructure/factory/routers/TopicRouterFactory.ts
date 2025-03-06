@@ -1,11 +1,13 @@
 import { CreateTopicUseCase } from "../../../../bioma/application/usecase/Topics/CreateTopicUseCase"
 import DeleteTopicUseCase from "../../../../bioma/application/usecase/Topics/DeleteTopicUseCase"
 import { GetTopicByBiomeUseCase } from "../../../../bioma/application/usecase/Topics/GetTopicByBiomeUseCase"
+import UpdateTopicUseCase from "../../../../bioma/application/usecase/Topics/UpdateTopicUseCase"
 import TopicControllerExpress from "../../../../bioma/infrastructure/express/controller/TopicControllerExpress"
 import TopicRouterExpress from "../../../../bioma/infrastructure/express/router/TopicRouterExpress"
 import CreateTopicServiceFactory from "../../../../bioma/infrastructure/factory/service/CreateTopicServiceFactory"
 import TopicByBiomeRetrieverServiceFactory from "../../../../bioma/infrastructure/factory/service/TopicByBiomeRetrieverServiceFactory"
 import TopicDeleteServiceFactory from "../../../../bioma/infrastructure/factory/service/TopicDeleteServiceFactory"
+import TopicUpdateServiceFactory from "../../../../bioma/infrastructure/factory/service/TopicUpdateFactory"
 import RouterExpress from "../../../domain/RouterExpress"
 
 export default class TopicRouterFactory {
@@ -21,7 +23,11 @@ export default class TopicRouterFactory {
         const deleteTopicService = TopicDeleteServiceFactory.create()
         const deleteTopicUseCase = new DeleteTopicUseCase(deleteTopicService)
 
-        const flashcardController = new TopicControllerExpress(createTopicUseCase, getTopicByBiomeUseCase, deleteTopicUseCase)
+        // ------ UPDATE TOPIC -------
+        const updateTopicService = TopicUpdateServiceFactory.create()
+        const updateTopicUseCase = new UpdateTopicUseCase(updateTopicService)
+
+        const flashcardController = new TopicControllerExpress(createTopicUseCase, getTopicByBiomeUseCase, deleteTopicUseCase, updateTopicUseCase)
         // TODO: validate controller
         const topicRouter = new TopicRouterExpress(flashcardController)
         // TODO: validate router

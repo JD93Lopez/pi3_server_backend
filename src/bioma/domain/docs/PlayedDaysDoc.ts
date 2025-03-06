@@ -1,4 +1,4 @@
-export interface PlayedDaysDoc {
+export interface PlayedDayDoc {
     date: Date;
     time_played: number;
     questions_learned: number;
