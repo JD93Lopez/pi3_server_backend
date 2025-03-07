@@ -1,4 +1,4 @@
-import PlayedDayCreateService from "../../../application/service/PlayedDays/CreatePlayedDayService";
+import PlayedDayCreateService from "../../../application/service/PlayedDays/PlayedDayCreateService";
 import PlayedDayCreateServicePort from "../../../domain/ports/driver/service/PlayedDayCreateServicePort";
 import PlayedDayRepositoryFactory from "../repository/PlayedDayRepositoryFactory";
 

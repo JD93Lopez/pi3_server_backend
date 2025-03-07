@@ -43,7 +43,7 @@ export default class TopicControllerExpress implements TopicControllerExpressPor
       res.status(400).json({ message: 'Bad request biome_id' })
     }
     
-    const id = await this.createTopicUseCase.createTopic(biome_id, topic)
+    const id = await this.createTopicUseCase.createTopic(biome_id, topic) 
 
     res.status(200).json({ message: 'Success', data: id })
   }

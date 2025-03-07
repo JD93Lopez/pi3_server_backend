@@ -35,11 +35,11 @@ export default class PlayedDayControllerExpress implements PlayedDayControllerEx
 
             const { id_user, playedDay } = CreatePlayedDayInterface;
 
+            
             const playedDayCreated = await this.createPlayedDayUseCase.createPlayedDay(id_user, playedDay);
             
-            if(!playedDayCreated) {
-                res.status(201).json({ message: 'Played day created', data: playedDayCreated });
-            }
+            res.status(201).json({ message: 'Played day created', data: playedDayCreated });
+            
 
         } catch (error: any) {
             
