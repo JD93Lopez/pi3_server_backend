@@ -8,6 +8,8 @@ import UpdateFlashcardsUseCasePort from "../../../domain/ports/driver/usecase/Up
 import UpdateFlashcardsInterface from "../../../domain/types/endpoint/UpdateFlashcards"
 import CreateFlashcardsFromAiUseCasePort from "../../../domain/ports/driver/usecase/CreateFlashcardsFromAiUseCasePort"
 import CreateFlashcardsFromAi from "../../../domain/types/endpoint/CreateFlashcardsFromAi"
+import GetOrganizedFlashcardsByBiomeUseCase from "../../../application/usecase/Flashcards/GetBiomeOrganizedFlashcardsUseCase"
+import GetOrganizedFlashcardsByBiomeInterface from "../../../domain/types/endpoint/GetOrganizedFlashcardsByBiomeInterface"
 
 export default class FlashcardControllerExpress implements FlashcardControllerExpressPort
 {
@@ -15,8 +17,8 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
     private readonly organizeUseCase: GetOrganizedFlashcardsByTopicUseCasePort,
     private readonly createFlashcardsUseCase: CreateFlashcardsUseCasePort,
     private readonly updateFlashcardsUseCase: UpdateFlashcardsUseCasePort,
-    private readonly createFlashcardsFromAiUseCase: CreateFlashcardsFromAiUseCasePort
-
+    private readonly createFlashcardsFromAiUseCase: CreateFlashcardsFromAiUseCasePort,
+    private readonly getFlashcardsByBiomeUseCase: GetOrganizedFlashcardsByBiomeUseCase
   ) {}
 
   
@@ -168,7 +170,32 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
     }
   }
 
+  
+  public async getOrganizedFlashcardsByBiome(req: Request, res: Response): Promise<void> {
+    
+    const body = req.body
+    if(!body) {
+      res.status(400).json({ message: 'Bad request body' })  
+    }
+    let getOrganizedInterface = null
+    try {
+      getOrganizedInterface = body as GetOrganizedFlashcardsByBiomeInterface
+    } catch (error) {
+      res.status(400).json({ message: 'Bad request interface' })
+    }
+    if(!getOrganizedInterface) {
+      res.status(400).json({ message: 'Bad request interface' })
+      return
+    }
+    const biome_id = getOrganizedInterface.biome_id
+    if(!biome_id) {
+      res.status(400).json({ message: 'Bad request id topic' })
+    }
 
+    const flashcards = await this.getFlashcardsByBiomeUseCase.getOrganizedFlashcards(biome_id)
+
+    res.status(200).json({ message: 'Success', data: flashcards })
+  }
 
   
 }
