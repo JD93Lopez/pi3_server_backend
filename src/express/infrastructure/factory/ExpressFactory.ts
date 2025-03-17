@@ -5,6 +5,7 @@ import IconRouterFactory from './routers/IconRouteFactory'
 import PlayedDayRouterFactory from './routers/PlayedDayRouterFactory'
 import ThemeRouterFactory from './routers/ThemeRouteFactory'
 import TopicRouterFactory from './routers/TopicRouterFactory'
+import UserRouterFactory from './routers/UserRouterFactory'
 
 export default class ExpressFactory {
   public static readonly create = (): Server => {
@@ -15,8 +16,9 @@ export default class ExpressFactory {
     const iconRouter = IconRouterFactory.get()
     const themeRouter = ThemeRouterFactory.create()
     const playedDayRouter = PlayedDayRouterFactory.create()
+    const userRouter = UserRouterFactory.create()
     // TODO: validate routerF
-    const server = new Server([flashcardRouter, topicRouter, biomeRouter, iconRouter, themeRouter, playedDayRouter])
+    const server = new Server([flashcardRouter, topicRouter, biomeRouter, iconRouter, themeRouter, playedDayRouter, userRouter])
     // TODO: validate server
     return  server
   }
