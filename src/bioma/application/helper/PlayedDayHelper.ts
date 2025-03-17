@@ -10,7 +10,7 @@ export default class PlayedDayHelper {
             date: playedDay.date,
             time_played: playedDay.time_played,
             questions_learned: playedDay.questions_learned,
-            received_xp: playedDay.questions_learned
+            received_xp: playedDay.received_xp
         });
 
     }

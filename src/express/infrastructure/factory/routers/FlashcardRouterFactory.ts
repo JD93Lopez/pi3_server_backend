@@ -11,6 +11,8 @@ import OrganizeServiceFactory from "../../../../bioma/infrastructure/factory/ser
 import RouterExpress from "../../../domain/RouterExpress"
 import FlashcardsFromAiCreateServiceFactorty from "../../../../bioma/infrastructure/factory/service/FlashcardsFromAiCreateServiceFactorty"
 import CreateFlashcardsFromAiUseCase from "../../../../bioma/application/usecase/Flashcards/CreateFlashcardsFromAiUseCase"
+import FlashcardByBiomeRetriverServiceFactory from "../../../../bioma/infrastructure/factory/service/FlashcardByBiomeRetriverServiceFactory"
+import GetOrganizedFlashcardsByBiomeUseCase from "../../../../bioma/application/usecase/Flashcards/GetBiomeOrganizedFlashcardsUseCase"
 
 export default class FlashcardRouterFactory {
     public static readonly create = (): RouterExpress => {
@@ -34,13 +36,19 @@ export default class FlashcardRouterFactory {
         const flashcardsAiCreateService = FlashcardsFromAiCreateServiceFactorty.create()
         const createFlashcardsFromAiUseCase = new CreateFlashcardsFromAiUseCase(flashcardsAiCreateService)
 
+        
+        // ----------  GET FLASHCARD BY BIOME ---------------
+        const flashcard = FlashcardByBiomeRetriverServiceFactory.create()
+        const getFlashcardsByBiomeUseCase = new GetOrganizedFlashcardsByBiomeUseCase(flashcard, organizeService)
+        
         // ---------- FLASHCARD CONTROLLER ---------------
-        const flashcardController = new FlashcardControllerExpress(organizeUseCase, createFlashcardsUseCase, updateFlashcardsUseCase, createFlashcardsFromAiUseCase)
+        const flashcardController = new FlashcardControllerExpress(organizeUseCase, createFlashcardsUseCase, updateFlashcardsUseCase, createFlashcardsFromAiUseCase, getFlashcardsByBiomeUseCase)
         // TODO: validate controller
-
 
         const flashcardRouter = new FlashcardRouterExpress(flashcardController)
         // TODO: validate router
         return  flashcardRouter
     }
 }
+
+
