@@ -1,12 +1,12 @@
-import { AbstractItem } from "./AbstractItem";
+import AbstractItem from "./AbstractItem";
 
 export class NullItem extends AbstractItem {
     constructor() {
-        super(
-            -1,
-          "/default.png"  ,
-            0
-        );
+        super({
+            id_item: -1,
+            image: "/default.png"  ,
+            cost: 0
+        });
     }
 
     isNull(): boolean {
