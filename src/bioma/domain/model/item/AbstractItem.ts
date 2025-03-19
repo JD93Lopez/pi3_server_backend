@@ -1,14 +1,14 @@
-export abstract class AbstractItem {
+export default abstract class AbstractItem {
     
     protected id_item: number;
     protected image: string;
     protected cost: number;
 
 
-    constructor(id_item: number, image: string, cost: number) {
-        this.id_item = id_item;
-        this.image = image;
-        this.cost = cost;
+    constructor(attributes: ItemAtributes) {
+        this.id_item = attributes.id_item;
+        this.image = attributes.image;
+        this.cost = attributes.cost;
     }
 
     getIdItem(): number {
@@ -26,3 +26,8 @@ export abstract class AbstractItem {
     abstract isNull(): boolean;
 }
 
+export interface ItemAtributes {
+    id_item: number;
+    image: string;
+    cost: number;
+}
