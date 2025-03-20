@@ -2,7 +2,9 @@ import { UserRepositoryPort } from "../../../domain/ports/driven/UserRepositoryP
 import UserRepository from "../../Repository/backend_api/UserRepository";
 
 export default class UserRepositoryFactory {
-    public static create(): UserRepositoryPort {
+    
+    public static readonly create= (): UserRepositoryPort => {
         return new UserRepository();
     }
+
 }

@@ -14,6 +14,12 @@ export default class PlayedDayRepository implements PlayedDayRepositoryPort{
 
         const response = await this.playedDayDBC.createPlayedDay(playedDay.date, playedDay.time_played, playedDay.questions_learned, playedDay.received_xp, playedDay.USERS_id_user)
         return response
-    
     }
+
+    update = async(playedDay: PlayedDayDoc): Promise<number>  => {
+        const response = await this.playedDayDBC.updatePlayedDay(playedDay.date, playedDay.time_played, playedDay.questions_learned, playedDay.received_xp, playedDay.USERS_id_user)
+        return response
+    }
+
+
 }

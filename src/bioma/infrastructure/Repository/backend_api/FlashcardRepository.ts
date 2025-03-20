@@ -47,8 +47,22 @@ export default class FlashcardRepository implements FlashcardRepositoryPort {
       // Retorna 1 si la acualización fue exitosa
       const dbResponse = await this.flashcardDBC.updateFlashcard(flashcard.id_flashcard,  flashcard.learned, flashcard.last_date); 
       return dbResponse;  
-
-      
     }
 
+  findByBiome = async (biome_id: number): Promise<FlashcardDoc[]> => {
+  
+       const flashcardsFromDB = await this.flashcardDBC.getFlashcardsByBiome(biome_id);
+        console.log("RESPUESTASSSS -> ", flashcardsFromDB);
+        try {
+          return flashcardsFromDB.map((flashcard: FlashcardDoc) => ({
+             id_flashcard: flashcard.id_flashcard,
+             question: flashcard.question,
+             answer: flashcard.answer,
+             learned: flashcard.learned,
+             last_date: flashcard.last_date
+         }));
+        } catch (error) {
+          throw new Error("Error getting flashcards")
+        }
+    }
 }

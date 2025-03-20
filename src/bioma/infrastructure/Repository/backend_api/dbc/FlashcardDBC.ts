@@ -8,10 +8,14 @@ export default class FlashcardDBC {
     }
 
     public async getFlashcardsByTopic(id_topic: number): Promise<any> {
-        await Database.getConnection()
-        const query = `call GetFlashcardsByTopic(${id_topic})`
-        const res = await Database.executeQuery(query)
-        return res[0]
+        try {
+            await Database.getConnection()
+            const query = `call GetFlashcardsByTopic(${id_topic})`
+            const res = await Database.executeQuery(query)
+            return res[0]
+        } catch (error) {            
+            throw new Error("Error getting flashcards by topic from database")
+        }
     }
 
     public async createFlashcard(flashcard_question: string, flashcard_answer: string, learned_status: boolean, topic_id: number): Promise<any> {
@@ -22,7 +26,7 @@ export default class FlashcardDBC {
         res = res[0]
         const key = Object.keys(res)[0];
         if(!key){
-            throw new Error("Error creating flashcard")
+            throw new Error("Error creating flashcard in database")
         }
         return res[key];
     }
@@ -38,5 +42,30 @@ export default class FlashcardDBC {
             throw new Error("Error updating flashcard")
         }
         return res[key];
+    }
+
+    public async getFlashcardsByBiome(biome_id: number): Promise<any> {
+
+        try {
+            await Database.getConnection();
+            const query = `call GetFlashcardsByBiome(${biome_id})`;
+            const res = await Database.executeQuery(query);
+            
+            // Verifica si hay resultados y maneja el caso en que no haya
+            if (!res || res.length === 0) {
+                throw new Error(`No flashcards found for biome id ${biome_id}`);
+            }
+
+            return res[0];
+        } catch (error: any) {
+            if (error.code === 'ER_SP_DOES_NOT_EXIST') {
+                console.error("Stored procedure not found:", error);
+                throw new Error(`Stored procedure GetFlashcardsByBiome does not exist.`);
+            }
+
+            console.error("Error getting flashcards by biome:", error);
+            throw new Error("Error getting flashcards by biome from database.");
+        }
+
     }
 }

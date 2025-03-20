@@ -1,14 +1,31 @@
-import { Request, Response } from 'express';
-import { CreateUserUseCasePort } from '../../../domain/ports/driver/usecase/CreateUserUseCasePort';
-import UserControllerExpressPort from '../../../domain/ports/driver/controller/UserControllerExpressPort';
-import CreateUserInterface from '../../../domain/types/endpoint/CreateUser';
+import { Request, Response } from "express";
+import UserControllerExpressPort from "../../../domain/ports/driver/controller/UserControllerExpressPort";
+import UpdateUserExperienceUseCasePort from "../../../domain/ports/driver/usecase/UpdateUserExperienceUseCasePort";
+import CreateUserInterface from "../../../domain/types/endpoint/CreateUser";
+import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/CreateUserUseCasePort";
 
 export default class UserControllerExpress implements UserControllerExpressPort {
-    
-    constructor(
+   
+
+    constructor(private readonly updateUserXpeUseCase: UpdateUserExperienceUseCasePort,
         private readonly createUserUseCase: CreateUserUseCasePort
     ) {}
 
+    async updateUserExperience(req: Request, res: Response): Promise<void> {
+        try {
+            const {user_id, user_xp }= req.body;
+            
+            if(!user_id || !user_xp) {
+                res.status(400).json({ message: 'Bad request body' });
+            }
+
+            const response = await this.updateUserXpeUseCase.updateUserXP(user_id, user_xp);
+            res.status(200).send({ message: "User experience updated successfully", data: response });
+
+        } catch (error) {
+            res.status(500).send({ message: "Internal server error" , error: error});
+        }
+    }
     async createUser(req: Request, res: Response): Promise<void> {
         let createUserInterface: CreateUserInterface | null = null;
 

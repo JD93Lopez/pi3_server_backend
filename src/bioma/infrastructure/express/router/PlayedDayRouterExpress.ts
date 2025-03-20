@@ -15,7 +15,7 @@ export default class PlayedDayRouterExpress extends RouterExpress implements Pla
 
     public getPlayedDayRoutes = (): void => {
         this.router.post(
-            "/v1.0/played/creation",
+            "/v1.0/played/save",
             this.playedDayController.createPlayedDay.bind(this.playedDayController)
         )
     }
