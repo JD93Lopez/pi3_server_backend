@@ -21,10 +21,8 @@ export default class PlayedDayCreateService implements PlayedDayCreateServicePor
             
             const resultUpdated = await this.playedDayRepository.update(playedDayDoc);
             
-            console.log("resultUpdated x1 : ", resultUpdated)
             if(resultUpdated === 0) { 
                 const result = await this.playedDayRepository.save(playedDayDoc);
-                console.log("resultCreate x: ", result)
                 return result;
             }
     
