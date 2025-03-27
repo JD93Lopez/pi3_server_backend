@@ -17,4 +17,14 @@ export default class UserRepository implements UserRepositoryPort {
         const idUserFromDBC = await this.userDBC.createUser(user.user_name, user.email, user.password, user.name, user.pet_name, user.education, user.birthdate, user.telephone, user.sex, user.occupation, user.time_played, user.questions_learned, user.received_xp, user.streak, user.last_date_added, user.league);
         return idUserFromDBC
     }
+
+    async UpdateUserStreak(user_id: number): Promise<void> {
+        await this.userDBC.UpdateUserStreak(user_id);
+    }
+
+    async getUserStreak(user_id: number): Promise<number> {
+        const result = await this.userDBC.getUserStreak(user_id);
+        return result;
+    }
+
 }

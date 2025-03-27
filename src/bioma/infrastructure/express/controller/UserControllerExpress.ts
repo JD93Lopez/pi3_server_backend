@@ -3,15 +3,19 @@ import UserControllerExpressPort from "../../../domain/ports/driver/controller/U
 import UpdateUserExperienceUseCasePort from "../../../domain/ports/driver/usecase/UpdateUserExperienceUseCasePort";
 import CreateUserInterface from "../../../domain/types/endpoint/CreateUser";
 import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/CreateUserUseCasePort";
+import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/GetUserStreakUseCasePort";
+import GetUserStreakInterface from "../../../domain/types/endpoint/GetUserStreakInterface";
 
 export default class UserControllerExpress implements UserControllerExpressPort {
-   
 
-    constructor(private readonly updateUserXpeUseCase: UpdateUserExperienceUseCasePort,
-        private readonly createUserUseCase: CreateUserUseCasePort
+    constructor(
+        private readonly updateUserXpeUseCase: UpdateUserExperienceUseCasePort,
+        private readonly createUserUseCase: CreateUserUseCasePort,
+        private readonly getUserStrakeUseCase: GetUserStreakUseCasePort
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
+
         try {
             const {user_id, user_xp }= req.body;
             
@@ -62,4 +66,35 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             res.status(500).json({ message: 'Internal server error' });
         }
     }
+    async getUserStreak(req: Request, res: Response): Promise<void> {
+
+        try {
+            const body = req.body;
+            
+            let userStreakInterface = null;
+            if(!body) {
+                res.status(400).json({ message: 'Bad request body' });
+            }
+            try{
+                userStreakInterface = body as GetUserStreakInterface;
+            }catch(error){
+                res.status(400).json({ message: 'Bad request interface' });
+            }
+
+            if (!userStreakInterface) {
+                res.status(400).json({ message: 'Bad request interface' });
+                return;
+            }
+
+            const user_id = userStreakInterface.user_id;                
+            const response = await this.getUserStrakeUseCase.getUserStreak(user_id);
+
+            res.status(200).send({ message: "User streak fetched successfully", data: response });
+
+        } catch (error) {
+
+            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+        }
+    }
+
 }
