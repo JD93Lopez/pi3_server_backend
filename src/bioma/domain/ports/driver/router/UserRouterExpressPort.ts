@@ -1,3 +1,3 @@
-export default interface UserRouterExpressPort {
-    getUserRoutes(): void
+export default interface UserRouterExpressPort{
+    getUserRoutes(): void;
 }

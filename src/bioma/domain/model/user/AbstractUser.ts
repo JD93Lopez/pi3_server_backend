@@ -1,5 +1,5 @@
 import { AbstractBiome } from "../biome/AbstractBiome";
-import { AbstractPerson, typeSex } from "../person/AbstractPerson";
+import { AbstractPerson } from "../person/AbstractPerson";
 
 export abstract class AbstractUser extends AbstractPerson {
 
@@ -91,7 +91,7 @@ export default interface UserAttributes {
     education: string, 
     birthdate: Date,
     telephone:string, 
-    sex: typeSex, 
+    sex: string, 
     occupation: string,
     time_played_total: number;
     questions_learned_total: number;
