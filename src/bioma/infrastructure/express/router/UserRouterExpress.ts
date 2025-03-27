@@ -17,6 +17,10 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
         this.router.put(
             "/v1.0/user/update/experience",
             this.userController.updateUserExperience.bind(this.userController)
+        ),
+        this.router.post(
+            "/v1.0/user/streak",
+            this.userController.getUserStreak.bind(this.userController)
         )
     }
 }

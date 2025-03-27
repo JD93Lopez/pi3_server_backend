@@ -12,4 +12,14 @@ export default class UserRepository implements UserRepositoryPort {
         const result = await this.userDBC.updateUserExperience(user_id, received_xp);
         return result;
     }
+
+    async UpdateUserStreak(user_id: number): Promise<void> {
+        await this.userDBC.UpdateUserStreak(user_id);
+    }
+
+    async getUserStreak(user_id: number): Promise<number> {
+        const result = await this.userDBC.getUserStreak(user_id);
+        return result;
+    }
+
 }
