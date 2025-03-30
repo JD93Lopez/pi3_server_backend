@@ -27,4 +27,29 @@ export default class UserRepository implements UserRepositoryPort {
         return result;
     }
 
+    async findByUserName(username: string): Promise<UserDoc> {
+        const user = await this.userDBC.getUserByUserName(username);
+        const userDBC : UserDoc = {
+            id_user: user.id_user,
+            user_name: user.user_name,
+            email: user.email,
+            password: user.password,
+            name: user.name,
+            pet_name: user.pet_name,
+            education: user.education,
+            birthdate: user.birthdate,
+            telephone: user.telephone,
+            sex: user.sex,
+            occupation: user.occupation,
+            time_played: user.time_played,
+            questions_learned: user.questions_learned,
+            received_xp: user.received_xp,
+            streak: user.streak,
+            last_date_added: user.last_date_added,
+            league: user.league,
+        }
+
+        return userDBC;
+    }
+
 }
