@@ -1,3 +1,4 @@
+import { JWTService } from "../../../../bioma/application/service/User/JWTService"
 import GetUserStreakUseCase from "../../../../bioma/application/usecase/User/GetUserStreakUseCase"
 import LoginUseCase from "../../../../bioma/application/usecase/User/LoginUseCase"
 import UpdateUserExperienceUseCase from "../../../../bioma/application/usecase/User/UpdateUserExperienceUseCase"
@@ -27,8 +28,9 @@ export default class UserRouterFactory {
 
 
     // --------- User Login  ----------------
-    const userLoginService = LoginServiceFactory.create()
-    const userLoginUseCase = new LoginUseCase(userLoginService)
+    const userValidationService = LoginServiceFactory.create()
+    const userJwtService = new JWTService();
+    const userLoginUseCase = new LoginUseCase(userValidationService, userJwtService)
 
     
     const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase)
