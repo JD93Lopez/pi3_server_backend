@@ -52,7 +52,6 @@ export default class FlashcardRepository implements FlashcardRepositoryPort {
   findByBiome = async (biome_id: number): Promise<FlashcardDoc[]> => {
   
        const flashcardsFromDB = await this.flashcardDBC.getFlashcardsByBiome(biome_id);
-        console.log("RESPUESTASSSS -> ", flashcardsFromDB);
         try {
           return flashcardsFromDB.map((flashcard: FlashcardDoc) => ({
              id_flashcard: flashcard.id_flashcard,

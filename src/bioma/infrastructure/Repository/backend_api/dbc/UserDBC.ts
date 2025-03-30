@@ -65,5 +65,18 @@ export default class UserDBC {
         }
         return res[key];
     }
+
+    public async getUserByUserName(user_name: string): Promise<any> {
+        await Database.getConnection()
+        const query = "CALL GetUserByUsername('Paola')";
+        const params = [user_name]
+        let res = await Database.executeQuery(query, params)
+        res = res[0]
+        const key = Object.keys(res)[0];
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+        return res[key];
+    }
 }
 

@@ -5,13 +5,15 @@ import CreateUserInterface from "../../../domain/types/endpoint/CreateUser";
 import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/CreateUserUseCasePort";
 import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/GetUserStreakUseCasePort";
 import GetUserStreakInterface from "../../../domain/types/endpoint/GetUserStreakInterface";
+import LoginUseCasePort from "../../../domain/ports/driver/usecase/loginUseCasePort";
 
 export default class UserControllerExpress implements UserControllerExpressPort {
 
     constructor(
         private readonly updateUserXpeUseCase: UpdateUserExperienceUseCasePort,
         private readonly createUserUseCase: CreateUserUseCasePort,
-        private readonly getUserStrakeUseCase: GetUserStreakUseCasePort
+        private readonly getUserStrakeUseCase: GetUserStreakUseCasePort,
+        private readonly loginUserUseCase: LoginUseCasePort
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -94,6 +96,28 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         } catch (error) {
 
             res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+        }
+    }
+
+    async loginUser(req: Request, res: Response): Promise<void> {
+        try {
+            const { username, password } = req.body;
+
+            if (!username || !password) {
+                res.status(400).json({ message: 'Bad request body' });
+                return;
+            }
+
+            const response = await this.loginUserUseCase.login(username, password);
+            if (!response) {
+                res.status(401).json({ message: 'Unauthorized' });
+                return;
+            }
+            res.status(200).json({ success:true, data: response });
+            
+        } catch (error) {
+            console.error("Error logging in user:", error);
+            res.status(500).send({ message: "Internal server error", error: error });
         }
     }
 
