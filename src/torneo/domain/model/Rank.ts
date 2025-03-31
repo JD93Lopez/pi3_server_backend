@@ -11,7 +11,7 @@ export class Rank {
         this.rooms = [];
     }
 
-    clasificar(users: AbstractUser[]): boolean {
+    clasificar(_users: AbstractUser[]): boolean {
         console.log(`Clasificando usuarios en el rango ${this.rankName}`);
         // TODO Lógica de clasificación específica del rango
         return true;
@@ -33,7 +33,7 @@ export class Rank {
     finalizar(): AbstractUser[] {
         const finalUsers: AbstractUser[] = [];
         for (const room of this.rooms) {
-            finalUsers.push(...room.finalizar());
+            finalUsers.push(...room.finalizar( this.rankName ));
         }
         return finalUsers; // Devolver lista de usuarios clasificados
     }
