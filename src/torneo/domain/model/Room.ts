@@ -31,7 +31,14 @@ export class Room {
             case RankName.BRONZE:
                 // Ascend half Bigger Ascend
                 const topHalfIndex = Math.ceil(this.users.length / 2);
-                this.users.slice(0, topHalfIndex).forEach(user => user.setRank(RankName.SILVER));
+                this.users.forEach((user, index) => {
+                    if (index < topHalfIndex) {
+                        user.setRank(RankName.SILVER);
+                        user.addStreak(1); // Añadir racha de victoria
+                    } else {
+                        user.addStreak(-1); // Bajar racha para facilitar próxima victoria
+                    }
+                });
                 break;
             case RankName.SILVER:
                 // Ascend third Bigger Keep
@@ -48,10 +55,13 @@ export class Room {
                 this.users.forEach((user, index) => {
                     if (index < topThirdIndex) {
                         user.setRank(RankName.DIAMOND); // Ascender
+                        user.addStreak(1); // Añadir racha de victoria
                     } else if (index < midThirdIndex) {
                         // Mantener
+                        user.addStreak(-1); // Bajar racha para facilitar proxima victoria
                     } else {
                         user.setRank(RankName.GOLD); // Descender
+                        user.addStreak(-2); // Bajar mas la racha para facilitar proxima victoria
                     }
                 });
                 break;
@@ -61,6 +71,9 @@ export class Room {
                 this.users.forEach((user, index) => {
                     if (index >= halfIndex) {
                         user.setRank(RankName.PLATINUM); // Descender
+                        user.addStreak(-2); // Bajar mas la racha para facilitar proxima victoria
+                    } else {
+                        user.addStreak(1); // Sumar 1 a la racha
                     }
                 });
                 break;
@@ -77,10 +90,13 @@ export class Room {
         this.users.forEach((user, index) => {
             if (index < topThirdIndex) {
                 user.setRank(upRank); // Ascender
+                user.addStreak(1); // Añadir racha de victoria
             } else if (index <= midThirdIndex) {
                 // Mantener
+                user.addStreak(-1); // Bajar racha para facilitar proxima victoria
             } else {
                 user.setRank(downRank); // Descender
+                user.addStreak(-2); // Bajar mas la racha para facilitar proxima victoria
             }
         });
         return this.users;

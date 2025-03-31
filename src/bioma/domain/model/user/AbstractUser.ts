@@ -81,6 +81,22 @@ export abstract class AbstractUser extends AbstractPerson {
         this.league = rank;
     }
 
+    addXP(xp: number): void {
+        this.received_xp_total += xp;
+    }
+
+    addStreak(iStreak: number): void {
+        const currentStreak = parseInt(this.streak);
+        // Si cambio de signo
+        if (Math.sign(currentStreak) !== Math.sign(iStreak)) {
+            // Se reinicia la racha
+            this.streak = iStreak.toString();
+        } else {
+            // Si no, se suma
+            this.streak = (currentStreak + iStreak).toString();
+        }
+    }
+
     abstract isNull(): boolean;
 
 }
