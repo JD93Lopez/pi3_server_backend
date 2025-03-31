@@ -11,10 +11,65 @@ export class Rank {
         this.rooms = [];
     }
 
-    clasificar(_users: AbstractUser[]): boolean {
-        console.log(`Clasificando usuarios en el rango ${this.rankName}`);
-        // TODO Lógica de clasificación específica del rango
-        return true;
+    clasificar(users: AbstractUser[]): boolean {
+        try {
+            // Organizar usuarios por XP y racha
+            // calculos de media de xp y racha
+            const xpAverage = users.reduce((sum, user) => sum + user.getReceivedXpTotal(), 0) / users.length;
+            const streakAverage = users.reduce((sum, user) => sum + parseInt(user.getStreak()), 0) / users.length;
+
+            // Calcular el porcentaje de cada usuario sobre o bajo la media
+            const userPercentages = users.map(user => {
+                const xpPercentageOverMean = ((user.getReceivedXpTotal() - xpAverage) / xpAverage) * 100;
+                const streakPercentageOverMean = ((parseInt(user.getStreak()) - streakAverage) / streakAverage) * 100;
+                return {
+                    user,
+                    xpPercentageOverMean,
+                    streakPercentageOverMean
+                };
+            });
+
+            // Ordenar usuarios por el porcentaje combinado de XP y racha
+            const usersOrdered = userPercentages.sort((a, b) => 
+                (b.xpPercentageOverMean + b.streakPercentageOverMean) - (a.xpPercentageOverMean + a.streakPercentageOverMean)
+            ).map(item => item.user);
+
+            // Definir parametros de clasificacion
+            const minUsersPerRoom = 3;
+            const maxUsersPerRoom = 15;
+            const optimalUsersPerRoom = 10;
+            const minRooms = 3;
+
+            // Clasificar usuarios en salas
+            let remainingUsers = [...usersOrdered];
+            this.rooms = [];
+
+            while (remainingUsers.length > 0) {
+                // Calcular el numero de salas restantes necesarias
+                const remainingRoomsNeeded = Math.max(minRooms - this.rooms.length, 1);
+                // Calcular el numero de usuarios por sala
+                const maxUsersForCurrentRoom = Math.min(
+                    Math.max(optimalUsersPerRoom, Math.ceil(remainingUsers.length / remainingRoomsNeeded)),
+                    maxUsersPerRoom
+                );
+
+                // Crear una nueva sala y anadir usuarios
+                const usersForRoom = remainingUsers.splice(0, maxUsersForCurrentRoom);
+                if (usersForRoom.length < minUsersPerRoom && this.rooms.length >= minRooms) {
+                    // Anade los sobrantes a la ultima sala
+                    this.rooms[this.rooms.length - 1]!.anadir(usersForRoom);
+                } else {
+                    const newRoom = new Room();
+                    newRoom.anadir(usersForRoom);
+                    this.rooms.push(newRoom);
+                }
+            }
+
+            return true;
+        } catch (error) {
+            console.error("Error during classification:", error);
+            return false;
+        }
     }
 
     getRankRooms(): Room[] {
