@@ -1,4 +1,5 @@
 import { AbstractUser } from "../../../bioma/domain/model/user/AbstractUser";
+import { NullUser } from "../../../bioma/domain/model/user/NullUser";
 import { RankName } from "./RankName";
 import { Room } from "./Room";
 
@@ -76,13 +77,13 @@ export class Rank {
         return this.rooms;
     }
 
-    searchUser(userId: number): AbstractUser | undefined {
+    searchUser(userId: number): AbstractUser {
         // Búsqueda en todas las salas del rango
         for (const room of this.rooms) {
             const user = room.searchUser(userId);
-            if (user) return user;
+            if (!user.isNull()) return user;
         }
-        return undefined;
+        return new NullUser(); // Usuario no encontrado
     }
 
     finalizar(): AbstractUser[] {

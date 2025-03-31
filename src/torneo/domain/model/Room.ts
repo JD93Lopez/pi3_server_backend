@@ -1,4 +1,5 @@
 import { AbstractUser } from "../../../bioma/domain/model/user/AbstractUser";
+import { NullUser } from "../../../bioma/domain/model/user/NullUser";
 import { RankName } from "./RankName";
 
 export class Room {
@@ -22,8 +23,8 @@ export class Room {
         return this.users;
     }
 
-    searchUser(userId: number): AbstractUser | undefined {
-        return this.users.find(user => user.getIdUser() === userId);
+    searchUser(userId: number): AbstractUser {
+        return this.users.find(user => user.getIdUser() === userId) || new NullUser();
     }
 
     finalizar( _rankName: RankName ): AbstractUser[] {

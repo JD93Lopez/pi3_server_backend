@@ -1,4 +1,5 @@
 import { AbstractUser } from "../../../bioma/domain/model/user/AbstractUser";
+import { NullUser } from "../../../bioma/domain/model/user/NullUser";
 import { Rank } from "./Rank";
 
 export class Tournament {
@@ -24,13 +25,13 @@ export class Tournament {
         return false; // Usuario no encontrado
     }
 
-    searchUser(userId: number): AbstractUser | undefined {
+    searchUser(userId: number): AbstractUser {
         // Búsqueda global en todos los rangos
         for (const rank of this.ranks) {
             const user = rank.searchUser(userId);
-            if (user) return user;
+            if (!user.isNull()) return user;
         }
-        return undefined;
+        return new NullUser(); // Usuario no encontrado
     }
 
     finalizar(): AbstractUser[] {
