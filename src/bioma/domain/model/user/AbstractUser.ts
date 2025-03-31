@@ -77,6 +77,10 @@ export abstract class AbstractUser extends AbstractPerson {
         return this.biomes;
     }
 
+    setRank(rank: string): void {
+        this.league = rank;
+    }
+
     abstract isNull(): boolean;
 
 }
