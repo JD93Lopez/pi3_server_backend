@@ -3,7 +3,7 @@ import { NullUser } from "../../../bioma/domain/model/user/NullUser";
 import { RankName } from "./RankName";
 
 export class Room {
-    users: AbstractUser[];
+    private users: AbstractUser[];
 
     constructor() {
         this.users = [];

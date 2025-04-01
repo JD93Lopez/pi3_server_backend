@@ -4,8 +4,8 @@ import { RankName } from "./RankName";
 import { Room } from "./Room";
 
 export class Rank {
-    rankName: RankName;
-    rooms: Room[];
+    private rankName: RankName;
+    private rooms: Room[];
 
     constructor(rankName: RankName) {
         this.rankName = rankName;
