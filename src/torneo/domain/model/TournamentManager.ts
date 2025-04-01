@@ -17,11 +17,11 @@ export class TournamentManager {
     }
 
     inscribir(user: AbstractUser): boolean {
-        if (!this.started) {
+        if (!this.estaInscrito(user.getIdUser())) {
             this.inscriptionList.push(user);
             return true;
         }
-        return false; // No se permite inscribir si el torneo ya comenzó
+        return false;
     }
 
     iniciar(endDate: Date): boolean {
@@ -37,6 +37,7 @@ export class TournamentManager {
 
             // Clasificar usuarios al iniciar el torneo
             this.tournament.clasificar(this.inscriptionList);
+            this.inscriptionList = []; // Limpiar la lista de inscripción después de clasificar
 
             // Configurar el temporizador para finalizar el torneo automáticamente
             const timeUntilEnd = endDate.getTime() - now.getTime(); // Diferencia en milisegundos
@@ -50,8 +51,8 @@ export class TournamentManager {
         return false; // No se puede iniciar si ya está en curso
     }
 
-    anadirExperiencia(userId: number, xp: number): boolean {
-        return this.tournament.anadirExperiencia(userId, xp);
+    anadirExperiencia(userId: number, league: string, xp: number): boolean {
+        return this.tournament.anadirExperiencia(userId, league, xp);
     }
 
     finalizar(): boolean {
@@ -65,12 +66,35 @@ export class TournamentManager {
             }
 
             console.log("Torneo finalizado.");
-            // TODO: Lógica de finalización (por ejemplo, clasificación final)
+
             const usuariosActualizados = this.tournament.finalizar();
-            usuariosActualizados;
+            
+            usuariosActualizados.forEach(usuario => {
+                usuario
+                // TODO Actualizar liga de cada usuario
+            });
+
+            // TODO reinscribir usuarios con mas de 0 xp
+
             return true;
         }
         return false; // No se puede finalizar si no ha comenzado o no ha llegado la fecha de finalización
+    }
+
+    estaInscrito(userId: number): boolean {
+        return this.inscriptionList.some(u => u.getIdUser() === userId);
+    }
+
+    estaParticipando(userId: number, league: string): boolean {
+        const user = this.tournament.searchUserInRank(userId, league);
+        if (!user.isNull()) {
+            return user.getIdUser() === userId;
+        }
+        return false; // Usuario no encontrado o rango no válido
+    }
+
+    estaEnCurso(): boolean {
+        return this.started;
     }
 
     cancelarTorneo(): void {

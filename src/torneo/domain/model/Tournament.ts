@@ -3,7 +3,7 @@ import { NullUser } from "../../../bioma/domain/model/user/NullUser";
 import { Rank } from "./Rank";
 
 export class Tournament {
-    ranks: Rank[];
+    private ranks: Rank[];
 
     constructor() {
         this.ranks = [];
@@ -16,6 +16,7 @@ export class Tournament {
             for (const user of users) {
                 const league = Rank.toRankName(user.getLeague());
                 if (league) {
+                    // Agrupar usuarios por liga
                     if (!usersByLeague[league]) {
                         usersByLeague[league] = [];
                     }
@@ -26,12 +27,16 @@ export class Tournament {
                 }
             }
 
+            // Clasificar usuarios por liga
             for (const league in usersByLeague) {
+                // buscar o crear el rango correspondiente a la liga
                 let rank = this.ranks.find(r => r.getName() === Rank.toRankName(league));
                 if (!rank) {
                     rank = new Rank(Rank.toRankName(league));
                     this.ranks.push(rank);
                 }
+
+                // Clasificar usuarios de la liga en el rango correspondiente
                 const usersInLeague = usersByLeague[Rank.toRankName(league)];
                 if (usersInLeague) {
                     rank.clasificar(usersInLeague);
@@ -44,18 +49,27 @@ export class Tournament {
         }
     }
 
-    anadirExperiencia(userId: number, xp: number): boolean {
-        const user = this.searchUser(userId);
+    anadirExperiencia(userId: number, league: string, xp: number): boolean {
+        const user = this.searchUserInRank(userId, league);
         if (!user.isNull()) {
             user.addXp(xp);
             return true;
         }
-        return false; // Usuario no encontrado
+        return false; // Usuario no encontrado o rango no válido
     }
 
     searchUser(userId: number): AbstractUser {
         // Búsqueda global en todos los rangos
         for (const rank of this.ranks) {
+            const user = rank.searchUser(userId);
+            if (!user.isNull()) return user;
+        }
+        return new NullUser(); // Usuario no encontrado
+    }
+
+    searchUserInRank(userId: number, league: string): AbstractUser {
+        const rank = this.ranks.find(r => r.getName() === Rank.toRankName(league));
+        if (rank) {
             const user = rank.searchUser(userId);
             if (!user.isNull()) return user;
         }
