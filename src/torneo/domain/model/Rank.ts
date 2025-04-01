@@ -93,4 +93,17 @@ export class Rank {
         }
         return finalUsers; // Devolver lista de usuarios clasificados
     }
+
+    getName(): RankName {
+        return this.rankName;
+    }
+
+    static toRankName(rankName: string): RankName {
+        try {
+            return RankName[rankName as keyof typeof RankName];
+        } catch (error) {
+            console.error(`Error converting string to RankName: ${rankName}`, error);
+            throw new Error(`Invalid rank name: ${rankName}`);
+        }
+    }
 }

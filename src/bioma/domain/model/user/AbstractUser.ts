@@ -81,7 +81,7 @@ export abstract class AbstractUser extends AbstractPerson {
         this.league = rank;
     }
 
-    addXP(xp: number): void {
+    addXp(xp: number): void {
         this.received_xp_total += xp;
     }
 

@@ -10,16 +10,44 @@ export class Tournament {
     }
 
     clasificar(users: AbstractUser[]): boolean {
-        console.log("Clasificando usuarios...");
-        // TODO Lógica de clasificación aquí
-        return true;
+        try {
+            const usersByLeague: { [key: string]: AbstractUser[] } = {};
+
+            for (const user of users) {
+                const league = Rank.toRankName(user.getLeague());
+                if (league) {
+                    if (!usersByLeague[league]) {
+                        usersByLeague[league] = [];
+                    }
+                    usersByLeague[league].push(user);
+                } else {
+                    console.error(`Liga no válida para el usuario ${user.getUserName()}`);
+                    return false;
+                }
+            }
+
+            for (const league in usersByLeague) {
+                let rank = this.ranks.find(r => r.getName() === Rank.toRankName(league));
+                if (!rank) {
+                    rank = new Rank(Rank.toRankName(league));
+                    this.ranks.push(rank);
+                }
+                const usersInLeague = usersByLeague[Rank.toRankName(league)];
+                if (usersInLeague) {
+                    rank.clasificar(usersInLeague);
+                }
+            }
+            return true;
+        } catch (error) {
+            console.error("Error during classification:", error);
+            return false;
+        }
     }
 
     anadirExperiencia(userId: number, xp: number): boolean {
         const user = this.searchUser(userId);
-        if (user) {
-            console.log(`Añadiendo ${xp} XP al usuario ${user.getUserName()}`); 
-            // TODO añadir experiencia
+        if (!user.isNull()) {
+            user.addXp(xp);
             return true;
         }
         return false; // Usuario no encontrado
