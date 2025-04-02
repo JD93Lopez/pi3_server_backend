@@ -52,4 +52,9 @@ export default class UserRepository implements UserRepositoryPort {
         return userDBC;
     }
 
+    async updateUserLeague(user_id: number, league: string): Promise<number> {
+        const result = await this.userDBC.updateUserLeague(user_id, league);
+        return result;
+    }
+
 }
