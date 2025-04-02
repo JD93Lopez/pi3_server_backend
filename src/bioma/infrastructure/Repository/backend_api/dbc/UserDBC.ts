@@ -78,5 +78,29 @@ export default class UserDBC {
         }
         return res[key];
     }
+    public async updateUserLeague(user_id: number, league: string): Promise<any> {
+        try {
+            await Database.getConnection();
+            const query = "CALL UpdateUserLeague(?, ?)";
+            const params = [user_id, league];
+            let res = await Database.executeQuery(query, params);
+    
+            if (!res || res.length === 0) {
+                throw new Error("No result returned from database");
+            }
+    
+            res = res[0];
+            const key = Object.keys(res)[0];
+            if (!key) {
+                throw new Error("Unexpected db result");
+            }
+    
+            return res[key];
+        } catch (error) {
+            console.error("Error updating user league:", error);
+            throw error;
+        }
+    }
+    
 }
 
