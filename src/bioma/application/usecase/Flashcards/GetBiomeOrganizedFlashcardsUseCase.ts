@@ -1,6 +1,6 @@
-import FlashcardByBiomeRetrieverServicePort from "../../../domain/ports/driver/service/FlashcardByBiomeRetrieverServicePort";
+import FlashcardByBiomeRetrieverServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardByBiomeRetrieverServicePort";
 import { OrganizerServicePort } from "../../../domain/ports/driver/service/OrganizerServicePort";
-import GetOrganizedFlashcardsByBiomeUseCasePort from "../../../domain/ports/driver/usecase/GetBiomeOrganizedFlashcardsUseCasePort";
+import GetOrganizedFlashcardsByBiomeUseCasePort from "../../../domain/ports/driver/usecase/Flashcards/GetBiomeOrganizedFlashcardsUseCasePort";
 
 export default class GetOrganizedFlashcardsByBiomeUseCase implements GetOrganizedFlashcardsByBiomeUseCasePort {
 

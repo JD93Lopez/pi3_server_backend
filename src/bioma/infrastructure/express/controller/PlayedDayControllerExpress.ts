@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import PlayedDayControllerExpressPort from "../../../domain/ports/driver/controller/PlayedDayControllerExpressPort";
-import CreatePlayedDayUseCasePort from "../../../domain/ports/driver/usecase/CreatePlayedDayUseCasePort";
+import CreatePlayedDayUseCasePort from "../../../domain/ports/driver/usecase/PlayedDays/CreatePlayedDayUseCasePort";
 import CreatePlayedDayInterface from "../../../domain/types/endpoint/CreatePlayedDay";
-import { GetLast31DaysUseCasePort } from "../../../domain/ports/driver/usecase/GetLast31DaysUseCasePort";
+import { GetLast31DaysUseCasePort } from "../../../domain/ports/driver/usecase/PlayedDays/GetLast31DaysUseCasePort";
 
 export default class PlayedDayControllerExpress implements PlayedDayControllerExpressPort{
         

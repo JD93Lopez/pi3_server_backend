@@ -1,5 +1,5 @@
-import PlayedDayCreateServicePort from "../../../domain/ports/driver/service/PlayedDayCreateServicePort";
-import CreatePlayedDayUseCasePort from "../../../domain/ports/driver/usecase/CreatePlayedDayUseCasePort";
+import PlayedDayCreateServicePort from "../../../domain/ports/driver/service/PlayedDays/PlayedDayCreateServicePort";
+import CreatePlayedDayUseCasePort from "../../../domain/ports/driver/usecase/PlayedDays/CreatePlayedDayUseCasePort";
 import { PlayedDayInterface } from "../../../domain/types/PlayedDaysInterface";
 import PlayedDayHelper from "../../helper/PlayedDayHelper";
 

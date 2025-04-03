@@ -1,5 +1,5 @@
 import AiFlashcards from "../../../domain/docs/AiFlashcards";
-import FlashcardFromAiRetrieverServicePort from "../../../domain/ports/driver/service/FlashcardFromAiRetrieverServicePort";
+import FlashcardFromAiRetrieverServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardFromAiRetrieverServicePort";
 import AiServerFlashcardsProvider from "../../../infrastructure/Repository/backend_api/provider/AiServerFlashcardsProvider";
 
 export class FlashcardFromAiRetrieverService implements FlashcardFromAiRetrieverServicePort {

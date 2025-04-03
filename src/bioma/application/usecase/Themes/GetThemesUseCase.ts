@@ -1,6 +1,6 @@
 import { AbstractTheme } from "../../../domain/model/theme/AbstractTheme";
-import { GetThemeServicePort } from "../../../domain/ports/driver/service/GetThemesServicePort";
-import { GetThemesUseCasePort } from "../../../domain/ports/driver/usecase/GetThemesUseCasePort";
+import { GetThemeServicePort } from "../../../domain/ports/driver/service/Theme/GetThemesServicePort";
+import { GetThemesUseCasePort } from "../../../domain/ports/driver/usecase/Themes/GetThemesUseCasePort";
 
 export class GetThemesUseCase implements GetThemesUseCasePort {
 

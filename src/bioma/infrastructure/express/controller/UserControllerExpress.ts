@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import UserControllerExpressPort from "../../../domain/ports/driver/controller/UserControllerExpressPort";
-import UpdateUserExperienceUseCasePort from "../../../domain/ports/driver/usecase/UpdateUserExperienceUseCasePort";
+import UpdateUserExperienceUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdateUserExperienceUseCasePort";
 import CreateUserInterface from "../../../domain/types/endpoint/CreateUser";
-import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/CreateUserUseCasePort";
-import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/GetUserStreakUseCasePort";
+import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/Users/CreateUserUseCasePort";
+import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/Users/GetUserStreakUseCasePort";
 import GetUserStreakInterface from "../../../domain/types/endpoint/GetUserStreakInterface";
-import LoginUseCasePort from "../../../domain/ports/driver/usecase/loginUseCasePort";
+import LoginUseCasePort from "../../../domain/ports/driver/usecase/Users/loginUseCasePort";
 
 export default class UserControllerExpress implements UserControllerExpressPort {
 

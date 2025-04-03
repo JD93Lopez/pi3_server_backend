@@ -1,5 +1,5 @@
 import { AbstractFlashcard } from "../../../domain/model/flashcard/AbstractFlashcard";
-import FlashcardUpdateServicePort from "../../../domain/ports/driver/service/FlashcardUpdateServicePort";
+import FlashcardUpdateServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardUpdateServicePort";
 import { FlashcardRepositoryPort } from "../../../domain/ports/driven/FlashcardRepositoryPort";
 
 export default class FlashcardUpdateService implements FlashcardUpdateServicePort {

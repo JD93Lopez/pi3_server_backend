@@ -1,5 +1,5 @@
-import { CreateBiomeServicePort } from "../../../domain/ports/driver/service/CreateBiomeServicePort";
-import { CreateBiomeUseCasePort } from "../../../domain/ports/driver/usecase/CreateBiomeUseCasePort";
+import { CreateBiomeServicePort } from "../../../domain/ports/driver/service/Biomes/CreateBiomeServicePort";
+import { CreateBiomeUseCasePort } from "../../../domain/ports/driver/usecase/Biomes/CreateBiomeUseCasePort";
 import { BiomeInterface } from "../../../domain/types/BiomeInterface";
 import BiomeHelper from "../../helper/BiomeHelper";
 

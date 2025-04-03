@@ -1,6 +1,6 @@
 import { AbstractPlayedDay } from "../../../domain/model/played_day/AbstractPlayedDay";
-import { GetLast31DaysServicePort } from "../../../domain/ports/driver/service/GetLast31DaysServicePort";
-import { GetLast31DaysUseCasePort } from "../../../domain/ports/driver/usecase/GetLast31DaysUseCasePort";
+import { GetLast31DaysServicePort } from "../../../domain/ports/driver/service/PlayedDays/GetLast31DaysServicePort";
+import { GetLast31DaysUseCasePort } from "../../../domain/ports/driver/usecase/PlayedDays/GetLast31DaysUseCasePort";
 
 export class GetLast31DaysUseCase implements GetLast31DaysUseCasePort {
 

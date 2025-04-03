@@ -1,5 +1,5 @@
 import { AbstractFlashcard } from "../../../domain/model/flashcard/AbstractFlashcard";
-import { OrganizerServicePort } from "../../../domain/ports/driver/service/OrganizerServicePort";
+import { OrganizerServicePort } from "../../../domain/ports/driver/service/Flashcards/OrganizerServicePort";
 
 export class OrganizerService implements OrganizerServicePort {
 

@@ -1,7 +1,7 @@
 import { AbstractBiome } from "../../../domain/model/biome/AbstractBiome";
 import { BiomeRepositoryPort } from "../../../domain/ports/driven/BiomeRepositoryPort";
 import ThemeRepositoryPort from "../../../domain/ports/driven/ThemeRepositoryPort";
-import BiomesByUserRetriverServicePort from "../../../domain/ports/driver/service/BiomeByUserRetriverServicePort";
+import BiomesByUserRetriverServicePort from "../../../domain/ports/driver/service/Biomes/BiomeByUserRetriverServicePort";
 import BiomeHelper from "../../helper/BiomeHelper";
 
 export default class BiomesByUserRetriverService implements BiomesByUserRetriverServicePort {

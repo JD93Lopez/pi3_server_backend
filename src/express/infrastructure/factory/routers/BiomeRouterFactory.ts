@@ -4,10 +4,10 @@ import UpdateBiomeUseCase from "../../../../bioma/application/usecase/Biomes/Upd
 import GetBiomesByUserUseCase from "../../../../bioma/application/usecase/Biomes/GetBiomesByUserUseCase";
 import BiomeControllerExpress from "../../../../bioma/infrastructure/express/controller/BiomeControllerExpress";
 import BiomeRouterExpress from "../../../../bioma/infrastructure/express/router/BiomeRouterExpress";
-import BiomesByUserRetriverServiceFactory from "../../../../bioma/infrastructure/factory/service/BiomesByUserRetriverServiceFactory";
-import CreateBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/CreateBiomeServiceFactory"
+import BiomesByUserRetriverServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/BiomesByUserRetriverServiceFactory";
+import CreateBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/CreateBiomeServiceFactory"
 import DeleteBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/DeleteBiomeServiceFactory";
-import UpdateBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/UpdateBiomeServiceFactory";
+import UpdateBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/UpdateBiomeServiceFactory";
 import RouterExpress from "../../../domain/RouterExpress"
 
 export default class BiomeRouterFactory {
