@@ -13,5 +13,6 @@ export default class CreatePlayedDayUseCase implements CreatePlayedDayUseCasePor
         return this.playedDayCreateService.createPlayedDay(id_user, playedDayDomain);
     
     }
+
     
 }

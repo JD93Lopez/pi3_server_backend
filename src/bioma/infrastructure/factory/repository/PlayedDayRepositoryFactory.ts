@@ -5,4 +5,5 @@ export default class PlayedDayRepositoryFactory {
   public static readonly create = (): PlayedDayRepositoryPort => {
     return new PlayedDayRepository()
   }
+
 }

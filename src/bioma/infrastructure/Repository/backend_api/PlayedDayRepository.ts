@@ -21,5 +21,10 @@ export default class PlayedDayRepository implements PlayedDayRepositoryPort{
         return response
     }
 
+    getLast31Days = async (USERS_id_user: number): Promise<PlayedDayDoc[]> => {
+        const response = await this.playedDayDBC.getPlayedDayByUserId(USERS_id_user)
+        return response
+    }
+
 
 }
