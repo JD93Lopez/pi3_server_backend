@@ -1,3 +1,4 @@
+import { PlayedDayDoc } from "../../../../domain/docs/PlayedDaysDoc";
 import Database from "../../Database";
 
 export default class PlayedDayDBC {
@@ -36,4 +37,20 @@ export default class PlayedDayDBC {
 
                 return result[0][key];
     }
+
+    public async getPlayedDayByUserId(USERS_id_user: number): Promise<PlayedDayDoc[]> {
+        await Database.getConnection();
+        const query = "CALL GetLast31Days(?)";  
+        const values = [USERS_id_user];
+        const result = await Database.executeQuery(query, values);
+    
+        if (!result || result.length === 0 || !result[0]) {
+            throw new Error("No data found for the user");
+        }
+    
+        return result[0];
+    }
+    
+
+
 }
