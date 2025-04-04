@@ -1,6 +1,6 @@
 // application/services/DeleteBiomeService.ts
 import { BiomeRepositoryPort } from "../../../domain/ports/driven/BiomeRepositoryPort";
-import { DeleteBiomeServicePort } from "../../../domain/ports/driver/service/DeleteBiomeServicePort";
+import { DeleteBiomeServicePort } from "../../../domain/ports/driver/service/Biomes/DeleteBiomeServicePort";
 
 export class DeleteBiomeService implements DeleteBiomeServicePort {
   constructor(private biomeRepository: BiomeRepositoryPort) {}

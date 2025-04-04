@@ -1,5 +1,5 @@
-import { TopicDeleteServicePort } from "../../../domain/ports/driver/service/TopicDeleteServicePort";
-import DeleteTopicByIdUseCasePort from "../../../domain/ports/driver/usecase/DeleteTopicByIdUseCasePort";
+import { TopicDeleteServicePort } from "../../../domain/ports/driver/service/Topics/TopicDeleteServicePort";
+import DeleteTopicByIdUseCasePort from "../../../domain/ports/driver/usecase/Topics/DeleteTopicByIdUseCasePort";
 
 export default class DeleteTopicUseCase implements DeleteTopicByIdUseCasePort {
     

@@ -1,7 +1,7 @@
 import { BiomeDoc } from "../../../domain/docs/BiomeDoc";
 import { AbstractBiome } from "../../../domain/model/biome/AbstractBiome";
 import { BiomeRepositoryPort } from "../../../domain/ports/driven/BiomeRepositoryPort";
-import { UpdateBiomeServicePort } from "../../../domain/ports/driver/service/UpdateBiomeServicePort";
+import { UpdateBiomeServicePort } from "../../../domain/ports/driver/service/Biomes/UpdateBiomeServicePort";
 
 export class UpdateBiomeService implements UpdateBiomeServicePort {
   constructor(private biomeRepository: BiomeRepositoryPort) {}

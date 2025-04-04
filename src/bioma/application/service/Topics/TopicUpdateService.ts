@@ -1,7 +1,7 @@
 import { TopicDoc } from "../../../domain/docs/TopicDoc";
 import { AbstractTopic } from "../../../domain/model/topic/AbstractTopic";
 import { TopicRepositoryPort } from "../../../domain/ports/driven/TopicRepositoryPort";
-import TopicUpdateServicePort from "../../../domain/ports/driver/service/TopicUpdateServicePort";
+import TopicUpdateServicePort from "../../../domain/ports/driver/service/Topics/TopicUpdateServicePort";
 
 export default class TopicUpdateService implements TopicUpdateServicePort {
 

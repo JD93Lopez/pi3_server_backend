@@ -1,7 +1,7 @@
 import { GetThemesUseCase } from "../../../../bioma/application/usecase/Themes/GetThemesUseCase";
 import ThemeControllerExpress from "../../../../bioma/infrastructure/express/controller/ThemeControllerExpress";
 import ThemeRouterExpress from "../../../../bioma/infrastructure/express/router/ThemeRouterExpress";
-import GetThemeServiceFactory from "../../../../bioma/infrastructure/factory/service/GetThemeServiceFactory";
+import GetThemeServiceFactory from "../../../../bioma/infrastructure/factory/service/Themes/GetThemeServiceFactory";
 import RouterExpress from "../../../domain/RouterExpress";
 
 export default class ThemeRouterFactory {

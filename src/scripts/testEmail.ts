@@ -1,4 +1,4 @@
-import { EmailService } from "../bioma/application/service/User/EmailService";
+import { EmailService } from "../bioma/application/service/Users/EmailService";
 
 
 async function testEmail() {

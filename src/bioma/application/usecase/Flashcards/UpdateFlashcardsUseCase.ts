@@ -1,5 +1,5 @@
-import FlashcardUpdateServicePort from "../../../domain/ports/driver/service/FlashcardUpdateServicePort";
-import UpdateFlashcardsUseCasePort from "../../../domain/ports/driver/usecase/UpdateFlashcardsUseCasePort";
+import FlashcardUpdateServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardUpdateServicePort";
+import UpdateFlashcardsUseCasePort from "../../../domain/ports/driver/usecase/Flashcards/UpdateFlashcardsUseCasePort";
 import { FlashcardInterface } from "../../../domain/types/FlashcardInterface";
 import FlashcardHelper from "../../helper/FlashcardHelper";
 

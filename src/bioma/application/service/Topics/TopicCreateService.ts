@@ -1,6 +1,6 @@
 import { AbstractTopic } from "../../../domain/model/topic/AbstractTopic";
 import { TopicRepositoryPort } from "../../../domain/ports/driven/TopicRepositoryPort";
-import { CreateTopicServicePort } from "../../../domain/ports/driver/service/CreateTopicServicePort";
+import { CreateTopicServicePort } from "../../../domain/ports/driver/service/Topics/CreateTopicServicePort";
 
 export class TopicCreateService implements CreateTopicServicePort {
 

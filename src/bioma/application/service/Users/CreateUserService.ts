@@ -1,7 +1,7 @@
 import { UserDoc } from "../../../domain/docs/UserDoc";
 import { AbstractUser } from "../../../domain/model/user/AbstractUser";
 import { UserRepositoryPort } from "../../../domain/ports/driven/UserRepositoryPort";
-import { CreateUserServicePort } from "../../../domain/ports/driver/service/CreateUserServicePort";
+import { CreateUserServicePort } from "../../../domain/ports/driver/service/Users/CreateUserServicePort";
 
 export class CreateUserService implements CreateUserServicePort{
     constructor(private userRepository: UserRepositoryPort){}

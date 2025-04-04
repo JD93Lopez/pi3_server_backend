@@ -4,10 +4,10 @@ import { GetTopicByBiomeUseCase } from "../../../../bioma/application/usecase/To
 import UpdateTopicUseCase from "../../../../bioma/application/usecase/Topics/UpdateTopicUseCase"
 import TopicControllerExpress from "../../../../bioma/infrastructure/express/controller/TopicControllerExpress"
 import TopicRouterExpress from "../../../../bioma/infrastructure/express/router/TopicRouterExpress"
-import CreateTopicServiceFactory from "../../../../bioma/infrastructure/factory/service/CreateTopicServiceFactory"
-import TopicByBiomeRetrieverServiceFactory from "../../../../bioma/infrastructure/factory/service/TopicByBiomeRetrieverServiceFactory"
-import TopicDeleteServiceFactory from "../../../../bioma/infrastructure/factory/service/TopicDeleteServiceFactory"
-import TopicUpdateServiceFactory from "../../../../bioma/infrastructure/factory/service/TopicUpdateFactory"
+import CreateTopicServiceFactory from "../../../../bioma/infrastructure/factory/service/Topics/CreateTopicServiceFactory"
+import TopicByBiomeRetrieverServiceFactory from "../../../../bioma/infrastructure/factory/service/Topics/TopicByBiomeRetrieverServiceFactory"
+import TopicDeleteServiceFactory from "../../../../bioma/infrastructure/factory/service/Topics/TopicDeleteServiceFactory"
+import TopicUpdateServiceFactory from "../../../../bioma/infrastructure/factory/service/Topics/TopicUpdateFactory"
 import RouterExpress from "../../../domain/RouterExpress"
 
 export default class TopicRouterFactory {

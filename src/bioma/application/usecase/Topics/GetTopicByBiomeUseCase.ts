@@ -1,6 +1,6 @@
 import { AbstractTopic } from "../../../domain/model/topic/AbstractTopic";
-import { TopicByBiomeRetrieverServicePort } from "../../../domain/ports/driver/service/TopicByBiomeRetrieverServicePort";
-import { GetTopicByBiomeUseCasePort } from "../../../domain/ports/driver/usecase/GetTopicByBiomeUseCasePort";
+import { TopicByBiomeRetrieverServicePort } from "../../../domain/ports/driver/service/Topics/TopicByBiomeRetrieverServicePort";
+import { GetTopicByBiomeUseCasePort } from "../../../domain/ports/driver/usecase/Topics/GetTopicByBiomeUseCasePort";
 
 export class GetTopicByBiomeUseCase implements GetTopicByBiomeUseCasePort {
 

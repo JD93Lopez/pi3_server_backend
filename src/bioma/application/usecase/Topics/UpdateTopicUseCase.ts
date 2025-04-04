@@ -1,5 +1,5 @@
-import TopicUpdateServicePort from "../../../domain/ports/driver/service/TopicUpdateServicePort";
-import UpdateTopicUseCasePort from "../../../domain/ports/driver/usecase/UpdateTopicUseCasePort";
+import TopicUpdateServicePort from "../../../domain/ports/driver/service/Topics/TopicUpdateServicePort";
+import UpdateTopicUseCasePort from "../../../domain/ports/driver/usecase/Topics/UpdateTopicUseCasePort";
 import { TopicInterface } from "../../../domain/types/TopicInterface";
 import TopicHelper from "../../helper/TopicHelper";
 

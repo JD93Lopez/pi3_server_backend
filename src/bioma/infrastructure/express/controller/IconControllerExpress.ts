@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { GetIconsUseCasePort } from "../../../domain/ports/driver/usecase/GetIconsUseCasePort";
 import { IconControllerExpressPort } from "../../../domain/ports/driver/controller/IconControllerExpress";
+import { GetIconsUseCasePort } from "../../../domain/ports/driver/usecase/Icons/GetIconsUseCasePort";
 
 export default class IconControllerExpress implements IconControllerExpressPort {
   constructor(private readonly getIconsUseCase: GetIconsUseCasePort) {}

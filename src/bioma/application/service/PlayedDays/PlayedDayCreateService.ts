@@ -1,4 +1,4 @@
-import PlayedDayCreateServicePort from "../../../domain/ports/driver/service/PlayedDayCreateServicePort";
+import PlayedDayCreateServicePort from "../../../domain/ports/driver/service/PlayedDays/PlayedDayCreateServicePort";
 import PlayedDayRepositoryPort from '../../../domain/ports/driven/PlayedDayRepositoryPort'
 import { AbstractPlayedDay } from "../../../domain/model/played_day/AbstractPlayedDay";
 import { PlayedDayDoc } from "../../../domain/docs/PlayedDaysDoc";

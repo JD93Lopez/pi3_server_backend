@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { GetThemesUseCasePort } from "../../../domain/ports/driver/usecase/GetThemesUseCasePort";
 import { ThemeControllerExpressPort } from "../../../domain/ports/driver/controller/ThemeControllerExpress";
+import { GetThemesUseCasePort } from "../../../domain/ports/driver/usecase/Themes/GetThemesUseCasePort";
 
 export default class ThemeControllerExpress implements ThemeControllerExpressPort {
   constructor(private readonly getThemesUseCase: GetThemesUseCasePort) {}
