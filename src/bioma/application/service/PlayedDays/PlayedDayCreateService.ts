@@ -26,14 +26,12 @@ export default class PlayedDayCreateService implements PlayedDayCreateServicePor
                 return result;
             }
     
-            return resultUpdated
-                        
+            return resultUpdated 
 
         } catch (error) {
             throw new Error(`Failed to create/update played day: ${error}`);
         }
         
     }
-
     
 }

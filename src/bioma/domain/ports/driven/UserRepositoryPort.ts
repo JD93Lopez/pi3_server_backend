@@ -6,4 +6,5 @@ export interface UserRepositoryPort {
     UpdateUserStreak(user_id: number): Promise<void>
     getUserStreak(user_id: number): Promise<number>
     findByUserName(username: string): Promise<UserDoc>
+    updateUserLeague(user_id: number, league: string): Promise<number>
 }
