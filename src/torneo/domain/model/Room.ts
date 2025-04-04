@@ -27,8 +27,8 @@ export class Room {
         return this.users.find(user => user.getIdUser() === userId) || new NullUser();
     }
 
-    finalizar( _rankName: RankName ): AbstractUser[] {
-        switch (_rankName) {
+    finalizar( rankName: RankName ): AbstractUser[] {
+        switch (rankName) {
             case RankName.BRONZE:
                 // Ascend half Bigger Ascend
                 const topHalfIndex = Math.ceil(this.users.length / 2);
