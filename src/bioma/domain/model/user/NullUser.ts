@@ -21,7 +21,8 @@ export class NullUser extends AbstractUser {
                 received_xp_total: 0,
                 streak: "Not a streak provided",
                 last_date_added: new Date(),
-                league: "Not a league provided"
+                league: "Not a league provided",
+                biomes: []
             }
         );
     }

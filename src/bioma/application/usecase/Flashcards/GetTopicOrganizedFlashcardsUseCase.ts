@@ -1,6 +1,6 @@
 import { FlashcardByTopicRetrieverServicePort } from "../../../domain/ports/driver/service/Flashcards/FlashcardByTopicRetrieverServicePort";
 import FlashcardFromAiRetrieverServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardFromAiRetrieverServicePort";
-import { OrganizerServicePort } from "../../../domain/ports/driver/service/OrganizerServicePort";
+import { OrganizerServicePort } from "../../../domain/ports/driver/service/Flashcards/OrganizerServicePort";
 import { GetOrganizedFlashcardsByTopicUseCasePort } from "../../../domain/ports/driver/usecase/Flashcards/GetOrganizedFlashcardsByTopicUseCasePort";
 
 export class GetTopicOrganizedFlashcardsUseCase implements GetOrganizedFlashcardsByTopicUseCasePort {

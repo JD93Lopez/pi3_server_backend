@@ -6,9 +6,10 @@ import BiomeControllerExpress from "../../../../bioma/infrastructure/express/con
 import BiomeRouterExpress from "../../../../bioma/infrastructure/express/router/BiomeRouterExpress";
 import BiomesByUserRetriverServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/BiomesByUserRetriverServiceFactory";
 import CreateBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/CreateBiomeServiceFactory"
-import DeleteBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/DeleteBiomeServiceFactory";
+
 import UpdateBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/UpdateBiomeServiceFactory";
 import RouterExpress from "../../../domain/RouterExpress"
+import DeleteBiomeServiceFactory from "../../../../bioma/infrastructure/factory/service/Biomes/DeleteBiomeServiceFactory";
 
 export default class BiomeRouterFactory {
 

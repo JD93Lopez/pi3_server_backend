@@ -1,6 +1,7 @@
-import { DeleteBiomeService } from "../../../application/service/Biomes/DeleteBiomeService"
-import { DeleteBiomeServicePort } from "../../../domain/ports/driver/service/Biomes/DeleteBiomeServicePort"
-import BiomeRepositoryFactory from "../repository/BiomeRepositoryFactory"
+import { DeleteBiomeService } from "../../../../application/service/Biomes/DeleteBiomeService"
+import { DeleteBiomeServicePort } from "../../../../domain/ports/driver/service/Biomes/DeleteBiomeServicePort"
+import BiomeRepositoryFactory from "../../repository/BiomeRepositoryFactory"
+
 
 export default class DeleteBiomeServiceFactory {
 
