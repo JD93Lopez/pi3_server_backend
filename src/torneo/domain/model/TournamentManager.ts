@@ -8,8 +8,8 @@ export class TournamentManager {
     private endDate: Date | null;
     private timer: NodeJS.Timeout | null; // ID del temporizador
 
-    constructor(tournament: Tournament) {
-        this.tournament = tournament;
+    constructor() {
+        this.tournament = new Tournament();
         this.started = false;
         this.inscriptionList = [];
         this.endDate = null;
@@ -81,11 +81,11 @@ export class TournamentManager {
         return false; // No se puede finalizar si no ha comenzado o no ha llegado la fecha de finalización
     }
 
-    estaInscrito(userId: number): boolean {
+    estaInscrito(userId: number): boolean { // TODO devuelve el tiempo que falta para jugar else null
         return this.inscriptionList.some(u => u.getIdUser() === userId);
     }
 
-    estaParticipando(userId: number, league: string): boolean {
+    estaParticipando(userId: number, league: string): boolean {// TODO de una devuelve la sala else null
         const user = this.tournament.searchUserInRank(userId, league);
         if (!user.isNull()) {
             return user.getIdUser() === userId;

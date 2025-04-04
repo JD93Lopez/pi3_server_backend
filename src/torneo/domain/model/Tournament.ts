@@ -50,7 +50,7 @@ export class Tournament {
     }
 
     anadirExperiencia(userId: number, league: string, xp: number): boolean {
-        const user = this.searchUserInRank(userId, league);
+        const user = this.searchUserInRank(userId, league);// TODO iniciado?
         if (!user.isNull()) {
             user.addXp(xp);
             return true;
