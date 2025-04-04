@@ -1,7 +1,7 @@
 import { IconRepositoryPort } from "../../../domain/ports/driven/IconRepositoryPort";
 import { AbstractIcon } from "../../../domain/model/icon/AbstractIcon";
 import IconHelper from "../../helper/IconHelper";
-import { GetIconsServicePort } from "../../../domain/ports/driver/service/GetIconsServicePort";
+import { GetIconsServicePort } from "../../../domain/ports/driver/service/Icons/GetIconsServicePort";
 
 export class GetIconsService implements GetIconsServicePort {
 

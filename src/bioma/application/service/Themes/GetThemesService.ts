@@ -1,6 +1,6 @@
 import { AbstractTheme } from "../../../domain/model/theme/AbstractTheme";
 import ThemeRepositoryPort from "../../../domain/ports/driven/ThemeRepositoryPort";
-import { GetThemeServicePort } from "../../../domain/ports/driver/service/GetThemesServicePort";
+import { GetThemeServicePort } from "../../../domain/ports/driver/service/Theme/GetThemesServicePort";
 import ThemeHelper from "../../helper/ThemeHelper";
 
 export class GetThemesService implements GetThemeServicePort {

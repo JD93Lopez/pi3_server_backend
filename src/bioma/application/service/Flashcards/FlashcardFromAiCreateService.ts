@@ -1,4 +1,4 @@
-import FlashcardsFromAiCreateServicePort from "../../../domain/ports/driver/service/FlashcardsFromAiCreateServicePort";
+import FlashcardsFromAiCreateServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardsFromAiCreateServicePort";
 import AiServerFlashcardsProvider from "../../../infrastructure/Repository/backend_api/provider/AiServerFlashcardsProvider";
 
 export default class FlashcardsFromAiCreateService implements FlashcardsFromAiCreateServicePort {

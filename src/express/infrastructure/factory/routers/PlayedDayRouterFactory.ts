@@ -2,8 +2,8 @@ import CreatePlayedDayUseCase from "../../../../bioma/application/usecase/Played
 import {GetLast31DaysUseCase } from "../../../../bioma/application/usecase/PlayedDays/GetLast31DaysUseCase";
 import PlayedDayControllerExpress from "../../../../bioma/infrastructure/express/controller/PlayedDayControllerExpress";
 import PlayedDayRouterExpress from "../../../../bioma/infrastructure/express/router/PlayedDayRouterExpress";
-import GetLast31DaysServiceFactory from "../../../../bioma/infrastructure/factory/service/GetLast31DaysServiceFactory";
-import PlayedDayCreateServiceFactory from "../../../../bioma/infrastructure/factory/service/PlayedDayCreateServiceFactory";
+import GetLast31DaysServiceFactory from "../../../../bioma/infrastructure/factory/service/PlayedDays/GetLast31DaysServiceFactory";
+import PlayedDayCreateServiceFactory from "../../../../bioma/infrastructure/factory/service/PlayedDays/PlayedDayCreateServiceFactory";
 import RouterExpress from "../../../domain/RouterExpress";
 
 export default class PlayedDayRouterFactory {

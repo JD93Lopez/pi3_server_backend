@@ -1,5 +1,5 @@
 import { TopicRepositoryPort } from "../../../domain/ports/driven/TopicRepositoryPort";
-import { TopicDeleteServicePort } from "../../../domain/ports/driver/service/TopicDeleteServicePort";
+import { TopicDeleteServicePort } from "../../../domain/ports/driver/service/Topics/TopicDeleteServicePort";
 
 export default class TopicDeleteService implements TopicDeleteServicePort{
   

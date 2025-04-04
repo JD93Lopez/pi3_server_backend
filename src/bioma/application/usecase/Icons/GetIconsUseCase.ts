@@ -1,6 +1,6 @@
-import { GetIconsUseCasePort } from "../../../domain/ports/driver/usecase/GetIconsUseCasePort";
 import { AbstractIcon } from "../../../domain/model/icon/AbstractIcon";
-import { GetIconsServicePort } from "../../../domain/ports/driver/service/GetIconsServicePort";
+import { GetIconsServicePort } from "../../../domain/ports/driver/service/Icons/GetIconsServicePort";
+import { GetIconsUseCasePort } from "../../../domain/ports/driver/usecase/Icons/GetIconsUseCasePort";
 
 export class GetIconsUseCase implements GetIconsUseCasePort {
 

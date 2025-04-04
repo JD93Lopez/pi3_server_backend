@@ -1,7 +1,7 @@
 import { FlashcardDoc } from "../../../domain/docs/FlashcardDoc";
 import { AbstractFlashcard } from "../../../domain/model/flashcard/AbstractFlashcard";
 import { FlashcardRepositoryPort } from "../../../domain/ports/driven/FlashcardRepositoryPort";
-import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/FlashcardCreateServicePort";
+import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/Flashcards/FlashcardCreateServicePort";
 
 export class FlashcardCreateService implements FlashcardCreateServicePort {
 

@@ -1,5 +1,5 @@
-import { CreateUserServicePort } from "../../../domain/ports/driver/service/CreateUserServicePort";
-import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/CreateUserUseCasePort";
+import { CreateUserServicePort } from "../../../domain/ports/driver/service/Users/CreateUserServicePort";
+import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/Users/CreateUserUseCasePort";
 import { UserInterface } from "../../../domain/types/UserInterface";
 import UserHelper from "../../helper/UserHelper";
 

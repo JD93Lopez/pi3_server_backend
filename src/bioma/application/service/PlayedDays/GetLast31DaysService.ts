@@ -1,6 +1,6 @@
 import PlayedDayRepositoryPort from '../../../domain/ports/driven/PlayedDayRepositoryPort'
 import { AbstractPlayedDay } from "../../../domain/model/played_day/AbstractPlayedDay";
-import { GetLast31DaysServicePort } from "../../../domain/ports/driver/service/GetLast31DaysServicePort";
+import { GetLast31DaysServicePort } from "../../../domain/ports/driver/service/PlayedDays/GetLast31DaysServicePort";
 import PlayedDayHelper from '../../helper/PlayedDayHelper';
 
 export default class GetLast31DaysService implements GetLast31DaysServicePort {

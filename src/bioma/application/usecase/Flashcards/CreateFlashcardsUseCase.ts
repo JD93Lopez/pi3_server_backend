@@ -1,6 +1,6 @@
 import { Flashcard } from "../../../domain/model/flashcard/Flashcard";
-import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/FlashcardCreateServicePort";
-import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecase/CreateFlashcardsUseCasePort";
+import { FlashcardCreateServicePort } from "../../../domain/ports/driver/service/Flashcards/FlashcardCreateServicePort";
+import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecase/Flashcards/CreateFlashcardsUseCasePort";
 import { TopicInterface } from "../../../domain/types/TopicInterface";
 import TopicHelper from "../../helper/TopicHelper";
 

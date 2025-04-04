@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
-import { CreateTopicUseCasePort } from "../../../domain/ports/driver/usecase/CreateTopicUseCasePort"
+import { CreateTopicUseCasePort } from "../../../domain/ports/driver/usecase/Topics/CreateTopicUseCasePort"
 import CreateTopicInterface from "../../../domain/types/endpoint/CreateTopicInterface"
 import { TopicControllerExpressPort } from "../../../domain/ports/driver/controller/TopicControllerExpressPort"
-import { GetTopicByBiomeUseCasePort } from "../../../domain/ports/driver/usecase/GetTopicByBiomeUseCasePort"
+import { GetTopicByBiomeUseCasePort } from "../../../domain/ports/driver/usecase/Topics/GetTopicByBiomeUseCasePort"
 import GetTopicsByBiomeInterface from "../../../domain/types/endpoint/GetTopicsByBiomeInterface"
-import DeleteTopicByIdUseCasePort from "../../../domain/ports/driver/usecase/DeleteTopicByIdUseCasePort"
+import DeleteTopicByIdUseCasePort from "../../../domain/ports/driver/usecase/Topics/DeleteTopicByIdUseCasePort"
 import DeleteTopicByIdInterface from "../../../domain/types/endpoint/DeleteTopicByIdInterface"
-import UpdateTopicUseCasePort from "../../../domain/ports/driver/usecase/UpdateTopicUseCasePort"
+import UpdateTopicUseCasePort from "../../../domain/ports/driver/usecase/Topics/UpdateTopicUseCasePort"
 import UpdateTopicInterface from "../../../domain/types/endpoint/UpdateTopicInterface"
 
 export default class TopicControllerExpress implements TopicControllerExpressPort {

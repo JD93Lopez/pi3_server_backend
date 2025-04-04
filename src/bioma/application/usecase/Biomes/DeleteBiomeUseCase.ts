@@ -1,5 +1,5 @@
-import { DeleteBiomeServicePort } from "../../../domain/ports/driver/service/DeleteBiomeServicePort";
-import DeleteBiomeUseCasePort from "../../../domain/ports/driver/usecase/DeleteBiomeUseCasePort";
+import { DeleteBiomeServicePort } from "../../../domain/ports/driver/service/Biomes/DeleteBiomeServicePort";
+import DeleteBiomeUseCasePort from "../../../domain/ports/driver/usecase/Biomes/DeleteBiomeUseCasePort";
 
 export default class DeleteBiomeUseCase implements DeleteBiomeUseCasePort{
     constructor(private deleteBiomeService: DeleteBiomeServicePort) {}

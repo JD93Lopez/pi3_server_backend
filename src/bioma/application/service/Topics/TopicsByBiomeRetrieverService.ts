@@ -1,6 +1,6 @@
 import { AbstractTopic } from "../../../domain/model/topic/AbstractTopic";
 import { TopicRepositoryPort } from "../../../domain/ports/driven/TopicRepositoryPort";
-import { TopicByBiomeRetrieverServicePort } from "../../../domain/ports/driver/service/TopicByBiomeRetrieverServicePort";
+import { TopicByBiomeRetrieverServicePort } from "../../../domain/ports/driver/service/Topics/TopicByBiomeRetrieverServicePort";
 import TopicHelper from "../../helper/TopicHelper";
 
 export class TopicsByBiomeRetrieverService implements TopicByBiomeRetrieverServicePort {

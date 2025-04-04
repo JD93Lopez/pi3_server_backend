@@ -1,6 +1,6 @@
 import { AbstractBiome } from "../../../domain/model/biome/AbstractBiome";
-import BiomesByUserRetriverServicePort from "../../../domain/ports/driver/service/BiomeByUserRetriverServicePort";
-import GetBiomesByUserUseCasePort from "../../../domain/ports/driver/usecase/GetBiomesByUserUseCasePort";
+import BiomesByUserRetriverServicePort from "../../../domain/ports/driver/service/Biomes/BiomeByUserRetriverServicePort";
+import GetBiomesByUserUseCasePort from "../../../domain/ports/driver/usecase/Biomes/GetBiomesByUserUseCasePort";
 
 export default class GetBiomesByUserUseCase implements GetBiomesByUserUseCasePort{
 

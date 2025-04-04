@@ -1,7 +1,7 @@
 import { BiomeDoc } from "../../../domain/docs/BiomeDoc";
 import { AbstractBiome } from "../../../domain/model/biome/AbstractBiome";
 import { BiomeRepositoryPort } from "../../../domain/ports/driven/BiomeRepositoryPort";
-import { CreateBiomeServicePort } from "../../../domain/ports/driver/service/CreateBiomeServicePort";
+import { CreateBiomeServicePort } from "../../../domain/ports/driver/service/Biomes/CreateBiomeServicePort";
 
 export class CreateBiomService implements CreateBiomeServicePort {
 

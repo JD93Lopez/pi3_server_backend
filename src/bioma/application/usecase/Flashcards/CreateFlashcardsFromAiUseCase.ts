@@ -1,5 +1,5 @@
-import FlashcardsFromAiCreateServicePort from "../../../domain/ports/driver/service/FlashcardsFromAiCreateServicePort";
-import CreateFlashcardsFromAiUseCasePort from "../../../domain/ports/driver/usecase/CreateFlashcardsFromAiUseCasePort";
+import FlashcardsFromAiCreateServicePort from "../../../domain/ports/driver/service/Flashcards/FlashcardsFromAiCreateServicePort";
+import CreateFlashcardsFromAiUseCasePort from "../../../domain/ports/driver/usecase/Flashcards/CreateFlashcardsFromAiUseCasePort";
 
 export default class CreateFlashcardsFromAiUseCase implements CreateFlashcardsFromAiUseCasePort {
     
