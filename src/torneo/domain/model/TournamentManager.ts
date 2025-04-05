@@ -17,7 +17,7 @@ export class TournamentManager {
     }
 
     inscribir(user: AbstractUser): boolean {
-        if (!this.estaInscrito(user.getIdUser())) {
+        if (!this.estaInscritoObtenerTiempoRestante(user.getIdUser())) {
             this.inscriptionList.push(user);
             return true;
         }
@@ -81,16 +81,24 @@ export class TournamentManager {
         return false; // No se puede finalizar si no ha comenzado o no ha llegado la fecha de finalización
     }
 
-    estaInscrito(userId: number): boolean { // TODO devuelve el tiempo que falta para jugar else null
-        return this.inscriptionList.some(u => u.getIdUser() === userId);
+    estaInscritoObtenerTiempoRestante(userId: number): number { // TODO devuelve el tiempo que falta para jugar else null
+        if (this.inscriptionList.some(u => u.getIdUser() === userId)) {
+            if (this.endDate) {
+            const now = new Date();
+            const timeLeft = this.endDate.getTime() - now.getTime();
+            return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed
+            }
+            return -2; // If endDate is not set but user is in the list, return -2
+        }
+        return -1; // User is not in the inscription list
     }
 
-    estaParticipando(userId: number, league: string): boolean {// TODO de una devuelve la sala else null
+    estaParticipandoObtenerSala(userId: number, league: string): AbstractUser[] {// TODO de una devuelve la sala else null
         const user = this.tournament.searchUserInRank(userId, league);
         if (!user.isNull()) {
-            return user.getIdUser() === userId;
+            return [user]; //TODO devolver sala de usuario
         }
-        return false; // Usuario no encontrado o rango no válido
+        return []; // Usuario no encontrado o rango no válido
     }
 
     estaEnCurso(): boolean {
