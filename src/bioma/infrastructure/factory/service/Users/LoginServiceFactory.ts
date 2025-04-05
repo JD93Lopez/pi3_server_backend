@@ -1,5 +1,5 @@
 import LoginService from "../../../../application/service/Users/CredentialValidationService";
-import CredentialValidationServicePort from "../../../domain/ports/driver/service/LoginServicePort";
+import CredentialValidationServicePort from "../../../../domain/ports/driver/service/Users/LoginServicePort";
 import UserRepositoryFactory from "../../repository/UserRepositoryFactory";
 
 export default class LoginServiceFactory {
