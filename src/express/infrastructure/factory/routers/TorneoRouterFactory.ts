@@ -1,3 +1,4 @@
+import GetParticipantesSalaUseCase from "../../../../torneo/application/usecase/GetParticipantesSalaUseCase";
 import InscribirTorneoUseCase from "../../../../torneo/application/usecase/InscribirTorneoUseCase";
 import TorneoControllerExpress from "../../../../torneo/infraestructure/express/controller/TorneoControllerExpress";
 import TorneoRouterExpres from "../../../../torneo/infraestructure/express/router/TorneoRouterExpres";
@@ -11,7 +12,11 @@ export default class TorneoRouterFactory {
 
         const inscribirTorneoUseCase = new InscribirTorneoUseCase()
 
-        const inscribirTorneoController = new TorneoControllerExpress(inscribirTorneoUseCase)
+        // -------- Está participando en la sala --------
+        const getParticipantesSalaUseCase = new GetParticipantesSalaUseCase()
+
+
+        const inscribirTorneoController = new TorneoControllerExpress(inscribirTorneoUseCase, getParticipantesSalaUseCase)
 
         const TorneoRouter = new TorneoRouterExpres(inscribirTorneoController)
 
