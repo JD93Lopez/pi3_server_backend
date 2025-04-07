@@ -1,6 +1,7 @@
 import { AbstractUser } from "../../../bioma/domain/model/user/AbstractUser";
 import { NullUser } from "../../../bioma/domain/model/user/NullUser";
 import { Rank } from "./Rank";
+import { Room } from "./Room";
 
 export class Tournament {
     private ranks: Rank[];
@@ -50,9 +51,12 @@ export class Tournament {
     }
 
     anadirExperiencia(userId: number, league: string, xp: number): boolean {
-        const user = this.searchUserInRank(userId, league);// TODO iniciado?
-        if (!user.isNull()) {
-            user.addXp(xp);
+        const room = this.getUserRoomInRank(userId, league);// TODO iniciado?
+        if (room.getRoomUsers().length > 0) {
+
+            room.searchUser(userId).addXp(xp);
+            room.organizar(); // Reorganizar la sala después de añadir experiencia
+
             return true;
         }
         return false; // Usuario no encontrado o rango no válido
@@ -76,11 +80,30 @@ export class Tournament {
         return new NullUser(); // Usuario no encontrado
     }
 
+    getUserRoomInRank(userId: number, league: string): Room {
+        const rank = this.ranks.find(r => r.getName() === Rank.toRankName(league));
+        if (rank) {
+            return rank.getUserRoom(userId);
+        }
+        return new Room(); // Usuario no encontrado
+    }
+
+    getUserRankRoomUsers(userId: number, league: string): AbstractUser[] {
+        const rank = this.ranks.find(r => r.getName() === Rank.toRankName(league));
+        if (rank) {
+            const users = rank.getUserRoomUsers(userId);
+            return users;
+        }
+        return []; // Usuario no encontrado o rango no válido
+    }
+
     finalizar(): AbstractUser[] {
         const finalUsers: AbstractUser[] = [];
         for (const rank of this.ranks) {
             finalUsers.push(...rank.finalizar());
         }
+        // console.log("Usuarios clasificados al finalizar el torneo:", finalUsers);
+        
         return finalUsers; // Devolver lista de usuarios clasificados
     }
 }

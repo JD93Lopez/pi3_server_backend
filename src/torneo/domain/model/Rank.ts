@@ -86,6 +86,23 @@ export class Rank {
         return new NullUser(); // Usuario no encontrado
     }
 
+    getUserRoom(userId: number): Room {
+        // Búsqueda en todas las salas del rango
+        for (const room of this.rooms) {
+            const user = room.searchUser(userId);
+            if (!user.isNull()) return room; // Devolver la sala donde se encuentra el usuario
+        }
+        return new Room(); // Usuario no encontrado
+    }
+
+    getUserRoomUsers(userId: number): AbstractUser[] {
+        for (const room of this.rooms) {
+            const user = room.searchUser(userId);
+            if (!user.isNull()) return room.getRoomUsers(); // Devolver todos los usuarios de la sala
+        }
+        return []; // Usuario no encontrado
+    }
+
     finalizar(): AbstractUser[] {
         const finalUsers: AbstractUser[] = [];
         for (const room of this.rooms) {
