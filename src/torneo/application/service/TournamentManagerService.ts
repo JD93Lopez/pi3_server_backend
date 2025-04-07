@@ -13,13 +13,19 @@ export class TournamentManagerService {
         }
     }
 
-    private setUp(){
+    public setUp(){
+        if (TournamentManagerService.settedUp) {
+            return;
+        }
+        TournamentManagerService.settedUp = true;
+
         const now = new Date();
         let delay: number;
         let nextSunday: Date;
 
         if (this.startDate) {
             delay = this.startDate.getTime() - now.getTime();
+            delay = delay < 0 ? 0 : delay; // Asegurarse de que el retraso no sea negativo
         } else {
             nextSunday = new Date();
             nextSunday.setDate(now.getDate() + ((7 - now.getDay()) % 7));
@@ -40,8 +46,6 @@ export class TournamentManagerService {
 
             TournamentManagerService.tournamentManager.iniciar(finalEndDate);
         }, delay);
-
-        TournamentManagerService.settedUp = true;
     }
 
     public getInstance(): TournamentManager {
@@ -52,10 +56,22 @@ export class TournamentManagerService {
     }
 
     public setStartDate(date: Date): void {
-        this.startDate = date;
+        const now = new Date();
+        if (date >= now) {
+            this.startDate = date;
+        } else {
+            throw new Error("Start date must be in the future.");
+        }
     }
 
     public setEndDate(date: Date): void {
+        const now = new Date();
+        if (date <= now) {
+            throw new Error("End date must be in the future.");
+        }
+        if (this.startDate && date <= this.startDate) {
+            throw new Error("End date must be after the start date.");
+        }
         this.endDate = date;
     }
 

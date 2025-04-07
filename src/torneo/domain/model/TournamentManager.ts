@@ -17,11 +17,8 @@ export class TournamentManager {
     }
 
     inscribir(user: AbstractUser): boolean {
-        
-        if (this.estaInscritoObtenerTiempoRestante(user.getIdUser()) ==-1) {
+        if (this.estaInscritoObtenerTiempoRestante(user.getIdUser()) == -1) {
             this.inscriptionList.push(user);
-         
-        console.log("ELIMINAR participantes es sala: ", this.inscriptionList);
             return true;
         }
         return false;
@@ -62,49 +59,63 @@ export class TournamentManager {
         if (this.started && this.endDate && new Date() >= this.endDate) {
             this.started = false;
 
+            const newEndDate = new Date(this.endDate.getTime() + 1000*60*60*24*7); // Recalcular la fecha de finalización
+            
+            // Configurar un nuevo temporizador para reiniciar el torneo automáticamente después de 1 hora
+            setTimeout(() => {
+                if (newEndDate) {
+                    this.iniciar(newEndDate);
+                }
+            }, 1000 * 60 * 60); // 1 hora en milisegundos
+
+
+
             // Limpiar el temporizador si aún está activo
             if (this.timer) {
                 clearTimeout(this.timer);
                 this.timer = null;
             }
 
-            console.log("Torneo finalizado.");
-
+            
             const usuariosActualizados = this.tournament.finalizar();
+            // console.log("Torneo finalizado.");
+            this.tournament = new Tournament(); // Reiniciar el torneo
+
+
             
             usuariosActualizados.forEach(usuario => {
                 usuario
                 // TODO Actualizar liga de cada usuario
             });
 
-            // TODO reinscribir usuarios con mas de 0 xp
+
+            // Reinscribir usuarios con mas de 0 xp
+            for (const usuario of usuariosActualizados) {
+                if (usuario.getReceivedXpTotal() > 0) {
+                    this.inscribir(usuario); // Reinscribir usuarios con más de 0 XP
+                }
+            }
 
             return true;
         }
         return false; // No se puede finalizar si no ha comenzado o no ha llegado la fecha de finalización
     }
 
-    estaInscritoObtenerTiempoRestante(userId: number): number { // TODO devuelve el tiempo que falta para jugar else null
+    estaInscritoObtenerTiempoRestante(userId: number): number { // TODO devuelve el tiempo que falta para jugar else codigo de error
         if (this.inscriptionList.some(u => u.getIdUser() === userId)) {
             if (this.endDate) {
-            const now = new Date();
-            const timeLeft = this.endDate.getTime() - now.getTime();
-            return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed
+                const now = new Date();
+                const timeLeft = this.endDate.getTime() - now.getTime();
+                return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed but user is in the list
             }
             return -3; // If endDate is not set but user is in the list, return -3
         }
         return -1; // User is not in the inscription list
     }
 
-    estaParticipandoObtenerSala(userId: number, league: string): AbstractUser[] {// TODO de una devuelve la sala else null
-
-        console.log("ELIMINAR X22222222222 participantes es sala: ", this.inscriptionList);
-
-        const user = this.tournament.searchUserInRank(userId, league);
-        if (!user.isNull()) {
-            return [user]; //TODO devolver sala de usuario
-        }
-        return []; // Usuario no encontrado o rango no válido
+    estaParticipandoObtenerSala(userId: number, league: string): AbstractUser[] {
+        const users = this.tournament.getUserRankRoomUsers(userId, league);
+        return users;
     }
 
     estaEnCurso(): boolean {
