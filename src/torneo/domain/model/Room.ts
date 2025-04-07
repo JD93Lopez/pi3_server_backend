@@ -68,7 +68,7 @@ export class Room {
                 break;
             case RankName.DIAMOND:
                 // Ascend half Bigger Descend
-                const halfIndex = Math.ceil(this.users.length / 2);
+                const halfIndex = Math.floor(this.users.length / 2);
                 this.users.forEach((user, index) => {
                     if (index >= halfIndex) {
                         user.setRank(RankName.PLATINUM); // Descender
