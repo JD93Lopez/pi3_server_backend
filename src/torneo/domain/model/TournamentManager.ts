@@ -60,6 +60,7 @@ export class TournamentManager {
             this.started = false;
 
             const newEndDate = new Date(this.endDate.getTime() + 1000*60*60*24*7); // Recalcular la fecha de finalización
+            this.endDate = null; // Limpiar la fecha de finalización
             
             // Configurar un nuevo temporizador para reiniciar el torneo automáticamente después de 1 hora
             setTimeout(() => {
@@ -108,7 +109,7 @@ export class TournamentManager {
                 const timeLeft = this.endDate.getTime() - now.getTime();
                 return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed but user is in the list
             }
-            return -3; // If endDate is not set but user is in the list, return -3
+            return -2; // If endDate is not set but user is in the list, return -2
         }
         return -1; // User is not in the inscription list
     }
@@ -136,5 +137,9 @@ export class TournamentManager {
         } else {
             console.error("El torneo no ha comenzado, no se puede cancelar.");
         }
+    }
+
+    getTournament(): Tournament {
+        return this.tournament;
     }
 }
