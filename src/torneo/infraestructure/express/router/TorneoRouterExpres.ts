@@ -17,6 +17,10 @@ export default class TorneoRouterExpres extends RouterExpress implements TorneoR
         this.router.post(
             "/v1.0/torneo/suscribir",
             this.torneoController.inscribirTorneo.bind(this.torneoController)
+        ),
+        this.router.post(
+            "/v1.0/torneo/participando",
+            this.torneoController.getParticipantesSala.bind(this.torneoController)
         )
     }
 

@@ -17,8 +17,11 @@ export class TournamentManager {
     }
 
     inscribir(user: AbstractUser): boolean {
-        if (!this.estaInscritoObtenerTiempoRestante(user.getIdUser())) {
+        
+        if (this.estaInscritoObtenerTiempoRestante(user.getIdUser()) ==-1) {
             this.inscriptionList.push(user);
+         
+        console.log("ELIMINAR participantes es sala: ", this.inscriptionList);
             return true;
         }
         return false;
@@ -94,6 +97,9 @@ export class TournamentManager {
     }
 
     estaParticipandoObtenerSala(userId: number, league: string): AbstractUser[] {// TODO de una devuelve la sala else null
+
+        console.log("ELIMINAR X22222222222 participantes es sala: ", this.inscriptionList);
+
         const user = this.tournament.searchUserInRank(userId, league);
         if (!user.isNull()) {
             return [user]; //TODO devolver sala de usuario
