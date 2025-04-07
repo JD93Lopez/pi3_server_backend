@@ -9,9 +9,9 @@ describe('MovieRetrieverService',  () => {
       console.log('MovieRetrieverService.retrieve 2+++++++++++')
     })
   
-    test('retrieve 3+++++++++++', () => {
-      console.log('MovieRetrieverService.retrieve 3+++++++++++')
-    })
+    // test('retrieve 3+++++++++++', () => {
+    //   console.log('MovieRetrieverService.retrieve 3+++++++++++')
+    // })
   })
 
 })
