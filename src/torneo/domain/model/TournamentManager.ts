@@ -88,7 +88,7 @@ export class TournamentManager {
             const timeLeft = this.endDate.getTime() - now.getTime();
             return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed
             }
-            return -2; // If endDate is not set but user is in the list, return -2
+            return -3; // If endDate is not set but user is in the list, return -3
         }
         return -1; // User is not in the inscription list
     }
