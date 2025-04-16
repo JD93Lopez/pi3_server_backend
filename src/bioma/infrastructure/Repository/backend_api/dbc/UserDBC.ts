@@ -101,6 +101,19 @@ export default class UserDBC {
             throw error;
         }
     }
+
+    public async deleteUserById(id: number): Promise<number> {
+        await Database.getConnection()
+        const query = "CALL DeleteUserCascade(?)";
+        const params = [id]
+        let res = await Database.executeQuery(query, params)
+        
+        if(res.affectedRows > 0) {
+            return id
+        }else{
+            return -1
+        }
+    }    
     
 }
 
