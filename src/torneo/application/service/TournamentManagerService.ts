@@ -74,5 +74,23 @@ export class TournamentManagerService {
         }
         this.endDate = date;
     }
-
+    public estaInscritoObtenerTiempoRestante(userId: number): string {
+        const tiempoRestante = TournamentManagerService.tournamentManager.estaInscritoObtenerTiempoRestante(userId);
+    
+        if (tiempoRestante === -1) {
+            return "El usuario no está inscrito.";
+        }
+    
+        if (tiempoRestante === -2) {
+            return "El torneo ya ha finalizado.";
+        }
+    
+        const segundos = Math.floor(tiempoRestante / 1000) % 60;
+        const minutos = Math.floor(tiempoRestante / (1000 * 60)) % 60;
+        const horas = Math.floor(tiempoRestante / (1000 * 60 * 60)) % 24;
+        const dias = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+    
+        return `${dias}d ${horas}h ${minutos}m ${segundos}s restantes`;
+    }
+    
 }
