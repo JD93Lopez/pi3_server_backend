@@ -15,8 +15,10 @@ export default class TorneoRouterFactory {
         // -------- Está participando en la sala --------
         const getParticipantesSalaUseCase = new GetParticipantesSalaUseCase()
 
+        // -------- Tiempo restante --------
+        const getTiempoRestanteUseCase = new GetParticipantesSalaUseCase()
 
-        const inscribirTorneoController = new TorneoControllerExpress(inscribirTorneoUseCase, getParticipantesSalaUseCase)
+        const inscribirTorneoController = new TorneoControllerExpress(inscribirTorneoUseCase, getParticipantesSalaUseCase, getTiempoRestanteUseCase)
 
         const TorneoRouter = new TorneoRouterExpres(inscribirTorneoController)
 

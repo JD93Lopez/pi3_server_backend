@@ -22,4 +22,9 @@ export default class GetParticipantesSalaUseCase implements GetParticipantesSala
             return tournamentResponse 
             
     }
+    getTiempoRestante(userId: number): number {
+        const tournamentManager = this.tournamentManagerService.estaInscritoObtenerTiempoRestante(userId);
+
+        return tournamentManager
+    }
 }
