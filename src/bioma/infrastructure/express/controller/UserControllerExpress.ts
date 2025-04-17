@@ -7,6 +7,7 @@ import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/Users
 import GetUserStreakInterface from "../../../domain/types/endpoint/GetUserStreakInterface";
 import LoginUseCasePort from "../../../domain/ports/driver/usecase/Users/loginUseCasePort";
 import DeleteUserCascadaUseCasePort from "../../../domain/ports/driver/usecase/Users/DeleteUserCascadaUseCasePort";
+import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Users/GetTotalBalanceUseCasePort";
 
 export default class UserControllerExpress implements UserControllerExpressPort {
 
@@ -16,6 +17,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly getUserStrakeUseCase: GetUserStreakUseCasePort,
         private readonly loginUserUseCase: LoginUseCasePort,
         private readonly deleteUserCascadaUseCase: DeleteUserCascadaUseCasePort,
+        private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -165,4 +167,38 @@ export default class UserControllerExpress implements UserControllerExpressPort 
           res.status(500).json({ message: 'Internal server error', error });
         }
     }
+    async getTotalBalance(req: Request, res: Response): Promise<void> {
+        try {
+            const body = req.body;   
+            console.log("body", body);
+            
+        
+            let userIdInterface = null;
+            if(!body) {
+                res.status(400).json({ message: 'Bad request body' });
+            }
+            try{
+                userIdInterface = body as { id_user: number };
+            }catch(error){
+                res.status(400).json({ message: 'Bad request interface' });
+            }
+
+            if (!userIdInterface) {
+                res.status(400).json({ message: 'Bad request interface' });
+                return;
+            }
+
+            const user_id = userIdInterface.id_user;        
+                    
+            const response = await this.getTotalBalanceUseCase.getTotalBalance(user_id);
+
+            res.status(200).send({ message: "User total balance fetched successfully", data: response });
+
+        } catch (error) {
+
+            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+        }
+ 
+    }
+    
 }

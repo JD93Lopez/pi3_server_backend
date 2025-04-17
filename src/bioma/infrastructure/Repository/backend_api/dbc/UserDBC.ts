@@ -113,7 +113,25 @@ export default class UserDBC {
         }else{
             return -1
         }
-    }    
+    }
+    public async getTotalBalance(user_id: number): Promise<number> {
+        if (user_id === undefined || user_id === null) {
+            throw new Error("user_id is required but is undefined or null");
+        }
+    
+        await Database.getConnection();
+    
+        const query = "SELECT GetTotalBalance(?) AS balance";
+        const result = await Database.executeQuery(query, [user_id]);
+    
+        if (!result || !result[0] || typeof result[0].balance !== 'number') {
+            throw new Error("Unexpected db result");
+        }
+    
+        return result[0].balance;
+    }
+    
+      
     
 }
 

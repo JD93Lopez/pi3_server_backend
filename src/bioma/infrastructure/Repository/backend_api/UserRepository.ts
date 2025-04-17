@@ -60,6 +60,11 @@ export default class UserRepository implements UserRepositoryPort {
     async deleteUserById(id: number): Promise<number> {
         const deleted = await this.userDBC.deleteUserById(id)
         return deleted
-      }
+    }
+
+    async getTotalBalance(user_id: number): Promise<number> {
+        const result = await this.userDBC.getTotalBalance(user_id);
+        return result;
+    }   
 
 }

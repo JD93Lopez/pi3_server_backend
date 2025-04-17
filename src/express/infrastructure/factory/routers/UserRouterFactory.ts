@@ -12,6 +12,8 @@ import UserUpdateExperienceServiceFactory from "../../../../bioma/infrastructure
 import RouterExpress from "../../../domain/RouterExpress"
 import DeleteUserCascadaServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/DeleteUserCascadaServiceFactory"
 import DeleteUserCascadaUseCase from "../../../../bioma/application/usecase/Users/DeleteUserCascadaUseCase"
+import GetTotalBalanceServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/GetTotalBalanceServiceFactory"
+import GetTotalBalanceUseCase from "../../../../bioma/application/usecase/Users/GetTotalBalanceUseCase"
 
 export default class UserRouterFactory {
 
@@ -29,9 +31,14 @@ export default class UserRouterFactory {
         const userGetStreakUseCase = new GetUserStreakUseCase(userGetStreakService);
 
         
-        // ------ DELETE TOPIC -------
+        // ------ DELETE USER -------
         const deleteUserCascadaService = DeleteUserCascadaServiceFactory.create()
         const deleteUserCascadaUseCase = new DeleteUserCascadaUseCase(deleteUserCascadaService);
+
+        // ------ GET TOTAL BALANCE USER -------
+        const getTotalBalanceService = GetTotalBalanceServiceFactory.create()
+        const getTotalBalanceUseCase = new GetTotalBalanceUseCase(getTotalBalanceService);
+
 
         // --------- User Login  ----------------
         const userValidationService = LoginServiceFactory.create()
@@ -39,7 +46,7 @@ export default class UserRouterFactory {
         const userLoginUseCase = new LoginUseCase(userValidationService, userJwtService)
 
         
-        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase)
+        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase)
 
         const userRouter = new UserRouterExpress(userController)
         
