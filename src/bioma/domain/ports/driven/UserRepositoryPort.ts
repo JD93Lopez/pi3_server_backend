@@ -7,4 +7,6 @@ export interface UserRepositoryPort {
     getUserStreak(user_id: number): Promise<number>
     findByUserName(username: string): Promise<UserDoc>
     updateUserLeague(user_id: number, league: string): Promise<number>
+    deleteUserById(id: number): Promise<number>
+    getTotalBalance(user_id: number): Promise<number>
 }

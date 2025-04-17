@@ -21,14 +21,22 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
         this.router.post(
             '/v1.0/user/creation',
             this.userController.createUser.bind(this.userController)
-        )        
+        ),
         this.router.post(
             "/v1.0/user/streak",
             this.userController.getUserStreak.bind(this.userController)
         ),
         this.router.post(
+            '/v1.0/user/deletion',
+            this.userController.deleteUserById.bind(this.userController)
+        ),
+        this.router.post(
             "/v1.0/user/login",
             this.userController.loginUser.bind(this.userController)
+        ),
+        this.router.post(
+            "/v1.0/user/balance",
+            this.userController.getTotalBalance.bind(this.userController)
         )
     }
 }

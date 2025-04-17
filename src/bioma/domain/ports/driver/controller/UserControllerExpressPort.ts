@@ -5,4 +5,6 @@ export default interface UserControllerExpressPort {
     updateUserExperience(req: Request, res: Response): Promise<void>
     getUserStreak(req: Request, res: Response): Promise<void>
     loginUser(req: Request, res: Response): Promise<void>;
+    deleteUserById(req: Request, res: Response): Promise<void>;
+    getTotalBalance(req: Request, res: Response): Promise<void>;
 }
