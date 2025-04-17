@@ -133,7 +133,8 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
     async getBiomesByUser(req: Request, res: Response): Promise<void> {
         
         let getBiomesByUserInterface = null;
-
+        
+        console.log("LLEGA A getBiomesByUser")
         const body = req.body
 
         if(!body) {
