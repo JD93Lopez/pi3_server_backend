@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import UserControllerExpressPort from "../../../domain/ports/driver/controller/UserControllerExpressPort";
 import UpdateUserExperienceUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdateUserExperienceUseCasePort";
-import CreateUserInterface from "../../../domain/types/endpoint/CreateUser";
+import CreateUserInterface from "../../../domain/types/endpoint/Users/CreateUser";
 import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/Users/CreateUserUseCasePort";
 import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/Users/GetUserStreakUseCasePort";
-import GetUserStreakInterface from "../../../domain/types/endpoint/GetUserStreakInterface";
+import GetUserStreakInterface from "../../../domain/types/endpoint/Users/GetUserStreakInterface";
 import LoginUseCasePort from "../../../domain/ports/driver/usecase/Users/loginUseCasePort";
 import DeleteUserCascadaUseCasePort from "../../../domain/ports/driver/usecase/Users/DeleteUserCascadaUseCasePort";
 import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Users/GetTotalBalanceUseCasePort";

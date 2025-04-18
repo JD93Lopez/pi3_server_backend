@@ -1,13 +1,13 @@
 import BiomeControllerExpressPort from "../../../domain/ports/driver/controller/BiomeControllerExpressPort";
 import { Request, Response } from 'express';
 import { CreateBiomeUseCasePort } from "../../../domain/ports/driver/usecase/Biomes/CreateBiomeUseCasePort";
-import CreateBiomeInterface from "../../../domain/types/endpoint/CreateBiome";
 import UpdateBiomeUseCasePort from "../../../domain/ports/driver/usecase/Biomes/UpdateBiomeUseCasePort";
-import UpdateBiomeInterface from "../../../domain/types/endpoint/UpdateBiome";
 import DeleteBiomeUseCasePort from "../../../domain/ports/driver/usecase/Biomes/DeleteBiomeUseCasePort";
-import DeleteBiomeInterface from "../../../domain/types/endpoint/DeleteBiome";
 import GetBiomesByUserUseCasePort from "../../../domain/ports/driver/usecase/Biomes/GetBiomesByUserUseCasePort";
-import GetBiomesByUserInterface from "../../../domain/types/endpoint/GetBiomesByUserInterface";
+import CreateBiomeInterface from "../../../domain/types/endpoint/Biomes/CreateBiome";
+import UpdateBiomeInterface from "../../../domain/types/endpoint/Biomes/UpdateBiome";
+import DeleteBiomeInterface from "../../../domain/types/endpoint/Biomes/DeleteBiome";
+import GetBiomesByUserInterface from "../../../domain/types/endpoint/Biomes/GetBiomesByUserInterface";
 export default class BiomeControllerExpress implements BiomeControllerExpressPort {
 
     constructor(
