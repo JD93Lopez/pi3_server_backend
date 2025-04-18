@@ -2,6 +2,7 @@ import Server from '../server/Server'
 import BiomeRouterFactory from './routers/BiomeRouterFactory'
 import FlashcardRouterFactory from './routers/FlashcardRouterFactory'
 import IconRouterFactory from './routers/IconRouteFactory'
+import ItemRouterFactory from './routers/ItemRouterFactory'
 import PlayedDayRouterFactory from './routers/PlayedDayRouterFactory'
 import ThemeRouterFactory from './routers/ThemeRouteFactory'
 import TopicRouterFactory from './routers/TopicRouterFactory'
@@ -19,9 +20,10 @@ export default class ExpressFactory {
     const playedDayRouter = PlayedDayRouterFactory.create()
     const userRouter = UserRouterFactory.create()
     const torneoRouter = TorneoRouterFactory.create()
+    const itemRouter = ItemRouterFactory.create()
     // TODO: validate routerF
 
-    const server = new Server([flashcardRouter, topicRouter, biomeRouter, iconRouter, themeRouter, playedDayRouter, userRouter, torneoRouter])
+    const server = new Server([flashcardRouter, topicRouter, biomeRouter, iconRouter, themeRouter, playedDayRouter, userRouter, torneoRouter, itemRouter])
     // TODO: validate server
     return  server
   }
