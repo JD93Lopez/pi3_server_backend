@@ -12,5 +12,11 @@ export default class ItemRepository implements ItemRepositoryPort {
         const result = await this.itemDBC.buyItem(user_id, item_id);
         return result;
     }
+
+    async getStoreItems(user_id: number): Promise<any[]> {
+        const items = await this.itemDBC.getStoreItems(user_id);
+        return items;
+    }
+    
     
 }
