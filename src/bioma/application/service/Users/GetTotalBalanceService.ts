@@ -3,7 +3,9 @@ import { UserRepositoryPort } from "../../../domain/ports/driven/UserRepositoryP
 
 
 export default class GetTotalBalanceService implements GetTotalBalanceServicePort {
+
     constructor(private userRepo: UserRepositoryPort) {}
+    
     async getTotalBalance(user_id: number): Promise<number> {
         const totalBalance = await this.userRepo.getTotalBalance(user_id);
         if (totalBalance === undefined || totalBalance === null) {
@@ -12,7 +14,4 @@ export default class GetTotalBalanceService implements GetTotalBalanceServicePor
         return totalBalance;
     }
     
-    
-    
-
-    }
+}

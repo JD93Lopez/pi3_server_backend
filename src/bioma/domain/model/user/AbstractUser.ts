@@ -77,6 +77,14 @@ export abstract class AbstractUser extends AbstractPerson {
         return this.biomes;
     }
 
+    setXp(xp: number): void {
+        this.received_xp_total = xp;
+    }
+
+    setStreak(streak: number): void {
+        this.streak = streak.toString();
+    }
+
     setRank(rank: string): void {
         this.league = rank;
     }

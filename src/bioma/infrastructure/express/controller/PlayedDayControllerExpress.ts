@@ -73,7 +73,7 @@ export default class PlayedDayControllerExpress implements PlayedDayControllerEx
             console.error('Error getting last 31 days:', error);
             res.status(500).json({ message: 'Internal server error' });
         }
-      }
+    }
 
     public async getPlayedDaysByDate(req: Request, res: Response): Promise<void> {
         try {

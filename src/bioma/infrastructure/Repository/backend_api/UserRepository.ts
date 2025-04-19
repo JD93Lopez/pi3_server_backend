@@ -67,6 +67,8 @@ export default class UserRepository implements UserRepositoryPort {
         return result;
     }   
 
-   
+    async getRank(user_id: number): Promise<string> {
+        return await this.userDBC.getRank(user_id);
+    }
 
 }

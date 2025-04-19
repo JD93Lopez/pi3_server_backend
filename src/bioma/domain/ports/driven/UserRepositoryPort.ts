@@ -9,5 +9,5 @@ export interface UserRepositoryPort {
     updateUserLeague(user_id: number, league: string): Promise<number>
     deleteUserById(id: number): Promise<number>
     getTotalBalance(user_id: number): Promise<number>
-    
+    getRank(user_id: number): Promise<string>
 }
