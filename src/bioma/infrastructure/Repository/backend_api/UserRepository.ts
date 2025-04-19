@@ -67,4 +67,6 @@ export default class UserRepository implements UserRepositoryPort {
         return result;
     }   
 
+   
+
 }

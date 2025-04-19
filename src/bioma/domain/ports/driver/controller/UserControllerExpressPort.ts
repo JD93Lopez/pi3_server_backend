@@ -7,4 +7,5 @@ export default interface UserControllerExpressPort {
     loginUser(req: Request, res: Response): Promise<void>;
     deleteUserById(req: Request, res: Response): Promise<void>;
     getTotalBalance(req: Request, res: Response): Promise<void>;
+   
 }

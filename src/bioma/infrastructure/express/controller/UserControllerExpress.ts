@@ -9,6 +9,7 @@ import LoginUseCasePort from "../../../domain/ports/driver/usecase/Users/loginUs
 import DeleteUserCascadaUseCasePort from "../../../domain/ports/driver/usecase/Users/DeleteUserCascadaUseCasePort";
 import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Users/GetTotalBalanceUseCasePort";
 
+
 export default class UserControllerExpress implements UserControllerExpressPort {
 
     constructor(
@@ -18,6 +19,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly loginUserUseCase: LoginUseCasePort,
         private readonly deleteUserCascadaUseCase: DeleteUserCascadaUseCasePort,
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
+        
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -182,5 +184,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
  
     }
+
+   
     
 }

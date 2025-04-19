@@ -15,6 +15,7 @@ import DeleteUserCascadaUseCase from "../../../../bioma/application/usecase/User
 import GetTotalBalanceServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/GetTotalBalanceServiceFactory"
 import GetTotalBalanceUseCase from "../../../../bioma/application/usecase/Users/GetTotalBalanceUseCase"
 
+
 export default class UserRouterFactory {
 
     public static readonly create = (): RouterExpress => {
@@ -44,6 +45,8 @@ export default class UserRouterFactory {
         const userValidationService = LoginServiceFactory.create()
         const userJwtService = new JWTService();
         const userLoginUseCase = new LoginUseCase(userValidationService, userJwtService)
+
+    
 
         
         const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase)
