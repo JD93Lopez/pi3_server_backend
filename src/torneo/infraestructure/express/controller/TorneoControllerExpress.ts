@@ -4,12 +4,15 @@ import InscribirTorneoUseCasePort from "../../../domain/ports/driver/usecase/Ins
 import InscribirTorneoInterface from "../../../domain/types/endpoints/InscribirTorneoInterface";
 import GetParticipantesSalaUseCasePort from "../../../domain/ports/driver/usecase/GetParticipantesSalaUseCasePort";
 import GetParticipantesSalasInterface from "../../../domain/types/endpoints/GetParticipantesSalasInterface";
+import GetTiempoRestanteInterface from "../../../domain/types/endpoints/GetTiempoRestanteInterface";
+import GetTiempoRestanteUseCasePort from "../../../domain/ports/driver/usecase/GetTiempoRestanteUseCasePort";
 
 export default class TorneoControllerExpress implements TorneoControllerExpressPort {
     
     constructor(
         private readonly inscribirTorneoUseCase: InscribirTorneoUseCasePort,
-        private readonly getParticipantesSalasUseCase: GetParticipantesSalaUseCasePort
+        private readonly getParticipantesSalasUseCase: GetParticipantesSalaUseCasePort,
+        private readonly getTiempoRestanteUseCase: GetTiempoRestanteUseCasePort
     ) {}
     
 
@@ -92,7 +95,43 @@ export default class TorneoControllerExpress implements TorneoControllerExpressP
         
     }
 
-  
+    public async getTiempoRestante(req: Request, res: Response): Promise<void> {
+        let getTiempoRestanteInterface = null;
+        const body = req.body;
+
+        if (!body) {
+            res.status(400).json({ message: 'Bad request body' });
+            return;
+        }
+
+        try {
+            getTiempoRestanteInterface = body as GetTiempoRestanteInterface;
+        } catch (error) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        if (!getTiempoRestanteInterface) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        const userId = getTiempoRestanteInterface.id_user;
+
+        if (!userId) {
+            res.status(400).json({ message: 'Bad request user' });
+            return;
+        }
+
+        try {
+            const response = this.getTiempoRestanteUseCase.getTiempoRestante(userId);
+            res.status(200).json({ message: 'Success', data: response });
+
+        }catch (error) {
+            console.error("Error obteniendo el tiempo restante:", error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
 
     
 }

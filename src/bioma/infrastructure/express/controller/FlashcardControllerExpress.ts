@@ -1,15 +1,15 @@
 import { Request, Response } from "express"
 import { GetOrganizedFlashcardsByTopicUseCasePort } from "../../../domain/ports/driver/usecase/Flashcards/GetOrganizedFlashcardsByTopicUseCasePort"
 import { FlashcardControllerExpressPort } from "../../../domain/ports/driver/controller/FlashcardControllerExpressPort"
-import GetOrganizedFlashcardsByTopicInterface from "../../../domain/types/endpoint/GetOrganizedFlashcardsByTopicInterface"
+import GetOrganizedFlashcardsByTopicInterface from "../../../domain/types/endpoint/Flashcards/GetOrganizedFlashcardsByTopicInterface"
 import { CreateFlashcardsUseCasePort } from "../../../domain/ports/driver/usecase/Flashcards/CreateFlashcardsUseCasePort"
-import CreateFlashcardsInterface from "../../../domain/types/endpoint/CreateFlashcards"
+import CreateFlashcardsInterface from "../../../domain/types/endpoint/Flashcards/CreateFlashcards"
 import UpdateFlashcardsUseCasePort from "../../../domain/ports/driver/usecase/Flashcards/UpdateFlashcardsUseCasePort"
-import UpdateFlashcardsInterface from "../../../domain/types/endpoint/UpdateFlashcards"
+import UpdateFlashcardsInterface from "../../../domain/types/endpoint/Flashcards/UpdateFlashcards"
 import CreateFlashcardsFromAiUseCasePort from "../../../domain/ports/driver/usecase/Flashcards/CreateFlashcardsFromAiUseCasePort"
-import CreateFlashcardsFromAi from "../../../domain/types/endpoint/CreateFlashcardsFromAi"
+import CreateFlashcardsFromAi from "../../../domain/types/endpoint/Flashcards/CreateFlashcardsFromAi"
 import GetOrganizedFlashcardsByBiomeUseCase from "../../../application/usecase/Flashcards/GetBiomeOrganizedFlashcardsUseCase"
-import GetOrganizedFlashcardsByBiomeInterface from "../../../domain/types/endpoint/GetOrganizedFlashcardsByBiomeInterface"
+import GetOrganizedFlashcardsByBiomeInterface from "../../../domain/types/endpoint/Flashcards/GetOrganizedFlashcardsByBiomeInterface"
 
 export default class FlashcardControllerExpress implements FlashcardControllerExpressPort
 {

@@ -130,9 +130,18 @@ export default class UserDBC {
     
         return result[0].balance;
     }
-
-   
-    
+    async getRank(user_id: number): Promise<string> {
+        await Database.getConnection()
+        const query = "SELECT league FROM USERS WHERE id_user = ?"
+        const params = [user_id]
+        let res = await Database.executeQuery(query, params)
+        res = res[0]
+        const key = Object.keys(res)[0];
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+        return res[key];
+    }
       
     
 }

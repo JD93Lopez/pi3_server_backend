@@ -51,6 +51,18 @@ export default class PlayedDayDBC {
         return result[0];
     }
     
+    public async getPlayedDaysByUserIdAndDate(USERS_id_user: number, year: number, month: number): Promise<number> {
+        await Database.getConnection();
+        const query = "CALL GetPlayedDaysByMonthAndYear(?, ?, ?)";   
+        const values = [USERS_id_user, year, month]; 
+        const result = await Database.executeQuery(query, values);
 
+        if (!result || result.length === 0 || !result[0]) {
+            throw new Error("No data found for the user");
+        }
+
+        return result[0][0].days_played;
+
+    }
 
 }

@@ -9,17 +9,14 @@ export default class GetParticipantesSalaUseCase implements GetParticipantesSala
 
     constructor(){}
 
-     getParticipantesSala(userId: number, league: string): AbstractUser[] {
+    getParticipantesSala(userId: number, league: string): AbstractUser[] {
+        const tournamentResponse =  this.tournamentManagerService.estaParticipandoObtenerSala( userId, league);
 
+        if(tournamentResponse == null) return []
         
-            const tournamentResponse =  this.tournamentManagerService.estaParticipandoObtenerSala( userId, league);
+        if(tournamentResponse.length == 0) return []
 
-            console.log("tournamentResponse", tournamentResponse)
-            if(tournamentResponse == null) return []
-            
-            if(tournamentResponse.length == 0) return []
-
-            return tournamentResponse 
-            
+        return tournamentResponse 
     }
+
 }
