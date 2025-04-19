@@ -26,8 +26,8 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
             "/v1.0/user/streak",
             this.userController.getUserStreak.bind(this.userController)
         ),
-        this.router.post(
-            '/v1.0/user/deletion',
+        this.router.delete(
+            '/v1.0/user/:id',
             this.userController.deleteUserById.bind(this.userController)
         ),
         this.router.post(

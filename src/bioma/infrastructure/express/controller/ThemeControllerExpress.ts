@@ -6,6 +6,7 @@ export default class ThemeControllerExpress implements ThemeControllerExpressPor
   constructor(private readonly getThemesUseCase: GetThemesUseCasePort) {}
   public async getAllThemes(req: Request, res: Response): Promise<void> {
     const body = req.body;
+
     if(!body) {
         res.status(400).json({ message: 'Bad request body' })  
       }
