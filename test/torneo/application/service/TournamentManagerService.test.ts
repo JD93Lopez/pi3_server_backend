@@ -81,8 +81,13 @@ describe('TournamentManagerService Tournament Created',  () => {
     });
 
     test('should be initialized', () => {
-      tournamentManager.anadirExperiencia(user3.getIdUser(), user3.getLeague(), 1000);
       expect(tournamentManager).toBeDefined();
+    });
+
+    test('anadirExperiencia(userId: number, xp: number) debe devolver true', () => {
+      const res = tournamentManager.anadirExperiencia(user3.getIdUser(), 1234);
+      expect(res).toBe(true);
+      expect(user3.getReceivedXpTotal()).toBe(1234);
     });
 
     test('should have a tournament manager instance', () => {
