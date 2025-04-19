@@ -51,7 +51,7 @@ export class Tournament {
     }
 
     anadirExperienciaLeague(userId: number, league: string, xp: number): boolean {
-        const room = this.getUserRoomInRank(userId, league);// TODO iniciado?
+        const room = this.getUserRoomInRank(userId, league);
         if (room.getRoomUsers().length > 0) {
 
             room.searchUser(userId).addXp(xp);

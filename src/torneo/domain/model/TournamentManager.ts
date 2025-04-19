@@ -1,4 +1,5 @@
 import { AbstractUser } from "../../../bioma/domain/model/user/AbstractUser";
+import UpdateUserLeagueServiceFactory from "../../../bioma/infrastructure/factory/service/Users/UpdateUserLeagueServiceFactory";
 import { Tournament } from "./Tournament";
 
 export class TournamentManager {
@@ -89,8 +90,9 @@ export class TournamentManager {
 
             
             usuariosActualizados.forEach(usuario => {
-                usuario
-                // TODO Actualizar liga de cada usuario
+                const updateRankService = UpdateUserLeagueServiceFactory.create();
+                // Actualizar el rango de cada usuario
+                updateRankService.updateUserLeague(usuario.getIdUser(), usuario.getLeague());
             });
 
 
