@@ -1,12 +1,18 @@
 import { Request, Response } from "express";
 import PlayedDayControllerExpressPort from "../../../domain/ports/driver/controller/PlayedDayControllerExpressPort";
 import CreatePlayedDayUseCasePort from "../../../domain/ports/driver/usecase/PlayedDays/CreatePlayedDayUseCasePort";
-import CreatePlayedDayInterface from "../../../domain/types/endpoint/CreatePlayedDay";
+import CreatePlayedDayInterface from "../../../domain/types/endpoint/PlayedDays/CreatePlayedDay";
 import { GetLast31DaysUseCasePort } from "../../../domain/ports/driver/usecase/PlayedDays/GetLast31DaysUseCasePort";
+import GetPlayedDaysByDateUseCasePort from "../../../domain/ports/driver/usecase/PlayedDays/GetPlayedDaysByDateUseCasePort";
+import GetPlayedDaysByDateInterface from "../../../domain/types/endpoint/PlayedDays/GetPlayedDaysByDateInterface";
 
 export default class PlayedDayControllerExpress implements PlayedDayControllerExpressPort{
         
-    constructor(private createPlayedDayUseCase: CreatePlayedDayUseCasePort, private getLast31DaysUseCase : GetLast31DaysUseCasePort){}
+    constructor(
+        private createPlayedDayUseCase: CreatePlayedDayUseCasePort, 
+        private getLast31DaysUseCase : GetLast31DaysUseCasePort,
+        private getPlayedDaysByDateUseCase: GetPlayedDaysByDateUseCasePort
+    ){}
     
     public async createPlayedDay(req: Request, res: Response): Promise<void> {
     
@@ -67,6 +73,46 @@ export default class PlayedDayControllerExpress implements PlayedDayControllerEx
             console.error('Error getting last 31 days:', error);
             res.status(500).json({ message: 'Internal server error' });
         }
-        
+    }
+
+    public async getPlayedDaysByDate(req: Request, res: Response): Promise<void> {
+        try {
+            const body = req.body;
+            let GetPlayedDaysByDateInterface = null;
+
+            if(!body) {
+                res.status(400).json({ message: 'Bad request body' })  
+            }
+
+            try {
+                GetPlayedDaysByDateInterface = body as GetPlayedDaysByDateInterface
+            } catch (error) {
+                res.status(400).json({ message: 'Bad request interface' })
+            }
+
+            if(!GetPlayedDaysByDateInterface) {
+                res.status(400).json({ message: 'Bad request interface' })  
+                return
+            }
+
+            if (!GetPlayedDaysByDateInterface.idUser|| !GetPlayedDaysByDateInterface.date) {
+                res.status(400).json({ message: 'Bad request: missing fields' });
+                return;
+            }
+
+            const { idUser, date } = GetPlayedDaysByDateInterface; 
+
+            const daysPlayed = await this.getPlayedDaysByDateUseCase.GetPlayedDaysByDateUseCase(idUser, date);
+
+            if (!daysPlayed) {
+                res.status(404).json({ message: 'No data found for the user on the specified date' });
+                return;
+            }
+            res.status(200).json({ message: 'Success', data: daysPlayed });
+
+        } catch (error) {
+            console.error('Error getting played days by date:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
     }
 }

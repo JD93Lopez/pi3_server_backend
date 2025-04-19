@@ -1,4 +1,4 @@
-import { TopicInterface } from "../TopicInterface";
+import { TopicInterface } from "../../TopicInterface";
 
 export default interface CreateFlashcardsInterface {
     topic: TopicInterface;

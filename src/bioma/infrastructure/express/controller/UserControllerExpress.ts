@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import UserControllerExpressPort from "../../../domain/ports/driver/controller/UserControllerExpressPort";
 import UpdateUserExperienceUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdateUserExperienceUseCasePort";
-import CreateUserInterface from "../../../domain/types/endpoint/CreateUser";
+import CreateUserInterface from "../../../domain/types/endpoint/Users/CreateUser";
 import { CreateUserUseCasePort } from "../../../domain/ports/driver/usecase/Users/CreateUserUseCasePort";
 import GetUserStreakUseCasePort from "../../../domain/ports/driver/usecase/Users/GetUserStreakUseCasePort";
-import GetUserStreakInterface from "../../../domain/types/endpoint/GetUserStreakInterface";
+import GetUserStreakInterface from "../../../domain/types/endpoint/Users/GetUserStreakInterface";
 import LoginUseCasePort from "../../../domain/ports/driver/usecase/Users/loginUseCasePort";
 import DeleteUserCascadaUseCasePort from "../../../domain/ports/driver/usecase/Users/DeleteUserCascadaUseCasePort";
 import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Users/GetTotalBalanceUseCasePort";
+
 
 export default class UserControllerExpress implements UserControllerExpressPort {
 
@@ -18,6 +19,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly loginUserUseCase: LoginUseCasePort,
         private readonly deleteUserCascadaUseCase: DeleteUserCascadaUseCasePort,
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
+        
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -127,34 +129,16 @@ export default class UserControllerExpress implements UserControllerExpressPort 
 
     async deleteUserById(req: Request, res: Response): Promise<void> {
         try {
-            const body = req.body;
 
-            console.log("body", body);
-            
-            
-            if (!body) {
-            res.status(400).json({ message: 'Bad request body' });
-            return;
+            const idParam = req.params['id'];
+            if (!idParam) {
+                res.status(400).json({ message: 'Missing id parameter' });
+                return;
             }
+            const id = parseInt(idParam, 10);
+
+            const result = await this.deleteUserCascadaUseCase.deleteUserById(id);
             
-        
-            let deleteUserInterface = null;
-            try {
-            deleteUserInterface = body as { id_user: number };
-            } catch (error) {
-            res.status(400).json({ message: 'Bad request interface' });
-            return;
-            }
-        
-            if (!deleteUserInterface) {
-            res.status(400).json({ message: 'Invalid or missing id_user' });
-            return;
-            }
-        
-            const id = deleteUserInterface.id_user;
-      
-        
-          const result = await this.deleteUserCascadaUseCase.deleteUserById(id);
           
           if (result === -1) {
             res.status(404).json({ message: `User with ID ${id} not found or not deleted.` });
@@ -200,5 +184,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
  
     }
+
+   
     
 }
