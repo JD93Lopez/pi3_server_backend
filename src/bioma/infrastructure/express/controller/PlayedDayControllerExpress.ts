@@ -68,5 +68,5 @@ export default class PlayedDayControllerExpress implements PlayedDayControllerEx
             res.status(500).json({ message: 'Internal server error' });
         }
         
-      }
+    }
 }

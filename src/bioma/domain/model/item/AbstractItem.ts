@@ -3,6 +3,7 @@ export default abstract class AbstractItem {
     protected id_item: number;
     protected image: string;
     protected cost: number;
+    // TODO añadir campo comprado o no comprado
 
 
     constructor(attributes: ItemAtributes) {
