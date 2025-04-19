@@ -51,8 +51,12 @@ export class TournamentManager {
         return false; // No se puede iniciar si ya está en curso
     }
 
-    anadirExperiencia(userId: number, league: string, xp: number): boolean {
-        return this.tournament.anadirExperiencia(userId, league, xp);
+    anadirExperienciaLeague(userId: number, league: string, xp: number): boolean {
+        return this.tournament.anadirExperienciaLeague(userId, league, xp);
+    }
+
+    anadirExperiencia(userId: number, xp: number): boolean {
+        return this.tournament.anadirExperiencia(userId, xp);
     }
 
     finalizar(): boolean {
@@ -102,7 +106,7 @@ export class TournamentManager {
         return false; // No se puede finalizar si no ha comenzado o no ha llegado la fecha de finalización
     }
 
-    estaInscritoObtenerTiempoRestante(userId: number): number { // TODO devuelve el tiempo que falta para jugar else codigo de error
+    estaInscritoObtenerTiempoRestante(userId: number): number { // devuelve el tiempo que falta para jugar else codigo de error
         if (this.inscriptionList.some(u => u.getIdUser() === userId)) {
             if (this.endDate) {
                 const now = new Date();

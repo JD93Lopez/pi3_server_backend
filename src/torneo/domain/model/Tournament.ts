@@ -50,7 +50,7 @@ export class Tournament {
         }
     }
 
-    anadirExperiencia(userId: number, league: string, xp: number): boolean {
+    anadirExperienciaLeague(userId: number, league: string, xp: number): boolean {
         const room = this.getUserRoomInRank(userId, league);// TODO iniciado?
         if (room.getRoomUsers().length > 0) {
 
@@ -60,6 +60,15 @@ export class Tournament {
             return true;
         }
         return false; // Usuario no encontrado o rango no válido
+    }
+
+    anadirExperiencia(userId: number, xp: number): boolean {
+        const user = this.searchUser(userId);
+        if (!user.isNull()) {
+            user.addXp(xp);
+            return true;
+        }
+        return false; // Usuario no encontrado
     }
 
     searchUser(userId: number): AbstractUser {
