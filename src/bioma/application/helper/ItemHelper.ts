@@ -4,8 +4,13 @@ import Item from "../../domain/model/item/Item";
 
 export default class ItemHelper {
  
-    databaseToDomainTheme(itemDoc: ItemDoc): AbstractItem {
-        return new Item()
+    databaseToDomainItem(itemDoc: ItemDoc): AbstractItem {
+        return new Item({
+            id_item: itemDoc.id_item,
+            image: itemDoc.image,
+            cost: itemDoc.cost,
+            owned: itemDoc.owned == 1 ? true : false
+        })
     }
 
 }

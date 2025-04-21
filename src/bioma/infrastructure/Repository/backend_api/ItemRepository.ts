@@ -1,3 +1,4 @@
+import { ItemDoc } from "../../../domain/docs/ItemDoc";
 import { ItemRepositoryPort } from "../../../domain/ports/driven/ItemRepositoryPort";
 import ItemDBC from "./dbc/ItemDBC";
 
@@ -13,7 +14,7 @@ export default class ItemRepository implements ItemRepositoryPort {
         return result;
     }
 
-    async getStoreItems(user_id: number): Promise<any[]> {
+    async getStoreItems(user_id: number): Promise<ItemDoc[]> {
         const items = await this.itemDBC.getStoreItems(user_id);
         return items;
     }

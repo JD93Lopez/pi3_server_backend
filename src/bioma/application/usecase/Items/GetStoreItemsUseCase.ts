@@ -1,3 +1,4 @@
+import AbstractItem from "../../../domain/model/item/AbstractItem";
 import { GetStoreItemsServicePort } from "../../../domain/ports/driver/service/Items/GetStoreItemsServicePort";
 
 export default class GetStoreItemsUseCase{
@@ -7,7 +8,7 @@ export default class GetStoreItemsUseCase{
 
     ){}
 
-    public async getStoreItems(user_id: number): Promise<any[]> {
+    public async getStoreItems(user_id: number): Promise<AbstractItem[]> {
         if (!user_id) {
             throw new Error("Parámetro inválido: user_id es requerido");
         }
