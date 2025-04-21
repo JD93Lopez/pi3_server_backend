@@ -1,5 +1,5 @@
 import { ItemRepositoryPort } from "../../../domain/ports/driven/ItemRepositoryPort";
-import { BuyItemServicePort } from "../../../domain/ports/driver/service/Users/BuyItemServicePort";
+import { BuyItemServicePort } from "../../../domain/ports/driver/service/Items/BuyItemServicePort";
 
 
 export default class BuyItemService implements BuyItemServicePort {

@@ -5,7 +5,8 @@ export class NullItem extends AbstractItem {
         super({
             id_item: -1,
             image: "/default.png"  ,
-            cost: 0
+            cost: 0,
+            owned: false
         });
     }
 

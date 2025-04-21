@@ -1,3 +1,3 @@
 export default interface ItemRepositoryExpressPort {
-    gesItemRoutes(): void;
+    getItemRoutes(): void;
 }

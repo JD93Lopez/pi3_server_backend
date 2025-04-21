@@ -19,4 +19,23 @@ export default class ItemDBC{
         return result[0].result;
     }
 
+
+    public async getStoreItems(user_id: number): Promise<any[]> {
+        if (user_id === undefined || user_id === null) {
+            throw new Error("user_id is required but is undefined or null");
+        }
+    
+        await Database.getConnection();
+    
+        const query = "CALL getStoreItems(?)";
+        const result = await Database.executeQuery(query, [user_id]);
+    
+        if (!result || !Array.isArray(result)) {
+            throw new Error("Unexpected db result");
+        }
+    
+        return result;
+    }
+
+
 }
