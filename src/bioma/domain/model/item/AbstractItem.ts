@@ -10,7 +10,7 @@ export default abstract class AbstractItem {
         this.id_item = attributes.id_item;
         this.image = attributes.image;
         this.cost = attributes.cost;
-        this.owned = attributes.own;
+        this.owned = attributes.owned;
     }
 
     getIdItem(): number {
@@ -32,5 +32,5 @@ export interface ItemAtributes {
     id_item: number;
     image: string;
     cost: number;
-    own: boolean;
+    owned: boolean;
 }

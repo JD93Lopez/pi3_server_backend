@@ -8,10 +8,7 @@ export default class ItemRouterExpress extends RouterExpress implements ItemRout
             super()
             this.routes()
         }
-    gesItemRoutes(): void {
-        throw new Error("Method not implemented.")
-    }
-    
+        
     public routes = (): void => {
             this.getItemRoutes()
     }
@@ -20,6 +17,10 @@ export default class ItemRouterExpress extends RouterExpress implements ItemRout
             this.router.post(
                 "/v1.0/item/buy",
                 this.itemController.buyItem.bind(this.itemController)
+            ),
+            this.router.post(
+                "/v1.0/item/store/:user_id",
+                this.itemController.getStoreItems.bind(this.itemController)
             )
     }        
         

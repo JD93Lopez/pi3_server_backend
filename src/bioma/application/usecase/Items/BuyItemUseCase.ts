@@ -1,4 +1,4 @@
-import { BuyItemServicePort } from "../../../domain/ports/driver/service/Users/BuyItemServicePort";
+import { BuyItemServicePort } from "../../../domain/ports/driver/service/Items/BuyItemServicePort";
 
 
 export default class BuyItemUseCase {
