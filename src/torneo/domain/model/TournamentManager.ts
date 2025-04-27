@@ -61,7 +61,7 @@ export class TournamentManager {
     }
 
     finalizar(): boolean {
-        if (this.started && this.endDate && new Date() >= this.endDate) {
+        if (this.started && this.endDate) {
             this.started = false;
 
             const newEndDate = new Date(this.endDate.getTime() + 1000*60*60*24*7); // Recalcular la fecha de finalización
@@ -113,11 +113,11 @@ export class TournamentManager {
             if (this.endDate) {
                 const now = new Date();
                 const timeLeft = this.endDate.getTime() - now.getTime();
-                return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed but user is in the list
+                return timeLeft > 0 ? timeLeft : -2; // Return time left or -2 if the endDate has passed but user is in the list // El torneo comenzara pronto
             }
-            return -2; // If endDate is not set but user is in the list, return -2
+            return -2; // If endDate is not set but user is in the list, return -2 // El torneo comenzara pronto
         }
-        return -1; // User is not in the inscription list
+        return -1; // User is not in the inscription list // No inscrito
     }
 
     estaParticipandoObtenerSala(userId: number, league: string): AbstractUser[] {
@@ -147,5 +147,20 @@ export class TournamentManager {
 
     getTournament(): Tournament {
         return this.tournament;
+    }
+
+    getInscriptionList(): AbstractUser[] {
+        return this.inscriptionList;
+    }
+
+    getParticipatingUsers(): AbstractUser[] {
+        const participatingUsers: AbstractUser[] = [];
+        const ranks = this.tournament.getRanks();
+        ranks.forEach(rank => {
+            rank.getRooms().forEach(room => {
+            participatingUsers.push(...room.getUsers());
+            });
+        });
+        return participatingUsers;
     }
 }

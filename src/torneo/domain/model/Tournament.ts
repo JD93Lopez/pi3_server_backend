@@ -52,7 +52,7 @@ export class Tournament {
 
     anadirExperienciaLeague(userId: number, league: string, xp: number): boolean {
         const room = this.getUserRoomInRank(userId, league);
-        if (room.getRoomUsers().length > 0) {
+        if (room.getUsers().length > 0) {
 
             room.searchUser(userId).addXp(xp);
             room.organizar(); // Reorganizar la sala después de añadir experiencia
@@ -114,5 +114,9 @@ export class Tournament {
         // console.log("Usuarios clasificados al finalizar el torneo:", finalUsers);
         
         return finalUsers; // Devolver lista de usuarios clasificados
+    }
+
+    getRanks(): Rank[] {
+        return this.ranks;
     }
 }
