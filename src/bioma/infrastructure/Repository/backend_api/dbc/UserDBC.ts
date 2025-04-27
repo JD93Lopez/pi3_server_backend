@@ -68,7 +68,7 @@ export default class UserDBC {
 
     public async getUserByUserName(user_name: string): Promise<any> {
         await Database.getConnection()
-        const query = "CALL GetUserByUsername('Paola')";
+        const query = "CALL GetUserByUsername(?)";
         const params = [user_name]
         let res = await Database.executeQuery(query, params)
         res = res[0]
