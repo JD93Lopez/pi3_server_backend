@@ -19,7 +19,7 @@ export class Room {
         return true;
     }
 
-    getRoomUsers(): AbstractUser[] {
+    getUsers(): AbstractUser[] {
         return this.users;
     }
 

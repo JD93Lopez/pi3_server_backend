@@ -15,7 +15,6 @@ export default class IconRepository {
   }
   getAllIcons = async (): Promise<any> => {
     const iconsFromDB = await this.iconDBC.getAllIcons()
-    console.log(iconsFromDB);
     
     return iconsFromDB
   }

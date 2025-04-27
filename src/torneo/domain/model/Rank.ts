@@ -98,7 +98,7 @@ export class Rank {
     getUserRoomUsers(userId: number): AbstractUser[] {
         for (const room of this.rooms) {
             const user = room.searchUser(userId);
-            if (!user.isNull()) return room.getRoomUsers(); // Devolver todos los usuarios de la sala
+            if (!user.isNull()) return room.getUsers(); // Devolver todos los usuarios de la sala
         }
         return []; // Usuario no encontrado
     }
@@ -113,6 +113,10 @@ export class Rank {
 
     getName(): RankName {
         return this.rankName;
+    }
+
+    getRooms(): Room[] {
+        return this.rooms;
     }
 
     static toRankName(rankName: string): RankName {
