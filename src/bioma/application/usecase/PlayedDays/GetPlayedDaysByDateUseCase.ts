@@ -11,7 +11,7 @@ export default class GetPlayedDaysByDateUseCase implements GetPlayedDaysByDateUs
         const result = await this.getPlayedDaysByDateService.getPlayedDaysByDate(USERS_id_user, date);
 
         
-        if (!result || result.length === 0) {
+        if (!result) {
             throw new Error("No data found for the user on the specified date");
         }
         
