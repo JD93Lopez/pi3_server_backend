@@ -5,23 +5,23 @@ import ItemRouterExpressPort from "../../../domain/ports/driver/router/ItemRoute
 export default class ItemRouterExpress extends RouterExpress implements ItemRouterExpressPort{
 
     constructor(private readonly itemController: ItemControllerExpressPort) {
-            super()
-            this.routes()
-        }
+        super()
+        this.routes()
+    }
         
     public routes = (): void => {
-            this.getItemRoutes()
+        this.getItemRoutes()
     }
 
     async getItemRoutes()  {
-            this.router.post(
-                "/v1.0/item/buy",
-                this.itemController.buyItem.bind(this.itemController)
-            ),
-            this.router.post(
-                "/v1.0/item/store/:user_id",
-                this.itemController.getStoreItems.bind(this.itemController)
-            )
+        this.router.post(
+            "/v1.0/item/buy",
+            this.itemController.buyItem.bind(this.itemController)
+        ),
+        this.router.post(
+            "/v1.0/item/store/:user_id",
+            this.itemController.getStoreItems.bind(this.itemController)
+        )
     }        
         
 

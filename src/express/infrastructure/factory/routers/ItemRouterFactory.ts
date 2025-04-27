@@ -9,21 +9,21 @@ import GetStoreItemsServiceFactory from "../../../../bioma/infrastructure/factor
 export default class ItemRouterFactory{
     public static readonly create = (): RouterExpress => {
     
-            // ------BUY ITEM ----------------
-    
-            const buyItemService = BuyItemServiceFactory.create()
-            const buyItemUseCase = new BuyItemUseCase(buyItemService)
-    
-            const GetStoreItemsService= GetStoreItemsServiceFactory.create()
-            const GetStoreItems = new GetStoreItemsUseCase(GetStoreItemsService)
-    
-            
-            const itemController = new ItemControllerExpress(buyItemUseCase, GetStoreItems)
-    
-            const userRouter = new ItemRouterExpress(itemController)
-            
-            return userRouter
-    
-        }
+        // ------BUY ITEM ----------------
+
+        const buyItemService = BuyItemServiceFactory.create()
+        const buyItemUseCase = new BuyItemUseCase(buyItemService)
+
+        const GetStoreItemsService= GetStoreItemsServiceFactory.create()
+        const GetStoreItems = new GetStoreItemsUseCase(GetStoreItemsService)
+
+        
+        const itemController = new ItemControllerExpress(buyItemUseCase, GetStoreItems)
+
+        const userRouter = new ItemRouterExpress(itemController)
+        
+        return userRouter
+
+    }
 
 }

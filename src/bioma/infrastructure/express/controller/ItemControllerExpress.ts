@@ -14,7 +14,6 @@ export default class ItemControllerExpress implements ItemControllerExpressPort{
     async buyItem(req: Request, res: Response): Promise<void> {
         try {
             const body = req.body;   
-            console.log("body", body);
             
         
             let buyItemInterface = null;

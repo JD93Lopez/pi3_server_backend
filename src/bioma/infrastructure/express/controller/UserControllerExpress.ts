@@ -154,7 +154,6 @@ export default class UserControllerExpress implements UserControllerExpressPort 
     async getTotalBalance(req: Request, res: Response): Promise<void> {
         try {
             const body = req.body;   
-            console.log("body", body);
             
         
             let userIdInterface = null;
