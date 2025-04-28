@@ -13,7 +13,7 @@ export default class AiServerFlashcardsProvider {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error fetching flashcards by topic ID:', error);
+            console.error('Error fetching flashcards by topic ID');
             return errorAiFlashcards;
         }
     }
@@ -27,7 +27,7 @@ export default class AiServerFlashcardsProvider {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error creating flashcards from AI:', error);
+            console.error('Error creating flashcards from AI');
             return -1;
         }
     }
