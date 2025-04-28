@@ -34,7 +34,9 @@ export class EmailService {
   }
 
   // Envía el correo electrónico
-  public async sendVerificationEmail(to: string, code: string): Promise<void> {
+  public async sendVerificationEmail(to: string): Promise<void> {
+    let code = this.generateVerificationCode(); // Generar un nuevo código
+
     const mailOptions = {
       from: this.emailUser,
       to,
