@@ -2,7 +2,7 @@ import AiFlashcards, { errorAiFlashcards } from "../../../../domain/docs/AiFlash
 
 export default class AiServerFlashcardsProvider {
 
-    private readonly baseUrl = 'https://wh37l4d7-5001.use2.devtunnels.ms';
+    private readonly baseUrl = 'http://127.0.0.1:5001';
 
     public async getFlashcardsAiTopicId(TopicId: number): Promise<AiFlashcards> {
         try {
