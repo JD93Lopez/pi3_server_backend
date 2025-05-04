@@ -18,12 +18,17 @@ export default class BiomeDBC {
     }
 
     public async getBiomesByUserId(userId: number): Promise<BiomeDoc[]> {
-        await Database.getConnection()
-        const query = "call GetBiomesByUserId(?)"
-        const values = [userId]
-        let res = await Database.executeQuery(query, values)
-        res = res[0]
-        return res;
+        try {
+            await Database.getConnection()
+            const query = "call GetBiomesByUserId(?)"
+            const values = [userId]
+            let res = await Database.executeQuery(query, values)
+            res = res[0]
+            return res;
+        } catch (error) {
+            console.log("Error in getBiomesByUserId:", error);
+            return []
+        }
     }
 
 
