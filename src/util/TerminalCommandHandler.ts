@@ -159,7 +159,7 @@ class TerminalCommandHandler {
     private torneoTestUsers(): void {
         console.log('Creando usuarios de prueba...');
 
-        const user1 = createTournamentTestUser(1, "Test User", RankName.BRONZE);
+        const user1 = createTournamentTestUser(11, "Test User", RankName.BRONZE);
         const user2 = createTournamentTestUser(2, "Test User", RankName.BRONZE);
         const user3 = createTournamentTestUser(3, "Test User", RankName.BRONZE);
         const user4 = createTournamentTestUser(4, "Test User", RankName.BRONZE);
@@ -171,7 +171,7 @@ class TerminalCommandHandler {
         const user9 = createTournamentTestUser(9, "Test User", RankName.SILVER);  
       
         const user10 = createTournamentTestUser(10, "Test User", RankName.GOLD);
-        const user11 = createTournamentTestUser(11, "pepLimonuwu", RankName.GOLD);
+        const user11 = createTournamentTestUser(1, "pepLimonuwu", RankName.GOLD);
         const user12 = createTournamentTestUser(12, "paola", RankName.GOLD);
         const user13 = createTournamentTestUser(13, "Test User", RankName.GOLD);
       
