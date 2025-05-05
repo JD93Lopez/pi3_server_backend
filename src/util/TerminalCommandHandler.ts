@@ -116,7 +116,7 @@ class TerminalCommandHandler {
         const nextSunday = new Date(
             now.getFullYear(),
             now.getMonth(),
-            now.getDate() + ((7 - now.getDay()) % 7) + 7 // Ensure it's the next Sunday
+            now.getDate() + (7 - now.getDay())
         );
         nextSunday.setHours(23, 59, 0, 0);
         this.tournamentManager.iniciar(nextSunday);
