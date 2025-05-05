@@ -15,7 +15,7 @@ export class Room {
     }
 
     organizar(): boolean {
-        this.users.sort((a, b) => b.getReceivedXpTotal() - a.getReceivedXpTotal());
+        this.users = this.users.sort((a, b) => b.getReceivedXpTotal() - a.getReceivedXpTotal());
         return true;
     }
 
