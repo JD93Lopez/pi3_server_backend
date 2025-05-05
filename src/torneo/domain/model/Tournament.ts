@@ -63,12 +63,15 @@ export class Tournament {
     }
 
     anadirExperiencia(userId: number, xp: number): boolean {
-        const user = this.searchUser(userId);
-        if (!user.isNull()) {
-            user.addXp(xp);
-            return true;
+        for (const rank of this.ranks) {
+            const room = rank.getUserRoom(userId);
+            if (room.getUsers().length > 0) {
+                room.searchUser(userId).addXp(xp);
+                room.organizar(); // Reorganizar la sala después de añadir experiencia
+                return true;
+            }
         }
-        return false; // Usuario no encontrado
+        return false; // Usuario no encontrado en ninguna liga
     }
 
     searchUser(userId: number): AbstractUser {
