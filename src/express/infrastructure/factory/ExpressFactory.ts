@@ -23,7 +23,11 @@ export default class ExpressFactory {
     const itemRouter = ItemRouterFactory.create()
     // TODO: validate routerF
 
-    const server = new Server([flashcardRouter, topicRouter, biomeRouter, iconRouter, themeRouter, playedDayRouter, userRouter, torneoRouter, itemRouter])
+    const server = new Server([
+      flashcardRouter, topicRouter, biomeRouter, 
+      iconRouter, themeRouter, playedDayRouter, 
+      userRouter, torneoRouter, itemRouter
+    ])
     // TODO: validate server
     return  server
   }

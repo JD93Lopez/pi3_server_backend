@@ -27,8 +27,11 @@ export class TournamentManagerService {
             delay = this.startDate.getTime() - now.getTime();
             delay = delay < 0 ? 0 : delay; // Asegurarse de que el retraso no sea negativo
         } else {
-            nextSunday = new Date();
-            nextSunday.setDate(now.getDate() + ((7 - now.getDay()) % 7));
+            nextSunday = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate() + (7 - now.getDay())
+            );
             nextSunday.setHours(23, 59, 0, 0);
             delay = nextSunday.getTime() - now.getTime();
         }
@@ -40,7 +43,7 @@ export class TournamentManagerService {
                 finalEndDate = this.endDate;
             }else{
                 let endDate7DaysAfter: Date = this.startDate ? new Date(this.startDate) : new Date(nextSunday);
-                endDate7DaysAfter.setDate(nextSunday.getDate() + 7);
+                endDate7DaysAfter.setDate(endDate7DaysAfter.getDate() + 7);
                 finalEndDate = endDate7DaysAfter;
             }
 

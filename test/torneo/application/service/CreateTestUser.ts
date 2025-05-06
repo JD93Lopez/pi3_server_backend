@@ -1,14 +1,14 @@
 import { User } from "../../../../src/bioma/domain/model/user/User";
 import { RankName } from "../../../../src/torneo/domain/model/RankName";
 
-export const createTournamentTestUser = (id_user: number, name: string, league: RankName) => {
+export const createTournamentTestUser = (id_user: number, user_name: string, league: RankName) => {
   return new User({
     id_user: id_user,
-    user_name: "Not a name provided",
+    user_name: user_name,
     pet_name: "Not a pet name provided",
     email: "Not an email provided",
     password: "Not a password provided",
-    name: name,
+    name: "Not a name provided",
     education: "Not an education provided",
     birthdate: new Date(),
     telephone: "Not a telephone provided",

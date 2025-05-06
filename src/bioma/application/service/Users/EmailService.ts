@@ -8,6 +8,8 @@ export class EmailService {
   private readonly emailPass: string;
   private readonly transporter: nodemailer.Transporter;
 
+  private static codes: { [email: string]: string } = {};
+
   constructor() {
     this.emailUser = process.env['EMAIL_USER'] || '';
     this.emailPass = process.env['EMAIL_PASS'] || '';
@@ -32,7 +34,9 @@ export class EmailService {
   }
 
   // Envía el correo electrónico
-  public async sendVerificationEmail(to: string, code: string): Promise<void> {
+  public async sendVerificationEmail(to: string): Promise<void> {
+    let code = this.generateVerificationCode(); // Generar un nuevo código
+
     const mailOptions = {
       from: this.emailUser,
       to,
@@ -43,9 +47,20 @@ export class EmailService {
     try {
       await this.transporter.sendMail(mailOptions);
       console.log(`Código enviado a ${to}`);
+      EmailService.codes[to] = code; // Guardar el código en la memoria
     } catch (error) {
       console.error("Error al enviar el correo:", error);
       throw new Error("Error al enviar el correo electrónico");
     }
+  }
+
+  // Verifica el código
+  public verifyCode(email: string, code: string): boolean {
+    const storedCode = EmailService.codes[email];
+    if (storedCode && storedCode === code) {
+      delete EmailService.codes[email]; // Eliminar el código después de la verificación
+      return true;
+    }
+    return false;
   }
 }
