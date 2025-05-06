@@ -8,4 +8,6 @@ export default interface UserControllerExpressPort {
     deleteUserById(req: Request, res: Response): Promise<void>;
     getTotalBalance(req: Request, res: Response): Promise<void>;
     getDaysSinceLastXPActivity(req: Request, res: Response): Promise<void>;
+    sendVerificationCode(req: Request, res: Response): Promise<void>;
+    verifyCode(req: Request, res: Response): Promise<void>;
 }

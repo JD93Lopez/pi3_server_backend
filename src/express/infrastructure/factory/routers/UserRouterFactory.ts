@@ -16,6 +16,9 @@ import GetTotalBalanceServiceFactory from "../../../../bioma/infrastructure/fact
 import GetTotalBalanceUseCase from "../../../../bioma/application/usecase/Users/GetTotalBalanceUseCase"
 import GetDaysSinceLastXPActivityServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/GetDaysSinceLastXPActivityServiceFactory"
 import GetDaysSinceLastXPActivityUseCase from "../../../../bioma/application/usecase/Users/GetDaysSinceLastXPActivityUseCase"
+import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
+import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
+import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
 
 
 export default class UserRouterFactory {
@@ -53,8 +56,12 @@ export default class UserRouterFactory {
         const getDaysInactivity = GetDaysSinceLastXPActivityServiceFactory.create()
         const getDaysInactivityUseCase = new GetDaysSinceLastXPActivityUseCase(getDaysInactivity)
 
+        // ---------- Send verification code ---------------
+        const emailService = new EmailService();
+        const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
+        const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
         
-        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, getDaysInactivityUseCase)
+        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, getDaysInactivityUseCase, sendVerificationCodeUseCase, verifyCodeUseCase)
 
         const userRouter = new UserRouterExpress(userController)
         
