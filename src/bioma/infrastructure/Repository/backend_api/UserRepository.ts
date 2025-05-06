@@ -71,4 +71,8 @@ export default class UserRepository implements UserRepositoryPort {
         return await this.userDBC.getRank(user_id);
     }
 
+    async getDaysSinceLastXPActivity(user_id: number): Promise<any> {
+        const result = await this.userDBC.getDaysSinceLastXPActivity(user_id);
+        return result;
+    }
 }

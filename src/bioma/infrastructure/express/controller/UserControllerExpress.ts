@@ -8,6 +8,8 @@ import GetUserStreakInterface from "../../../domain/types/endpoint/Users/GetUser
 import LoginUseCasePort from "../../../domain/ports/driver/usecase/Users/loginUseCasePort";
 import DeleteUserCascadaUseCasePort from "../../../domain/ports/driver/usecase/Users/DeleteUserCascadaUseCasePort";
 import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Users/GetTotalBalanceUseCasePort";
+import GetDaysSinceLastXPActivityUseCasePort from "../../../domain/ports/driver/usecase/Users/GetDaysSinceLastXPActivityUseCasePort";
+import DaysSinceXpActivityInterface from "../../../domain/types/endpoint/Users/DaysSinceXpActivityInterface";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -19,6 +21,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly loginUserUseCase: LoginUseCasePort,
         private readonly deleteUserCascadaUseCase: DeleteUserCascadaUseCasePort,
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
+        private readonly getDaysSinceLastXPActivityUseCase: GetDaysSinceLastXPActivityUseCasePort,
         
     ) {}
 
@@ -151,6 +154,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
           res.status(500).json({ message: 'Internal server error', error });
         }
     }
+
     async getTotalBalance(req: Request, res: Response): Promise<void> {
         try {
             const body = req.body;   
@@ -184,6 +188,36 @@ export default class UserControllerExpress implements UserControllerExpressPort 
  
     }
 
-   
+    async getDaysSinceLastXPActivity(req: Request, res: Response): Promise<void> {
+        try {
+            const body = req.body;  
+            let daysSinceXpActivityInterface = null;
+
+            if(!body) {
+                res.status(400).json({ message: 'Bad request body' });
+            }
+            try{
+                daysSinceXpActivityInterface = body as DaysSinceXpActivityInterface;
+            }catch(error){
+                res.status(400).json({ message: 'Bad request interface' });
+            }
+
+            if (!daysSinceXpActivityInterface) {
+                res.status(400).json({ message: 'Bad request interface' });
+                return;
+            }
+
+            const id = daysSinceXpActivityInterface.id_user;
+            const response = await this.getDaysSinceLastXPActivityUseCase.getDaysSinceLastXPActivity(id);
+
+            console.log("Response from getDaysSinceLastXPActivityUseCase:", response); // Debugging line
+            res.status(200).send({ message: "Days of inactivity fetched successfully", data: response });
+
+        } catch (error) {
+            console.error("Error fetchingof inactivity:", error);
+            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+        }
+        
+    }
     
 }
