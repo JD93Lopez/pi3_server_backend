@@ -1,17 +1,22 @@
+import bcrypt from "bcrypt";
 import { UserDoc } from "../../../domain/docs/UserDoc";
 import { AbstractUser } from "../../../domain/model/user/AbstractUser";
 import { UserRepositoryPort } from "../../../domain/ports/driven/UserRepositoryPort";
 import { CreateUserServicePort } from "../../../domain/ports/driver/service/Users/CreateUserServicePort";
 
-export class CreateUserService implements CreateUserServicePort{
-    constructor(private userRepository: UserRepositoryPort){}
+export class CreateUserService implements CreateUserServicePort {
+    constructor(private userRepository: UserRepositoryPort) {}
 
-    async createUser(user: AbstractUser): Promise<number>{
+    async createUser(user: AbstractUser): Promise<number> {
+        // Encriptar la contraseña antes de guardarla
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(user.getPassword(), saltRounds);
+
         const userDoc: UserDoc = {
             id_user: -1,
             user_name: user.getUserName(),
             email: user.getEmail(),
-            password: user.getPassword(),
+            password: hashedPassword, 
             name: user.getName(),
             pet_name: user.getPetName(),
             education: user.getEducation(),
@@ -25,8 +30,11 @@ export class CreateUserService implements CreateUserServicePort{
             streak: '',
             last_date_added: new Date(),
             league: ''
-        }
-        const idSavedUser = await this.userRepository.save(userDoc)
+        };
+
+        const idSavedUser = await this.userRepository.save(userDoc);
         return idSavedUser;
     }
+
+
 }
