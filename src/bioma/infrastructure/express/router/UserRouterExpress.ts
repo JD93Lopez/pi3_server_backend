@@ -37,7 +37,10 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
         this.router.post(
             "/v1.0/user/balance",
             this.userController.getTotalBalance.bind(this.userController)
+        ),
+        this.router.post(
+            "/v1.0/user/inactivity",
+            this.userController.getDaysSinceLastXPActivity.bind(this.userController)
         )
-       
     }
 }

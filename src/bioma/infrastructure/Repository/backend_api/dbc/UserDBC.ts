@@ -147,7 +147,22 @@ export default class UserDBC {
         }
         return res[key];
     }
-      
+
+    public async getDaysSinceLastXPActivity(user_id: number): Promise<number> {
+
+        await Database.getConnection()
+        const query = "SELECT GetLastHighXPDate(?) AS last_xp_date;"
+        const params = [user_id]
+        const res = await Database.executeQuery(query, params);
+    
+        console.log("Result from DB:", res[0].last_xp_date);
+
+        if (!res || res[0].last_xp_date === undefined) {
+            throw new Error("Unexpected DB result");
+        }
+        
+        return res[0].last_xp_date;
+    }
     
 }
 
