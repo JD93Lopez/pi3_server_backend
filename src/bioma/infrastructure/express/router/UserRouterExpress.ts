@@ -46,5 +46,9 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
             "/v1.0/user/selectedItem",
             this.userController.saveSelectedItem.bind(this.userController)
         )
+        this.router.get(
+            "/v1.0/user/selectedItem/:id",
+            this.userController.getSelectedItem.bind(this.userController)
+        )
     }
 }

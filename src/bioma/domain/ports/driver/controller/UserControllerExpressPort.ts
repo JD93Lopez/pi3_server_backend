@@ -9,4 +9,5 @@ export default interface UserControllerExpressPort {
     getTotalBalance(req: Request, res: Response): Promise<void>;
     getDaysSinceLastXPActivity(req: Request, res: Response): Promise<void>;
     saveSelectedItem(req: Request, res: Response): Promise<void>;
+    getSelectedItem(req: Request, res: Response): Promise<void>;
 }

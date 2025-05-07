@@ -11,6 +11,7 @@ import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Use
 import GetDaysSinceLastXPActivityUseCasePort from "../../../domain/ports/driver/usecase/Users/GetDaysSinceLastXPActivityUseCasePort";
 import DaysSinceXpActivityInterface from "../../../domain/types/endpoint/Users/DaysSinceXpActivityInterface";
 import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/SaveSelectedItemUseCasePort";
+import GetSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/GetSelectedItemUseCasePort";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -24,6 +25,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
         private readonly getDaysSinceLastXPActivityUseCase: GetDaysSinceLastXPActivityUseCasePort,
         private readonly saveSelectedItemUseCase: SaveSelectedItemUseCasePort,
+        private readonly getSelectedItemUseCase: GetSelectedItemUseCasePort,
         
     ) {}
 
@@ -266,5 +268,40 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         
  
     }
+
+    async getSelectedItem(req: Request, res: Response): Promise<void> {
+        try {
+            const body = req.body;   
+            
+        
+            let getSelectedItemInterface = null;
+            if(!body) {
+                res.status(400).json({ message: 'Bad request body' });
+            }
+            try{
+                getSelectedItemInterface = body as { id_user: number };
+            }catch(error){
+                res.status(400).json({ message: 'Bad request interface' });
+            }
+
+            if (!getSelectedItemInterface) {
+                res.status(400).json({ message: 'Bad request interface' });
+                return;
+            }
+
+            const user_id = getSelectedItemInterface.id_user;        
+                    
+            const response = await this.getSelectedItemUseCase.getSelectedItem(user_id);
+
+            res.status(200).send({ message: "User selected item fetched successfully", data: response });
+
+        } catch (error) {
+            console.error("Error fetching selected item:", error);
+            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+        }
+        
+    }
+       
+        
     
 }
