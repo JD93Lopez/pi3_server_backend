@@ -35,16 +35,21 @@ export default class PlayedDayDBC {
     }
 
     public async getPlayedDayByUserId(USERS_id_user: number): Promise<PlayedDayDoc[]> {
-        await Database.getConnection();
-        const query = "CALL GetLast31Days(?)";  
-        const values = [USERS_id_user];
-        const result = await Database.executeQuery(query, values);
-    
-        if (!result || result.length === 0 || !result[0]) {
+        try {
+            await Database.getConnection();
+            const query = "CALL GetLast31Days(?)";  
+            const values = [USERS_id_user];
+            const result = await Database.executeQuery(query, values);
+        
+            if (!result || result.length === 0 || !result[0]) {
             throw new Error("No data found for the user");
+            }
+        
+            return result[0];
+        } catch (error) {
+            console.error("Error fetching played days:", error);
+            return [];
         }
-    
-        return result[0];
     }
     
     public async getPlayedDaysByUserIdAndDate(USERS_id_user: number, year: number, month: number): Promise<PlayedDayDoc[]> {

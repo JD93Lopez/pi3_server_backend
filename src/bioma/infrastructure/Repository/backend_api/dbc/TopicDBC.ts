@@ -19,10 +19,15 @@ export default class TopicDBC {
     }
 
     public async getTopicsByBiome(biome_id: number): Promise<any> {
-        await Database.getConnection()
-        const query = `call GetTopicsByBiome(${biome_id})`
-        let res = await Database.executeQuery(query)
-        return res[0]
+        try {
+            await Database.getConnection()
+            const query = `call GetTopicsByBiome(${biome_id})`
+            let res = await Database.executeQuery(query)
+            return res[0]
+        } catch (error) {
+            console.error("Error in getTopicsByBiome:", error)
+            return []
+        }
     }
 
     public async deleteTopicById(topic_id: number): Promise<any> {
