@@ -69,7 +69,5 @@ export default class ItemControllerExpress implements ItemControllerExpressPort{
             res.status(500).json({ message: "Internal server error en el dbc de user", error });
         }
     }
-    
-    
 
 }
