@@ -12,6 +12,8 @@ import GetDaysSinceLastXPActivityUseCasePort from "../../../domain/ports/driver/
 import DaysSinceXpActivityInterface from "../../../domain/types/endpoint/Users/DaysSinceXpActivityInterface";
 import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/SaveSelectedItemUseCasePort";
 import GetSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/GetSelectedItemUseCasePort";
+import SendVerificationCodeUserCasePort from "../../../domain/ports/driver/usecase/Users/SendVerificationCodeUserCasePort";
+import VerifyCodeUseCasePort from "../../../domain/ports/driver/usecase/Users/VerifyCodeUseCasePort";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -26,7 +28,8 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly getDaysSinceLastXPActivityUseCase: GetDaysSinceLastXPActivityUseCasePort,
         private readonly saveSelectedItemUseCase: SaveSelectedItemUseCasePort,
         private readonly getSelectedItemUseCase: GetSelectedItemUseCasePort,
-        
+        private readonly sendVerificationCodeUseCase: SendVerificationCodeUserCasePort,
+        private readonly verifyCodeUseCase: VerifyCodeUseCasePort
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -304,4 +307,53 @@ export default class UserControllerExpress implements UserControllerExpressPort 
        
         
     
+
+    async sendVerificationCode(req: Request, res: Response): Promise<void> {
+        try {
+            const { email } = req.body;
+            
+            console.log("Email from request body:", email); // Debugging line
+            if (!email) {
+                res.status(400).json({ message: 'Bad request body' });
+                return;
+            }
+
+            const response = await this.sendVerificationCodeUseCase.execute(email);
+            if (!response) {
+                res.status(500).json({success:false, message: 'Error sending verification code' });
+                return;
+            }
+
+            res.status(200).json({ success:true, message: 'Verification code sent successfully' });
+            
+        } catch (error) {
+            console.error("Error sending verification code:", error);
+            res.status(500).send({ message: "Internal server error", error: error });
+        }
+    }
+
+    async verifyCode(req: Request, res: Response): Promise<void> {
+        try {
+            const { email, code } = req.body;
+
+            if (!email || !code) {
+                res.status(400).json({ message: 'Bad request body' });
+                return;
+            }
+
+            const response = await this.verifyCodeUseCase.verifyCode(email, code);
+            
+            if (!response) {
+                res.status(401).json({success:false, message: 'Unauthorized' });
+                return;
+            }
+            res.status(200).json({ success:true, message: 'Verification code verified successfully' });
+            
+        } catch (error) {
+            console.error("Error verifying code:", error);
+            res.status(500).send({ message: "Internal server error", error: error });
+        }
+    }
+
+
 }

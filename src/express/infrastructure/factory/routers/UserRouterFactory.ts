@@ -20,6 +20,10 @@ import SaveSelectedItemServiceFactory from "../../../../bioma/infrastructure/fac
 import SaveSelectedItemUseCase from "../../../../bioma/application/usecase/Users/SaveSelectedItemUseCase"
 import GetSelectedItemServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/GetSelectedItemServiceFactory"
 import GetSelectedItemUseCase from "../../../../bioma/application/usecase/Users/GetSelectedItemUseCase"
+import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
+import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
+import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
+
 
 
 export default class UserRouterFactory {
@@ -60,10 +64,22 @@ export default class UserRouterFactory {
         const saveSelectedItemService = SaveSelectedItemServiceFactory.create()
         const saveSelectedItemUseCase = new SaveSelectedItemUseCase(saveSelectedItemService)
 
+
         const getSelectedItemService = GetSelectedItemServiceFactory.create()
         const getSelectedItemUseCase = new GetSelectedItemUseCase(getSelectedItemService)
 
-        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, getDaysInactivityUseCase, saveSelectedItemUseCase,getSelectedItemUseCase)
+        // ---------- Send verification code ---------------
+        const emailService = new EmailService();
+        const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
+        const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
+        
+        const userController = new UserControllerExpress(
+          userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
+          userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
+          getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
+          sendVerificationCodeUseCase, verifyCodeUseCase
+        )
+
 
         const userRouter = new UserRouterExpress(userController)
         

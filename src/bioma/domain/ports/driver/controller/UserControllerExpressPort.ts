@@ -10,4 +10,9 @@ export default interface UserControllerExpressPort {
     getDaysSinceLastXPActivity(req: Request, res: Response): Promise<void>;
     saveSelectedItem(req: Request, res: Response): Promise<void>;
     getSelectedItem(req: Request, res: Response): Promise<void>;
+    sendVerificationCode(req: Request, res: Response): Promise<void>;
+    verifyCode(req: Request, res: Response): Promise<void>;
 }
+    
+
+

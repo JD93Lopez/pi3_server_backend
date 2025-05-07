@@ -5,4 +5,5 @@ export default interface PlayedDayRepositoryPort {
     update(playedDay: PlayedDayDoc): Promise<number>;
     getLast31Days(USERS_id_user: number): Promise<PlayedDayDoc[]>;
     getPlayedDaysByDate(USERS_id_user: number, year: number, month:number): Promise<PlayedDayDoc[]>;
+    getUserPlayStats(USERS_id_user: number): Promise<any>;
 }
