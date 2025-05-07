@@ -12,7 +12,8 @@ export default class GetLast31DaysService implements GetLast31DaysServicePort {
             const results = await this.playedDayRepository.getLast31Days(id_user);
             return results.map((result)=>{return PlayedDayHelper.databaseToDomain(result)});
         } catch (error) {
-            throw new Error(`Failed to get last 31 days: ${error}`);
+            console.log(new Error(`Failed to get last 31 days: ${error}`));
+            return [];
         }
     }
     
