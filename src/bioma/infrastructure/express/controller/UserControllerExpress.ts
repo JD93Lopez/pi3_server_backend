@@ -10,6 +10,7 @@ import DeleteUserCascadaUseCasePort from "../../../domain/ports/driver/usecase/U
 import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Users/GetTotalBalanceUseCasePort";
 import GetDaysSinceLastXPActivityUseCasePort from "../../../domain/ports/driver/usecase/Users/GetDaysSinceLastXPActivityUseCasePort";
 import DaysSinceXpActivityInterface from "../../../domain/types/endpoint/Users/DaysSinceXpActivityInterface";
+import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/SaveSelectedItemUseCasePort";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -22,6 +23,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly deleteUserCascadaUseCase: DeleteUserCascadaUseCasePort,
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
         private readonly getDaysSinceLastXPActivityUseCase: GetDaysSinceLastXPActivityUseCasePort,
+        private readonly saveSelectedItemUseCase: SaveSelectedItemUseCasePort,
         
     ) {}
 
@@ -218,6 +220,51 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
         }
         
+    }
+
+    async saveSelectedItem(req: Request, res: Response): Promise<void> {
+        try {
+            const body = req.body;   
+            
+        
+            let saveSelectedItemInterface = null;
+            if(!body) {
+                res.status(400).json({ message: 'Bad request body' });
+            }
+            try{
+                saveSelectedItemInterface = body as { id_user: number, id_item: number };
+            }catch(error){
+                res.status(400).json({ message: 'Bad request interface' });
+            }
+
+            if (!saveSelectedItemInterface) {
+                res.status(400).json({ message: 'Bad request interface' });
+                return;
+            }
+
+            const user_id = saveSelectedItemInterface.id_user;
+            const id_item = saveSelectedItemInterface.id_item;
+            
+            if (typeof user_id !== 'number' || user_id <= 0) {
+                res.status(400).json({ message: 'Invalid user_id. It must be a positive number.' });
+            }
+
+            if (typeof id_item !== 'number' || id_item <= 0) {
+                res.status(400).json({ message: 'Invalid id_item. It must be a positive number.' });
+            }
+                    
+            const response = await this.saveSelectedItemUseCase.saveSelectedItem(user_id, id_item);
+
+            res.status(200).send({ message: "User selected item saved successfully", data: response });
+
+        } catch (error) {
+            console.log("Error saving selected item:", error);
+            
+
+            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+        }
+        
+ 
     }
     
 }

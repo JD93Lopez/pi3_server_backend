@@ -3,5 +3,6 @@ export interface ItemDoc {
     image: string;
     cost: number;
     owned: number;
+    selected?: number;
 }
 

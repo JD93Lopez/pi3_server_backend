@@ -154,14 +154,39 @@ export default class UserDBC {
         const query = "SELECT GetLastHighXPDate(?) AS last_xp_date;"
         const params = [user_id]
         const res = await Database.executeQuery(query, params);
-    
-        console.log("Result from DB:", res[0].last_xp_date);
 
         if (!res || res[0].last_xp_date === undefined) {
             throw new Error("Unexpected DB result");
         }
         
         return res[0].last_xp_date;
+    }
+
+    public async saveSelectedItem(user_id: number, id_item: number): Promise<void> {
+        await Database.getConnection()
+        const query = "SELECT SaveItemFunction(?, ?);"
+        const params = [user_id, id_item]
+        let res = await Database.executeQuery(query, params)
+        
+        res = res[0]
+        const key = Object.keys(res)[0];
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+        return res[key];
+    }
+
+    public async getSelectedItem(user_id: number): Promise<any> {
+        await Database.getConnection()
+        const query = "CALL GetSelectedItemByUser(?)"
+        const params = [user_id]
+        let res = await Database.executeQuery(query, params)
+        res = res[0]
+        const key = Object.keys(res)[0];
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+        return res[key];
     }
     
 }

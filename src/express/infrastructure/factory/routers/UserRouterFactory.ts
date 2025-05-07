@@ -16,6 +16,8 @@ import GetTotalBalanceServiceFactory from "../../../../bioma/infrastructure/fact
 import GetTotalBalanceUseCase from "../../../../bioma/application/usecase/Users/GetTotalBalanceUseCase"
 import GetDaysSinceLastXPActivityServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/GetDaysSinceLastXPActivityServiceFactory"
 import GetDaysSinceLastXPActivityUseCase from "../../../../bioma/application/usecase/Users/GetDaysSinceLastXPActivityUseCase"
+import SaveSelectedItemServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/SaveSelectedItemServiceFactory"
+import SaveSelectedItemUseCase from "../../../../bioma/application/usecase/Users/SaveSelectedItemUseCase"
 
 
 export default class UserRouterFactory {
@@ -53,8 +55,10 @@ export default class UserRouterFactory {
         const getDaysInactivity = GetDaysSinceLastXPActivityServiceFactory.create()
         const getDaysInactivityUseCase = new GetDaysSinceLastXPActivityUseCase(getDaysInactivity)
 
-        
-        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, getDaysInactivityUseCase)
+        const saveSelectedItemService = SaveSelectedItemServiceFactory.create()
+        const saveSelectedItemUseCase = new SaveSelectedItemUseCase(saveSelectedItemService)
+
+        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, getDaysInactivityUseCase, saveSelectedItemUseCase)
 
         const userRouter = new UserRouterExpress(userController)
         
