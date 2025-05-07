@@ -11,6 +11,7 @@ import GetTotalBalanceUseCasePort from "../../../domain/ports/driver/usecase/Use
 import GetDaysSinceLastXPActivityUseCasePort from "../../../domain/ports/driver/usecase/Users/GetDaysSinceLastXPActivityUseCasePort";
 import DaysSinceXpActivityInterface from "../../../domain/types/endpoint/Users/DaysSinceXpActivityInterface";
 import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/SaveSelectedItemUseCasePort";
+import GetSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/GetSelectedItemUseCasePort";
 import SendVerificationCodeUserCasePort from "../../../domain/ports/driver/usecase/Users/SendVerificationCodeUserCasePort";
 import VerifyCodeUseCasePort from "../../../domain/ports/driver/usecase/Users/VerifyCodeUseCasePort";
 
@@ -26,9 +27,9 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
         private readonly getDaysSinceLastXPActivityUseCase: GetDaysSinceLastXPActivityUseCasePort,
         private readonly saveSelectedItemUseCase: SaveSelectedItemUseCasePort,
+        private readonly getSelectedItemUseCase: GetSelectedItemUseCasePort,
         private readonly sendVerificationCodeUseCase: SendVerificationCodeUserCasePort,
         private readonly verifyCodeUseCase: VerifyCodeUseCasePort
-        
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -270,8 +271,37 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         
  
     }
-    
 
+    async getSelectedItem(req: Request, res: Response): Promise<void> {
+        try {
+            // Verificar que 'req.params.id' esté definido
+            const userIdParam = req.params["id"] ?? "0";
+    
+            if (!userIdParam) {
+                res.status(400).json({ message: 'user_id is required.' });
+            }
+    
+            // Convertir a número
+            const user_id = parseInt(userIdParam, 10);
+    
+            // Validar si el 'user_id' es un número válido
+            if (isNaN(user_id) || user_id <= 0) {
+                res.status(400).json({ message: 'Invalid user_id. It must be a positive number.' });
+            }
+    
+            // Llamar al caso de uso para obtener el ítem seleccionado
+            const response = await this.getSelectedItemUseCase.getSelectedItem(user_id);
+    
+            // Enviar la respuesta exitosa
+            res.status(200).json({ message: "User's selected item fetched successfully", data: response });
+    
+        } catch (error: any) {
+            console.error("Error fetching selected item:", error);
+            res.status(500).json({ message: "Internal server error en el dbc de user", error: error.message || error });
+        }
+    }
+    
+    
     async sendVerificationCode(req: Request, res: Response): Promise<void> {
         try {
             const { email } = req.body;
