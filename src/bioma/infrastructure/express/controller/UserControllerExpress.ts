@@ -301,7 +301,6 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
     
-    
     async sendVerificationCode(req: Request, res: Response): Promise<void> {
         try {
             const { email } = req.body;
@@ -348,6 +347,5 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             res.status(500).send({ message: "Internal server error", error: error });
         }
     }
-
 
 }

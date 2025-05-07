@@ -18,7 +18,7 @@ export default class ItemRouterExpress extends RouterExpress implements ItemRout
             "/v1.0/item/buy",
             this.itemController.buyItem.bind(this.itemController)
         ),
-        this.router.post(
+        this.router.get(
             "/v1.0/item/store/:user_id",
             this.itemController.getStoreItems.bind(this.itemController)
         )
