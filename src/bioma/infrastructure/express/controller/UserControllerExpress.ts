@@ -274,40 +274,34 @@ export default class UserControllerExpress implements UserControllerExpressPort 
 
     async getSelectedItem(req: Request, res: Response): Promise<void> {
         try {
-            const body = req.body;   
-            
-        
-            let getSelectedItemInterface = null;
-            if(!body) {
-                res.status(400).json({ message: 'Bad request body' });
-            }
-            try{
-                getSelectedItemInterface = body as { id_user: number };
-            }catch(error){
-                res.status(400).json({ message: 'Bad request interface' });
-            }
-
-            if (!getSelectedItemInterface) {
-                res.status(400).json({ message: 'Bad request interface' });
-                return;
-            }
-
-            const user_id = getSelectedItemInterface.id_user;        
-                    
-            const response = await this.getSelectedItemUseCase.getSelectedItem(user_id);
-
-            res.status(200).send({ message: "User selected item fetched successfully", data: response });
-
-        } catch (error) {
-            console.error("Error fetching selected item:", error);
-            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
-        }
-        
-    }
-       
-        
+            // Verificar que 'req.params.id' esté definido
+            const userIdParam = req.params["id"] ?? "0";
     
-
+            if (!userIdParam) {
+                res.status(400).json({ message: 'user_id is required.' });
+            }
+    
+            // Convertir a número
+            const user_id = parseInt(userIdParam, 10);
+    
+            // Validar si el 'user_id' es un número válido
+            if (isNaN(user_id) || user_id <= 0) {
+                res.status(400).json({ message: 'Invalid user_id. It must be a positive number.' });
+            }
+    
+            // Llamar al caso de uso para obtener el ítem seleccionado
+            const response = await this.getSelectedItemUseCase.getSelectedItem(user_id);
+    
+            // Enviar la respuesta exitosa
+            res.status(200).json({ message: "User's selected item fetched successfully", data: response });
+    
+        } catch (error: any) {
+            console.error("Error fetching selected item:", error);
+            res.status(500).json({ message: "Internal server error en el dbc de user", error: error.message || error });
+        }
+    }
+    
+    
     async sendVerificationCode(req: Request, res: Response): Promise<void> {
         try {
             const { email } = req.body;
