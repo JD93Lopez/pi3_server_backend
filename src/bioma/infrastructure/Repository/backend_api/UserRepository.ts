@@ -75,4 +75,14 @@ export default class UserRepository implements UserRepositoryPort {
         const result = await this.userDBC.getDaysSinceLastXPActivity(user_id);
         return result;
     }
+
+    async saveSelectedItem(user_id: number, id_item: number): Promise<void> {
+        await this.userDBC.saveSelectedItem(user_id, id_item);
+    }
+
+
+    async getSelectedItem(user_id: number): Promise<string> {
+        const result = await this.userDBC.getSelectedItem(user_id);
+        return result;
+    }
 }

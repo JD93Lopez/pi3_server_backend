@@ -4,13 +4,14 @@ export default abstract class AbstractItem {
     protected image: string;
     protected cost: number;
     protected owned: boolean;
-
+    protected selected?: number;
 
     constructor(attributes: ItemAtributes) {
         this.id_item = attributes.id_item;
         this.image = attributes.image;
         this.cost = attributes.cost;
         this.owned = attributes.owned;
+        this.selected = attributes.selected ?? 0;
     }
 
     getIdItem(): number {
@@ -24,6 +25,13 @@ export default abstract class AbstractItem {
     getCost(): number {
         return this.cost;
     }
+
+    getSelected(): number | undefined {
+        return this.selected;
+    }
+    setSelected(selected: number): void {   
+        this.selected = selected;
+    }
     
     abstract isNull(): boolean;
 }
@@ -33,4 +41,5 @@ export interface ItemAtributes {
     image: string;
     cost: number;
     owned: boolean;
+    selected?: number;
 }

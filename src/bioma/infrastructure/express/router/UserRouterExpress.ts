@@ -50,5 +50,9 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
             "/v1.0/user/verify/code",
             this.userController.verifyCode.bind(this.userController)
         )
+        this.router.post(
+            "/v1.0/user/selectedItem",
+            this.userController.saveSelectedItem.bind(this.userController)
+        )
     }
 }
