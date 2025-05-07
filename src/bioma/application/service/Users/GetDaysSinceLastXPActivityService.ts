@@ -9,8 +9,6 @@ export default class GetDaysSinceLastXPActivityService implements GetDaysSinceLa
        
         const lastDate = await this.userRepositoryPort.getDaysSinceLastXPActivity(userId);
 
-        console.log("Last date from DB:", lastDate); // Debugging line
-
         if (!lastDate) {
             return 0; // If no date is found, return 0
         }

@@ -18,6 +18,9 @@ import GetDaysSinceLastXPActivityServiceFactory from "../../../../bioma/infrastr
 import GetDaysSinceLastXPActivityUseCase from "../../../../bioma/application/usecase/Users/GetDaysSinceLastXPActivityUseCase"
 import SaveSelectedItemServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/SaveSelectedItemServiceFactory"
 import SaveSelectedItemUseCase from "../../../../bioma/application/usecase/Users/SaveSelectedItemUseCase"
+import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
+import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
+import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
 
 
 export default class UserRouterFactory {
@@ -58,7 +61,18 @@ export default class UserRouterFactory {
         const saveSelectedItemService = SaveSelectedItemServiceFactory.create()
         const saveSelectedItemUseCase = new SaveSelectedItemUseCase(saveSelectedItemService)
 
-        const userController = new UserControllerExpress(userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, getDaysInactivityUseCase, saveSelectedItemUseCase)
+        // ---------- Send verification code ---------------
+        const emailService = new EmailService();
+        const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
+        const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
+        
+        const userController = new UserControllerExpress(
+          userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
+          userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
+          getDaysInactivityUseCase, saveSelectedItemUseCase, sendVerificationCodeUseCase, 
+          verifyCodeUseCase
+        )
+
 
         const userRouter = new UserRouterExpress(userController)
         

@@ -10,6 +10,7 @@ export class EmailService {
 
   private static codes: { [email: string]: string } = {};
 
+  // Aqui define el correo desde el cual se enviaran los correos 
   constructor() {
     this.emailUser = process.env['EMAIL_USER'] || '';
     this.emailPass = process.env['EMAIL_PASS'] || '';
@@ -33,7 +34,7 @@ export class EmailService {
     return Math.floor(100000 + Math.random() * 900000).toString();
   }
 
-  // Envía el correo electrónico
+  // Envía el correo electrónico al destinatario
   public async sendVerificationEmail(to: string): Promise<void> {
     let code = this.generateVerificationCode(); // Generar un nuevo código
 
@@ -57,6 +58,8 @@ export class EmailService {
   // Verifica el código
   public verifyCode(email: string, code: string): boolean {
     const storedCode = EmailService.codes[email];
+
+  console.log(`Código almacenado: ${storedCode}, Código proporcionado: ${code}`);
     if (storedCode && storedCode === code) {
       delete EmailService.codes[email]; // Eliminar el código después de la verificación
       return true;

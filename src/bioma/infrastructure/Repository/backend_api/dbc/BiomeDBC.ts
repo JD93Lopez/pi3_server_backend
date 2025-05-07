@@ -24,7 +24,7 @@ export default class BiomeDBC {
             const values = [userId]
             let res = await Database.executeQuery(query, values)
             res = res[0]
-            return res;
+            return res || [];
         } catch (error) {
             console.log("Error in getBiomesByUserId:", error);
             return []

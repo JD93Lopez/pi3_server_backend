@@ -30,5 +30,9 @@ export default class PlayedDayRepository implements PlayedDayRepositoryPort{
         const response = await this.playedDayDBC.getPlayedDaysByUserIdAndDate(USERS_id_user, year,month)
         return response
     }
+    getUserPlayStats = async (USERS_id_user: number): Promise<any> => {
+        const response = await this.playedDayDBC.getUserPlayStats(USERS_id_user)
+        return response
+    }
 
 }

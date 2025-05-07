@@ -5,13 +5,15 @@ import CreatePlayedDayInterface from "../../../domain/types/endpoint/PlayedDays/
 import { GetLast31DaysUseCasePort } from "../../../domain/ports/driver/usecase/PlayedDays/GetLast31DaysUseCasePort";
 import GetPlayedDaysByDateUseCasePort from "../../../domain/ports/driver/usecase/PlayedDays/GetPlayedDaysByDateUseCasePort";
 import GetPlayedDaysByDateInterface from "../../../domain/types/endpoint/PlayedDays/GetPlayedDaysByDateInterface";
+import { GetUserPlayStatsUseCasePort } from "../../../domain/ports/driver/usecase/PlayedDays/GetUserPlayStatsUseCasePort";
 
 export default class PlayedDayControllerExpress implements PlayedDayControllerExpressPort{
         
     constructor(
         private createPlayedDayUseCase: CreatePlayedDayUseCasePort, 
         private getLast31DaysUseCase : GetLast31DaysUseCasePort,
-        private getPlayedDaysByDateUseCase: GetPlayedDaysByDateUseCasePort
+        private getPlayedDaysByDateUseCase: GetPlayedDaysByDateUseCasePort,
+        private getUserPlayStatsUseCase: GetUserPlayStatsUseCasePort
     ){}
     
     public async createPlayedDay(req: Request, res: Response): Promise<void> {
@@ -112,6 +114,22 @@ export default class PlayedDayControllerExpress implements PlayedDayControllerEx
 
         } catch (error) {
             console.error('Error getting played days by date:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+    public async getUserPlayStats(req: Request, res: Response): Promise<void> {
+        try {
+            const id_user = req.body.id_user;
+            if (!id_user) {
+                res.status(400).json({ message: 'Bad request: missing id_user field' });
+                return;
+            }
+    
+            const playStats = await this.getUserPlayStatsUseCase.getUserPlayStats(Number(id_user));
+    
+            res.status(200).json({ message: 'Success', data: playStats });
+        } catch (error: any) {
+            console.error('Error getting user play stats:', error);
             res.status(500).json({ message: 'Internal server error' });
         }
     }
