@@ -304,7 +304,6 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
     
-    
     async sendVerificationCode(req: Request, res: Response): Promise<void> {
         try {
             const { email } = req.body;
@@ -387,5 +386,4 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
         
-
 }
