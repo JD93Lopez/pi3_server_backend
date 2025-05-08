@@ -13,4 +13,5 @@ export interface UserRepositoryPort {
     getRank(user_id: number): Promise<string>
     saveSelectedItem(user_id: number, id_item: number): Promise<void>
     getSelectedItem(user_id: number): Promise<any>
+    updatePetName(user_id: number, pet_name: string): Promise<void>
 }
