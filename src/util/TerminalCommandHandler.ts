@@ -3,6 +3,7 @@ import { TournamentManagerService } from '../torneo/application/service/Tourname
 import { TournamentManager } from '../torneo/domain/model/TournamentManager';
 import { createTournamentTestUser } from '../../test/torneo/application/service/CreateTestUser';
 import { RankName } from '../torneo/domain/model/RankName';
+import Database from '../bioma/infrastructure/Repository/Database';
 
 class TerminalCommandHandler {
     private rl: readline.Interface;
@@ -39,6 +40,9 @@ class TerminalCommandHandler {
             case 'detener':
                 console.log('Deteniendo el servidor...');
                 process.exit(0); // Detenemos el servidor
+                break;
+            case 'conectar db':
+                Database.connect();
                 break;
             default:
                 this.handleTorneoCommand( command );

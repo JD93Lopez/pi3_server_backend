@@ -7,31 +7,35 @@ export default class Database {
 
     public static async getConnection(): Promise<Connection> {
         if (!Database.connection) {
-            const host = process.env['HOST_DATABASE'];
-            const port = process.env['PORT_DATABASE'];
-            const user = process.env['USER_DATABASE'];
-            const password = process.env['PASSWORD_DATABASE'];
-            const database = process.env['DATABASE'];
-
-            if (!host || !port || !user || !password || !database) {
-                console.error('Faltan datos de conexión a la base de datos');
-                return Promise.reject('Faltan datos de conexión a la base de datos');
-            }
-            
-            Database.connection = await mysql.createConnection({
-                host: host,  
-                port: Number(port),  
-                user: user,  
-                password: password,  
-                database: database,  
-                ssl: {
-                    ca: './ca.pem',
-                    rejectUnauthorized: false // Desactivar la validación del certificado
-                }
-            });
-            console.log('Conexión a la base de datos establecida');
+            await Database.connect();
         }
         return Database.connection;
+    }
+
+    public static async connect(): Promise<void> {
+        const host = process.env['HOST_DATABASE'];
+        const port = process.env['PORT_DATABASE'];
+        const user = process.env['USER_DATABASE'];
+        const password = process.env['PASSWORD_DATABASE'];
+        const database = process.env['DATABASE'];
+
+        if (!host || !port || !user || !password || !database) {
+            console.error('Faltan datos de conexión a la base de datos');
+            return Promise.reject('Faltan datos de conexión a la base de datos');
+        }
+        
+        Database.connection = await mysql.createConnection({
+            host: host,  
+            port: Number(port),  
+            user: user,  
+            password: password,  
+            database: database,  
+            ssl: {
+                ca: './ca.pem',
+                rejectUnauthorized: false // Desactivar la validación del certificado
+            }
+        });
+        console.log('Conexión a la base de datos establecida');
     }
 
     public static async executeQuery(query: string, params: any[] = []): Promise<any> {
