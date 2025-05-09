@@ -62,5 +62,9 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
             "/v1.0/user/profile",
             this.userController.updateUserProfile.bind(this.userController)
         )
+        this.router.put(
+            "/v1.0/user/update/petName",
+            this.userController.updatePetName.bind(this.userController)
+        )
     }
 }
