@@ -23,6 +23,8 @@ import GetSelectedItemUseCase from "../../../../bioma/application/usecase/Users/
 import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
 import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
 import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
+import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
+import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
 
 
 
@@ -72,12 +74,16 @@ export default class UserRouterFactory {
         const emailService = new EmailService();
         const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
         const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
+
+
+        const updatePetNameService = UpdatePetNameServiceFactory.create()
+        const updatePetNameUseCase = new UpdatePetNameUseCase(updatePetNameService)
         
         const userController = new UserControllerExpress(
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
           userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
-          sendVerificationCodeUseCase, verifyCodeUseCase
+          sendVerificationCodeUseCase, verifyCodeUseCase,updatePetNameUseCase
         )
 
 

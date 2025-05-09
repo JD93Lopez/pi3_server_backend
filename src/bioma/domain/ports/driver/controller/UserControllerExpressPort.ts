@@ -12,6 +12,7 @@ export default interface UserControllerExpressPort {
     getSelectedItem(req: Request, res: Response): Promise<void>;
     sendVerificationCode(req: Request, res: Response): Promise<void>;
     verifyCode(req: Request, res: Response): Promise<void>;
+    updatePetName(req: Request, res: Response): Promise<void>;
 }
     
 

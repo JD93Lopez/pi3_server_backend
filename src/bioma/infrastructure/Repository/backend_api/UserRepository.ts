@@ -85,4 +85,8 @@ export default class UserRepository implements UserRepositoryPort {
         const result = await this.userDBC.getSelectedItem(user_id);
         return result;
     }
+
+    async updatePetName(user_id: number, pet_name: string): Promise<void> {
+        await this.userDBC.updatePetName(user_id, pet_name);
+    }
 }

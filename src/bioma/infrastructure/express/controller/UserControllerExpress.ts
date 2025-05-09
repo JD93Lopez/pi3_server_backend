@@ -14,6 +14,8 @@ import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Us
 import GetSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/GetSelectedItemUseCasePort";
 import SendVerificationCodeUserCasePort from "../../../domain/ports/driver/usecase/Users/SendVerificationCodeUserCasePort";
 import VerifyCodeUseCasePort from "../../../domain/ports/driver/usecase/Users/VerifyCodeUseCasePort";
+import UpdatePetNameUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdatePetNameUseCasePort";
+import UpdatePetNameInterface from "../../../domain/types/endpoint/Users/UpdatePetNameInterface";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -29,7 +31,8 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly saveSelectedItemUseCase: SaveSelectedItemUseCasePort,
         private readonly getSelectedItemUseCase: GetSelectedItemUseCasePort,
         private readonly sendVerificationCodeUseCase: SendVerificationCodeUserCasePort,
-        private readonly verifyCodeUseCase: VerifyCodeUseCasePort
+        private readonly verifyCodeUseCase: VerifyCodeUseCasePort,
+        private readonly updatePetNameUseCase: UpdatePetNameUseCasePort
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -348,4 +351,39 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
 
+    async updatePetName(req: Request, res: Response): Promise<void> {
+        try {
+            // Verificar que 'req.body' esté definido y castearlo a la interfaz UpdatePetNameInterface
+            const body: UpdatePetNameInterface = req.body;
+    
+            // Validar que el body cumpla con la estructura de la interfaz
+            if (!body || typeof body.id_user !== 'number' || typeof body.pet_name !== 'string') {
+                res.status(400).json({ message: 'Bad request body, expected structure: { user_id: number, pet_name: string }' });
+                return;
+            }
+    
+            // Extraer las propiedades del body
+            const { id_user: user_id, pet_name } = body;
+    
+            // Debugging line
+            console.log("Request body for updatePetName:", req.body);
+    
+            // Validación adicional: Asegurarse de que los campos no sean vacíos
+            if (!user_id || !pet_name) {
+                res.status(400).json({ message: 'Bad request body, missing required fields' });
+                return;
+            }
+    
+            // Llamar al caso de uso para actualizar el nombre de la mascota
+            const response = await this.updatePetNameUseCase.updatePetName(user_id, pet_name);
+    
+            // Respuesta exitosa
+            res.status(200).json({ success: true, message: 'Pet name updated successfully', data: response });
+        } catch (error: any) {
+            console.error('Error updating pet name:', error);
+            // En caso de error, devolver un error 500
+            res.status(500).json({ message: 'Internal server error', error: error.message });
+        }
+    }
+        
 }
