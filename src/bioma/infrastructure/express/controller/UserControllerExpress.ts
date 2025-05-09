@@ -14,6 +14,8 @@ import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Us
 import GetSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Users/GetSelectedItemUseCasePort";
 import SendVerificationCodeUserCasePort from "../../../domain/ports/driver/usecase/Users/SendVerificationCodeUserCasePort";
 import VerifyCodeUseCasePort from "../../../domain/ports/driver/usecase/Users/VerifyCodeUseCasePort";
+import UpdateUserProfileUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdateUserProfileUseCasePort";
+import UpdateUserPerfilInterface from "../../../domain/types/endpoint/Users/UpdatePerfilInterface";
 import UpdatePetNameUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdatePetNameUseCasePort";
 import UpdatePetNameInterface from "../../../domain/types/endpoint/Users/UpdatePetNameInterface";
 
@@ -32,6 +34,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly getSelectedItemUseCase: GetSelectedItemUseCasePort,
         private readonly sendVerificationCodeUseCase: SendVerificationCodeUserCasePort,
         private readonly verifyCodeUseCase: VerifyCodeUseCasePort,
+        private readonly updateUserProfileUseCase: UpdateUserProfileUseCasePort,
         private readonly updatePetNameUseCase: UpdatePetNameUseCasePort
     ) {}
 
@@ -119,6 +122,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
     }
 
     async loginUser(req: Request, res: Response): Promise<void> {
+        
         try {
             const { username, password } = req.body;
 
@@ -220,7 +224,6 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             const id = daysSinceXpActivityInterface.id_user;
             const response = await this.getDaysSinceLastXPActivityUseCase.getDaysSinceLastXPActivity(id);
 
-            console.log("Response from getDaysSinceLastXPActivityUseCase:", response); // Debugging line
             res.status(200).send({ message: "Days of inactivity fetched successfully", data: response });
 
         } catch (error) {
@@ -351,6 +354,50 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
 
+    async updateUserProfile(req: Request, res: Response): Promise<void> {
+        
+        try {
+            let updateUserInterface: CreateUserInterface | null = null;
+            const body = req.body;
+            
+        if (!body) {
+            res.status(400).json({ message: 'Bad request body' });
+            return;
+        }
+
+        try {
+            updateUserInterface = body as UpdateUserPerfilInterface;
+        } catch (error) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        if (!updateUserInterface) {
+            res.status(400).json({ message: 'Bad request interface' });
+            return;
+        }
+
+        const user = updateUserInterface.user;
+        if (!user) {
+            res.status(400).json({ message: 'Bad request user' });
+            return;
+        }
+
+        const updatedUser = await this.updateUserProfileUseCase.updateUserProfile(user);
+
+        if(!updatedUser) {
+            res.status(404).json({ message:'User not updated'});
+            return;
+        }
+
+        res.status(200).json({ message: 'Success', data: updatedUser });
+        
+        } catch (error) {
+            console.error("Error updating user:", error);
+            res.status(500).send({ message: "Internal server error", error: error });
+        }
+    }
+
     async updatePetName(req: Request, res: Response): Promise<void> {
         try {
             // Verificar que 'req.body' esté definido y castearlo a la interfaz UpdatePetNameInterface
@@ -385,5 +432,4 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             res.status(500).json({ message: 'Internal server error', error: error.message });
         }
     }
-        
 }

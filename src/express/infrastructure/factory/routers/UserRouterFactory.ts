@@ -23,6 +23,8 @@ import GetSelectedItemUseCase from "../../../../bioma/application/usecase/Users/
 import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
 import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
 import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
+import UpdateUserProfileServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdateUserProfileServiceFactory"
+import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/UpdateProfileUseCase"
 import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
 import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
 
@@ -75,6 +77,8 @@ export default class UserRouterFactory {
         const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
         const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
 
+        const updateUserProfileService = UpdateUserProfileServiceFactory.create()
+        const userUpdateProfileUseCase  = new UpdateProfileUseCase(updateUserProfileService);
 
         const updatePetNameService = UpdatePetNameServiceFactory.create()
         const updatePetNameUseCase = new UpdatePetNameUseCase(updatePetNameService)
@@ -83,7 +87,8 @@ export default class UserRouterFactory {
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
           userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
-          sendVerificationCodeUseCase, verifyCodeUseCase,updatePetNameUseCase
+          sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase, 
+          updatePetNameUseCase
         )
 
 
