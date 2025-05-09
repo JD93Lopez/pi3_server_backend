@@ -4,7 +4,7 @@ import SaveSelectedItemUseCasePort from "../../../domain/ports/driver/usecase/Us
 export default class SaveSelectedItemUseCase implements SaveSelectedItemUseCasePort {
     constructor(private saveSelectedItemService: SaveSelectedItemServicePort) {}
 
-    async saveSelectedItem(user_id: number, id_item: number): Promise<void> {
-        await this.saveSelectedItemService.saveSelectedItem(user_id, id_item);
+    async saveSelectedItem(user_id: number, id_item: number): Promise<number> {
+        return await this.saveSelectedItemService.saveSelectedItem(user_id, id_item);
     }
 }

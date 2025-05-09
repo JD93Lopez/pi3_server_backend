@@ -11,6 +11,6 @@ export interface UserRepositoryPort {
     deleteUserById(id: number): Promise<number>
     getTotalBalance(user_id: number): Promise<number>
     getRank(user_id: number): Promise<string>
-    saveSelectedItem(user_id: number, id_item: number): Promise<void>
+    saveSelectedItem(user_id: number, id_item: number): Promise<number>
     getSelectedItem(user_id: number): Promise<any>
 }
