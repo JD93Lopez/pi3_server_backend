@@ -1,5 +1,3 @@
-import { typeSex } from "../model/person/AbstractPerson";
-
 export interface UserDoc {
     id_user: number;
     user_name: string;

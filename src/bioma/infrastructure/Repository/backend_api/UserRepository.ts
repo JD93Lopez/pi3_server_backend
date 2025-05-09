@@ -85,4 +85,10 @@ export default class UserRepository implements UserRepositoryPort {
         const result = await this.userDBC.getSelectedItem(user_id);
         return result;
     }
+
+    async updateProfile(user: UserDoc): Promise<boolean> {
+        const result = await this.userDBC.updateProfile(user);
+        return result;
+    }
+
 }

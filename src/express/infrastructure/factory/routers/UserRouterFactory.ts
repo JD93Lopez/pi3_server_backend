@@ -23,6 +23,8 @@ import GetSelectedItemUseCase from "../../../../bioma/application/usecase/Users/
 import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
 import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
 import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
+import UpdateUserProfileServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdateUserProfileServiceFactory"
+import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/UpdateProfileUseCase"
 
 
 
@@ -72,12 +74,16 @@ export default class UserRouterFactory {
         const emailService = new EmailService();
         const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
         const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
+
+        // --------------- Update User profile ------------------
+        const updateUserProfileService = UpdateUserProfileServiceFactory.create()
+        const userUpdateProfileUseCase  = new UpdateProfileUseCase(updateUserProfileService);
         
         const userController = new UserControllerExpress(
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
           userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
-          sendVerificationCodeUseCase, verifyCodeUseCase
+          sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase
         )
 
 

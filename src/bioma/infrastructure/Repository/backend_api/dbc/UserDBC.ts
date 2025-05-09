@@ -1,3 +1,4 @@
+import { UserDoc } from "../../../../domain/docs/UserDoc";
 import Database from "../../Database";
 
 export default class UserDBC {
@@ -187,6 +188,38 @@ export default class UserDBC {
             throw new Error("Unexpected db result");
         }
         return res[key];
+    }
+
+    public async updateProfile(user: UserDoc): Promise<boolean> {
+        try {
+            await Database.getConnection();
+            const query = "SELECT UpdateUserProfile(?, ?, ?, ?, ?, ?, ?, ?, ?) AS result";
+            const params = [
+                user.id_user,
+                user.user_name,
+                user.name,
+                user.email,
+                user.birthdate,
+                user.sex,
+                user.telephone,
+                user.education,
+                user.occupation
+            ];
+        
+            let res = await Database.executeQuery(query, params); 
+    
+            const updatedId = res[0]?.result;
+            
+            if (!updatedId || updatedId == undefined) {
+                console.error("Error: No se pudo actualizar el perfil del usuario.");
+                return false;
+            }
+
+            return true
+        } catch (error) {
+            console.error("Error updating user profile:", error);
+            return false;
+        }
     }
     
 }

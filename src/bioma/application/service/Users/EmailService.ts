@@ -14,7 +14,6 @@ export class EmailService {
   constructor() {
     this.emailUser = process.env['EMAIL_USER'] || '';
     this.emailPass = process.env['EMAIL_PASS'] || '';
-    console.log(this.emailUser, this.emailPass);
     
     if (!this.emailUser || !this.emailPass) {
       throw new Error("Las credenciales de correo no están definidas en las variables de entorno");
@@ -47,7 +46,6 @@ export class EmailService {
 
     try {
       await this.transporter.sendMail(mailOptions);
-      console.log(`Código enviado a ${to}`);
       EmailService.codes[to] = code; // Guardar el código en la memoria
     } catch (error) {
       console.error("Error al enviar el correo:", error);
@@ -59,7 +57,6 @@ export class EmailService {
   public verifyCode(email: string, code: string): boolean {
     const storedCode = EmailService.codes[email];
 
-  console.log(`Código almacenado: ${storedCode}, Código proporcionado: ${code}`);
     if (storedCode && storedCode === code) {
       delete EmailService.codes[email]; // Eliminar el código después de la verificación
       return true;
