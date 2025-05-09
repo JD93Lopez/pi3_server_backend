@@ -33,8 +33,10 @@ export default class ItemDBC{
         if (!result || !Array.isArray(result)) {
             throw new Error("Unexpected db result");
         }
-    
-        return result;
+        
+        const data = Object.values(result)[0];
+
+        return data;
     }
 
 

@@ -163,7 +163,7 @@ export default class UserDBC {
         return res[0].last_xp_date;
     }
 
-    public async saveSelectedItem(user_id: number, id_item: number): Promise<void> {
+    public async saveSelectedItem(user_id: number, id_item: number): Promise<number> {
         await Database.getConnection()
         const query = "SELECT SaveItemFunction(?, ?);"
         const params = [user_id, id_item]

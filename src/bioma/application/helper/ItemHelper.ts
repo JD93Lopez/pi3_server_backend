@@ -9,7 +9,8 @@ export default class ItemHelper {
             id_item: itemDoc.id_item,
             image: itemDoc.image,
             cost: itemDoc.cost,
-            owned: itemDoc.owned == 1 ? true : false
+            owned: itemDoc.owned == 1 ? true : false,
+            selected: itemDoc.selected == 1 ? 1 : 0,
         })
     }
 

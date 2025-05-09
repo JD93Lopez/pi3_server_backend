@@ -17,7 +17,7 @@ export default class GetStoreItemsService implements GetStoreItemsServicePort {
     const results = await this.itemRepository.getStoreItems(user_id);
 
     const items = results.map((result)=>{return itemHelper.databaseToDomainItem(result)})
-
+    
     return items;
   }
 }
