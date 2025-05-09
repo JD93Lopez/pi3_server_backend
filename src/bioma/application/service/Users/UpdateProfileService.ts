@@ -11,7 +11,7 @@ export default class UpdateProfileService implements UpdateUserProfileServicePor
 
         try {
             const userDoc: UserDoc = {
-                id_user: -1,
+                id_user: user.getIdUser(),
                 password: user.getPassword(),
                 user_name: user.getUserName(),
                 email: user.getEmail(),
