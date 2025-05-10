@@ -23,11 +23,13 @@ export class JWTService {
   }
 
   // Valida un token JWT 
-  validateToken(token: string): { id_user: string, user_name: string } {
+  public isTokenValid(token: string): boolean {
     try {
-      return jwt.verify(token, this.jwtSecret) as { id_user: string, user_name: string };
+      jwt.verify(token, this.jwtSecret);
+      return true;
     } catch (error) {
-      throw new Error("Token inválido o expirado");
+      return false;
     }
   }
+
 }

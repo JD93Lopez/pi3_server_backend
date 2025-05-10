@@ -25,6 +25,7 @@ import { EmailService } from "../../../../bioma/application/service/Users/EmailS
 import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
 import UpdateUserProfileServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdateUserProfileServiceFactory"
 import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/UpdateProfileUseCase"
+import JWTUseCase from "../../../../bioma/application/usecase/Users/JWTUseCase"
 import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
 import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
 
@@ -57,10 +58,11 @@ export default class UserRouterFactory {
 
         // --------- User Login  ----------------
         const userValidationService = LoginServiceFactory.create()
+        const userLoginUseCase = new LoginUseCase(userValidationService)
+        // ---------- JWT ----------------
         const userJwtService = new JWTService();
-        const userLoginUseCase = new LoginUseCase(userValidationService, userJwtService)
+        const jwtUseCase = new JWTUseCase(userJwtService);
 
-    
         // ---------- Days of inactivity ---------------
         const getDaysInactivity = GetDaysSinceLastXPActivityServiceFactory.create()
         const getDaysInactivityUseCase = new GetDaysSinceLastXPActivityUseCase(getDaysInactivity)
@@ -85,7 +87,7 @@ export default class UserRouterFactory {
         
         const userController = new UserControllerExpress(
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
-          userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
+          userLoginUseCase , jwtUseCase, deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
           sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase, 
           updatePetNameUseCase

@@ -11,6 +11,7 @@ export default class UpdateProfileUseCase implements UpdateUserProfileUseCasePor
         try {
             const userHelper = new UserHelper()
             const user = userHelper.endpointToDomainUser(userClient)
+
             const result = await this.updateProfileService.updateUser(user);
             return result;
         } catch (error) {
