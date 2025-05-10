@@ -27,6 +27,8 @@ import UpdateUserProfileServiceFactory from "../../../../bioma/infrastructure/fa
 import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/UpdateProfileUseCase"
 import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
 import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
+import CheckUserExistsServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/CheckUserExistsServiceFactory"
+import CheckUserExistsUseCase from "../../../../bioma/application/usecase/Users/CheckUserExistsUseCase"
 
 
 
@@ -82,13 +84,17 @@ export default class UserRouterFactory {
 
         const updatePetNameService = UpdatePetNameServiceFactory.create()
         const updatePetNameUseCase = new UpdatePetNameUseCase(updatePetNameService)
+
+        // --------- CHECK IF USER EXISTS  ----------------
+        const userExistsService = CheckUserExistsServiceFactory.create()
+        const userExistsUseCase = new CheckUserExistsUseCase(userExistsService)
         
         const userController = new UserControllerExpress(
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
           userLoginUseCase , deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
           sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase, 
-          updatePetNameUseCase
+          updatePetNameUseCase, userExistsUseCase,
         )
 
 
