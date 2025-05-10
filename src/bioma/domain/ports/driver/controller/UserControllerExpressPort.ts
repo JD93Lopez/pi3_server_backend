@@ -13,6 +13,7 @@ export default interface UserControllerExpressPort {
     sendVerificationCode(req: Request, res: Response): Promise<void>;
     verifyCode(req: Request, res: Response): Promise<void>;
     updateUserProfile(req: Request, res: Response): Promise<void>;
+    isTokenValid(req: Request, res: Response): Promise<void>;
 }
     
 
