@@ -164,7 +164,7 @@ export default class UserDBC {
         return res[0].last_xp_date;
     }
 
-    public async saveSelectedItem(user_id: number, id_item: number): Promise<void> {
+    public async saveSelectedItem(user_id: number, id_item: number): Promise<number> {
         await Database.getConnection()
         const query = "SELECT SaveItemFunction(?, ?);"
         const params = [user_id, id_item]
@@ -223,5 +223,19 @@ export default class UserDBC {
         }
     }
     
+
+    public async updatePetName(user_id: number, pet_name: string): Promise<void> {
+        await Database.getConnection()
+        const query = "SELECT UpdatePetName(?, ?)";
+        const params = [user_id, pet_name]
+        let res = await Database.executeQuery(query, params)
+        
+        res = res[0]
+        const key = Object.keys(res)[0];
+        if (!key) {
+            throw new Error("Unexpected db result");
+        }
+        return res[key];
+    }
 }
 

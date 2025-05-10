@@ -76,8 +76,8 @@ export default class UserRepository implements UserRepositoryPort {
         return result;
     }
 
-    async saveSelectedItem(user_id: number, id_item: number): Promise<void> {
-        await this.userDBC.saveSelectedItem(user_id, id_item);
+    async saveSelectedItem(user_id: number, id_item: number): Promise<number> {
+        return await this.userDBC.saveSelectedItem(user_id, id_item);
     }
 
 
@@ -91,4 +91,7 @@ export default class UserRepository implements UserRepositoryPort {
         return result;
     }
 
+    async updatePetName(user_id: number, pet_name: string): Promise<void> {
+        await this.userDBC.updatePetName(user_id, pet_name);
+    }
 }

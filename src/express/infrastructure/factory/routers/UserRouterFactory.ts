@@ -26,6 +26,8 @@ import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/Verif
 import UpdateUserProfileServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdateUserProfileServiceFactory"
 import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/UpdateProfileUseCase"
 import JWTUseCase from "../../../../bioma/application/usecase/Users/JWTUseCase"
+import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
+import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
 
 
 
@@ -77,15 +79,18 @@ export default class UserRouterFactory {
         const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
         const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
 
-        // --------------- Update User profile ------------------
         const updateUserProfileService = UpdateUserProfileServiceFactory.create()
         const userUpdateProfileUseCase  = new UpdateProfileUseCase(updateUserProfileService);
+
+        const updatePetNameService = UpdatePetNameServiceFactory.create()
+        const updatePetNameUseCase = new UpdatePetNameUseCase(updatePetNameService)
         
         const userController = new UserControllerExpress(
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
           userLoginUseCase , jwtUseCase, deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
           sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase, 
+          updatePetNameUseCase
         )
 
 

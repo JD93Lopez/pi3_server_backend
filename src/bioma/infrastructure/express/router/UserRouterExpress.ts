@@ -67,5 +67,9 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
             this.userController.isTokenValid.bind(this.userController)
         )
         
+        this.router.put(
+            "/v1.0/user/update/petName",
+            this.userController.updatePetName.bind(this.userController)
+        )
     }
 }

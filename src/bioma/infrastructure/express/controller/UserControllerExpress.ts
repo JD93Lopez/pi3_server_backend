@@ -17,6 +17,8 @@ import VerifyCodeUseCasePort from "../../../domain/ports/driver/usecase/Users/Ve
 import UpdateUserProfileUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdateUserProfileUseCasePort";
 import UpdateUserPerfilInterface from "../../../domain/types/endpoint/Users/UpdatePerfilInterface";
 import JWTUseCasePort from "../../../domain/ports/driver/usecase/Users/JWTUseCasePort";
+import UpdatePetNameUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdatePetNameUseCasePort";
+import UpdatePetNameInterface from "../../../domain/types/endpoint/Users/UpdatePetNameInterface";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -34,7 +36,8 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly getSelectedItemUseCase: GetSelectedItemUseCasePort,
         private readonly sendVerificationCodeUseCase: SendVerificationCodeUserCasePort,
         private readonly verifyCodeUseCase: VerifyCodeUseCasePort,
-        private readonly updateUserProfileUseCase: UpdateUserProfileUseCasePort
+        private readonly updateUserProfileUseCase: UpdateUserProfileUseCasePort,
+        private readonly updatePetNameUseCase: UpdatePetNameUseCasePort
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -246,45 +249,43 @@ export default class UserControllerExpress implements UserControllerExpressPort 
 
     async saveSelectedItem(req: Request, res: Response): Promise<void> {
         try {
-            const body = req.body;   
-            
-        
-            let saveSelectedItemInterface = null;
-            if(!body) {
-                res.status(400).json({ message: 'Bad request body' });
-            }
-            try{
-                saveSelectedItemInterface = body as { id_user: number, id_item: number };
-            }catch(error){
-                res.status(400).json({ message: 'Bad request interface' });
-            }
-
-            if (!saveSelectedItemInterface) {
-                res.status(400).json({ message: 'Bad request interface' });
+            const body = req.body;
+    
+            if (!body) {
+                res.status(400).json({ message: 'Bad request: missing body' });
                 return;
             }
 
-            const user_id = saveSelectedItemInterface.id_user;
-            const id_item = saveSelectedItemInterface.id_item;
-            
-            if (typeof user_id !== 'number' || user_id <= 0) {
+            // Validar estructura mínima
+            const { user_id, item_id }: {user_id:number, item_id:number} = body;
+
+            if (!user_id || user_id <= 0) {
                 res.status(400).json({ message: 'Invalid user_id. It must be a positive number.' });
+                return; 
             }
-
-            if (typeof id_item !== 'number' || id_item <= 0) {
+    
+            if (!item_id || item_id <= 0) {
                 res.status(400).json({ message: 'Invalid id_item. It must be a positive number.' });
+                return;
             }
-                    
-            const response = await this.saveSelectedItemUseCase.saveSelectedItem(user_id, id_item);
-
-            res.status(200).send({ message: "User selected item saved successfully", data: response });
-
+    
+            // Llamar al use case
+            const response = await this.saveSelectedItemUseCase.saveSelectedItem(user_id, item_id);
+    
+            res.status(200).json({
+                message: "User selected item saved successfully",
+                data: response
+            });
+            return; 
+    
         } catch (error) {
-            console.log("Error saving selected item:", error);
-            res.status(500).send({ message: "Internal server error en el dbc de user" , error: error});
+            console.error("Error saving selected item:", error);
+            res.status(500).json({
+                message: "Internal server error",
+                error: error instanceof Error ? error.message : String(error)
+            });
+            return;
         }
-        
- 
     }
 
     async getSelectedItem(req: Request, res: Response): Promise<void> {
@@ -435,4 +436,38 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
 
+    async updatePetName(req: Request, res: Response): Promise<void> {
+        try {
+            // Verificar que 'req.body' esté definido y castearlo a la interfaz UpdatePetNameInterface
+            const body: UpdatePetNameInterface = req.body;
+    
+            // Validar que el body cumpla con la estructura de la interfaz
+            if (!body || typeof body.id_user !== 'number' || typeof body.pet_name !== 'string') {
+                res.status(400).json({ message: 'Bad request body, expected structure: { user_id: number, pet_name: string }' });
+                return;
+            }
+    
+            // Extraer las propiedades del body
+            const { id_user: user_id, pet_name } = body;
+    
+            // Debugging line
+            console.log("Request body for updatePetName:", req.body);
+    
+            // Validación adicional: Asegurarse de que los campos no sean vacíos
+            if (!user_id || !pet_name) {
+                res.status(400).json({ message: 'Bad request body, missing required fields' });
+                return;
+            }
+    
+            // Llamar al caso de uso para actualizar el nombre de la mascota
+            const response = await this.updatePetNameUseCase.updatePetName(user_id, pet_name);
+    
+            // Respuesta exitosa
+            res.status(200).json({ success: true, message: 'Pet name updated successfully', data: response });
+        } catch (error: any) {
+            console.error('Error updating pet name:', error);
+            // En caso de error, devolver un error 500
+            res.status(500).json({ message: 'Internal server error', error: error.message });
+        }
+    }
 }
