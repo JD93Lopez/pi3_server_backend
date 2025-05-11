@@ -71,5 +71,9 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
             "/v1.0/user/update/petName",
             this.userController.updatePetName.bind(this.userController)
         )
+        this.router.post(
+            "/v1.0/user/checkUserExists",
+            this.userController.checkUserExists.bind(this.userController)
+        )
     }
 }

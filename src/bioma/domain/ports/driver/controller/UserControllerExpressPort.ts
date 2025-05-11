@@ -15,6 +15,7 @@ export default interface UserControllerExpressPort {
     updateUserProfile(req: Request, res: Response): Promise<void>;
     isTokenValid(req: Request, res: Response): Promise<void>;
     updatePetName(req: Request, res: Response): Promise<void>;
+    checkUserExists(req: Request, res: Response): Promise<void>;
 }
     
 

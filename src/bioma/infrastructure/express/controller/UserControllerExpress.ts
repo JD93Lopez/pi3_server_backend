@@ -19,6 +19,7 @@ import UpdateUserPerfilInterface from "../../../domain/types/endpoint/Users/Upda
 import JWTUseCasePort from "../../../domain/ports/driver/usecase/Users/JWTUseCasePort";
 import UpdatePetNameUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdatePetNameUseCasePort";
 import UpdatePetNameInterface from "../../../domain/types/endpoint/Users/UpdatePetNameInterface";
+import CheckUserExistsUseCasePort from "../../../domain/ports/driver/usecase/Users/CheckUserExistsUseCasePort";
 
 
 export default class UserControllerExpress implements UserControllerExpressPort {
@@ -37,7 +38,8 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly sendVerificationCodeUseCase: SendVerificationCodeUserCasePort,
         private readonly verifyCodeUseCase: VerifyCodeUseCasePort,
         private readonly updateUserProfileUseCase: UpdateUserProfileUseCasePort,
-        private readonly updatePetNameUseCase: UpdatePetNameUseCasePort
+        private readonly updatePetNameUseCase: UpdatePetNameUseCasePort,
+        private readonly checkUserExistsUseCase: CheckUserExistsUseCasePort
     ) {}
 
     async updateUserExperience(req: Request, res: Response): Promise<void> {
@@ -467,6 +469,25 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         } catch (error: any) {
             console.error('Error updating pet name:', error);
             // En caso de error, devolver un error 500
+            res.status(500).json({ message: 'Internal server error', error: error.message });
+        }
+    }
+    public async checkUserExists(req: Request, res: Response): Promise<void> {
+        try {
+            const body = req.body;
+    
+            if (!body || !body.user_name) {
+                res.status(400).json({ message: 'Bad request: missing user_name field' });
+                return;
+            }
+    
+            const user_name = body.user_name;
+    
+            const exists = await this.checkUserExistsUseCase.checkUserExists(user_name);
+    
+            res.status(200).json({ message: 'Success', data: exists });
+        } catch (error: any) {
+            console.error('Error checking user existence:', error);
             res.status(500).json({ message: 'Internal server error', error: error.message });
         }
     }

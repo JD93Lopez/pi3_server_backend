@@ -237,5 +237,23 @@ export default class UserDBC {
         }
         return res[key];
     }
+    public async checkUserExists(user_name: string): Promise<number> {
+        try {
+            await Database.getConnection();
+            const query = "SELECT CheckUserExists(?) AS result";
+            const params = [user_name];        
+                
+            const result = await Database.executeQuery(query, params);
+            
+            if (!result || !result[0] || typeof result[0].result !== 'number') {
+                throw new Error("Unexpected db result");
+            }
+    
+            return result[0].result;
+        } catch (error) {
+            console.error("Error checking user existence:", error);
+            throw new Error(`Failed to check user existence: ${error}`);
+        }
+    }
 }
 

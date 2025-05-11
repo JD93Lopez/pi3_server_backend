@@ -28,6 +28,8 @@ import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/Up
 import JWTUseCase from "../../../../bioma/application/usecase/Users/JWTUseCase"
 import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
 import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
+import CheckUserExistsServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/CheckUserExistsServiceFactory"
+import CheckUserExistsUseCase from "../../../../bioma/application/usecase/Users/CheckUserExistsUseCase"
 
 
 
@@ -36,7 +38,8 @@ export default class UserRouterFactory {
     public static readonly create = (): RouterExpress => {
         // --------- CREATE USER  ----------------
         const userCreateService = CreateUserServiceFactory.create()
-        const userCreateUseCase = new CreateUserUseCase(userCreateService)
+        const checkUserExistsService = CheckUserExistsServiceFactory.create()
+        const userCreateUseCase = new CreateUserUseCase(userCreateService, checkUserExistsService)
 
         // ----- User Update experience -----
         const userUpdateExService = UserUpdateExperienceServiceFactory.create()
@@ -84,13 +87,17 @@ export default class UserRouterFactory {
 
         const updatePetNameService = UpdatePetNameServiceFactory.create()
         const updatePetNameUseCase = new UpdatePetNameUseCase(updatePetNameService)
+
+        // --------- CHECK IF USER EXISTS  ----------------
+        const userExistsService = CheckUserExistsServiceFactory.create()
+        const userExistsUseCase = new CheckUserExistsUseCase(userExistsService)
         
         const userController = new UserControllerExpress(
           userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
           userLoginUseCase , jwtUseCase, deleteUserCascadaUseCase, getTotalBalanceUseCase, 
           getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
           sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase, 
-          updatePetNameUseCase
+          updatePetNameUseCase, userExistsUseCase,
         )
 
 
