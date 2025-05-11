@@ -58,6 +58,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             res.status(500).send({ message: "Internal server error" , error: error});
         }
     }
+
     async createUser(req: Request, res: Response): Promise<void> {
         
         let createUserInterface: CreateUserInterface | null = null;
@@ -103,6 +104,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             res.status(500).json({ message: 'Internal server error' });
         }
     }
+    
     async getUserStreak(req: Request, res: Response): Promise<void> {
 
         try {

@@ -5,6 +5,7 @@ export default class  GetSelectedItemService implements GetSelectedItemServicePo
     constructor(private userRepository: UserRepositoryPort) {}
 
     async getSelectedItem(user_id: number): Promise<number> {
-        return await this.userRepository.getSelectedItem(user_id);
+        let item = await this.userRepository.getSelectedItem(user_id)
+        return item.id_item;
     }
 }

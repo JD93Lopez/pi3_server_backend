@@ -1,3 +1,4 @@
+import { ItemDoc } from "../../../domain/docs/ItemDoc";
 import { UserDoc } from "../../../domain/docs/UserDoc";
 import { UserRepositoryPort } from "../../../domain/ports/driven/UserRepositoryPort";
 import UserDBC from "./dbc/UserDBC";
@@ -81,8 +82,16 @@ export default class UserRepository implements UserRepositoryPort {
     }
 
 
-    async getSelectedItem(user_id: number): Promise<string> {
+    async getSelectedItem(user_id: number): Promise<ItemDoc> {
         const result = await this.userDBC.getSelectedItem(user_id);
+        if (Object.keys(result).length === 0) {
+            return {
+                id_item: 0,
+                image: "",
+                cost: 0,
+                owned: 0,
+            } as ItemDoc;
+        }
         return result;
     }
 
