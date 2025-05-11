@@ -37,7 +37,8 @@ export default class UserRouterFactory {
     public static readonly create = (): RouterExpress => {
         // --------- CREATE USER  ----------------
         const userCreateService = CreateUserServiceFactory.create()
-        const userCreateUseCase = new CreateUserUseCase(userCreateService)
+        const checkUserExistsService = CheckUserExistsServiceFactory.create()
+        const userCreateUseCase = new CreateUserUseCase(userCreateService, checkUserExistsService)
 
         // ----- User Update experience -----
         const userUpdateExService = UserUpdateExperienceServiceFactory.create()
