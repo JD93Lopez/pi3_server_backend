@@ -20,27 +20,31 @@ export default class TopicControllerExpress implements TopicControllerExpressPor
   public async createTopic(req: Request, res: Response): Promise<void> {
     const body = req.body
     if(!body) {
-      res.status(400).json({ message: 'Bad request body' })  
+      res.status(400).json({ message: 'Bad request body' });
+      return;
     }
     //cast to interface
     let createTopicInterface = null
     try {
       createTopicInterface = body as CreateTopicInterface
     } catch (error) {
-      res.status(400).json({ message: 'Bad request interface' })
+      res.status(400).json({ message: 'Bad request interface' });
+      return;
     }
     if(!createTopicInterface) {
-      res.status(400).json({ message: 'Bad request interface' })
-      return
+      res.status(400).json({ message: 'Bad request interface' });
+      return;
     }
     //validate
     const topic = createTopicInterface.topic
     if(!topic) {
-      res.status(400).json({ message: 'Bad request topic' })
+      res.status(400).json({ message: 'Bad request topic' });
+      return;
     }
     const biome_id = createTopicInterface.biome_id
     if(!biome_id) {
-      res.status(400).json({ message: 'Bad request biome_id' })
+      res.status(400).json({ message: 'Bad request biome_id' });
+      return;
     }
     
     const id = await this.createTopicUseCase.createTopic(biome_id, topic) 

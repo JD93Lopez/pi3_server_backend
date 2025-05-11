@@ -67,8 +67,9 @@ export default class UserDBC {
                 throw new Error("Unexpected db result");
             }
             return res[key];
-        } catch (error) {
-            console.error("Error fetching user streak:", error);
+        } catch (error: any) {
+            // console.error("Error fetching user streak:", error);
+            console.log("Error fetching user streak:", error.message, "user_id:", user_id);
             return 0;
         }
     }
