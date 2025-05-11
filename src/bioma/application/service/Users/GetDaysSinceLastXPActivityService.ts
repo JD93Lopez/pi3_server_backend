@@ -1,5 +1,5 @@
 import { UserRepositoryPort } from "../../../domain/ports/driven/UserRepositoryPort";
-import GetDaysSinceLastXPActivityServicePort from "../../../domain/ports/driver/service/Users/getDaysSinceLastXPActivityServicePort";
+import GetDaysSinceLastXPActivityServicePort from "../../../domain/ports/driver/service/Users/GetDaysSinceLastXPActivityServicePort";
 
 export default class GetDaysSinceLastXPActivityService implements GetDaysSinceLastXPActivityServicePort{
 
