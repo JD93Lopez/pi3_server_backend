@@ -117,6 +117,7 @@ export default class PlayedDayControllerExpress implements PlayedDayControllerEx
             res.status(500).json({ message: 'Internal server error' });
         }
     }
+    
     public async getUserPlayStats(req: Request, res: Response): Promise<void> {
         try {
             const id_user = req.body.id_user;
