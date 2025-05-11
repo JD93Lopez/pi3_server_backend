@@ -1,3 +1,4 @@
+import { ItemDoc } from "../../docs/ItemDoc";
 import { UserDoc } from "../../docs/UserDoc";
 
 export interface UserRepositoryPort {
@@ -12,7 +13,7 @@ export interface UserRepositoryPort {
     getTotalBalance(user_id: number): Promise<number>
     getRank(user_id: number): Promise<string>
     saveSelectedItem(user_id: number, id_item: number): Promise<number>
-    getSelectedItem(user_id: number): Promise<any>
+    getSelectedItem(user_id: number): Promise<ItemDoc>
     updateProfile(user: UserDoc): Promise<boolean>
     updatePetName(user_id: number, pet_name: string): Promise<void>
 }

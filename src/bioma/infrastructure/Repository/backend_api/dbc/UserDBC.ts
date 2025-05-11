@@ -180,16 +180,22 @@ export default class UserDBC {
     }
 
     public async getSelectedItem(user_id: number): Promise<any> {
-        await Database.getConnection()
-        const query = "CALL GetSelectedItemByUser(?)"
-        const params = [user_id]
-        let res = await Database.executeQuery(query, params)
-        res = res[0]
-        const key = Object.keys(res)[0];
-        if (!key) {
-            throw new Error("Unexpected db result");
+        try {
+            await Database.getConnection();
+            const query = "CALL GetSelectedItemByUser(?)";
+            const params = [user_id];
+            let res = await Database.executeQuery(query, params);
+            
+            res = res[0];
+            const key = Object.keys(res)[0];
+            if (!key) {
+                throw new Error("Unexpected db result");
+            }
+            return res[key];
+        } catch (error: any) {
+            console.error("Error fetching selected item:", error.message);
+            return {};
         }
-        return res[key];
     }
 
     public async updateProfile(user: UserDoc): Promise<boolean> {
