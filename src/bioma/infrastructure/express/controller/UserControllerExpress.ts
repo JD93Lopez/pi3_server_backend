@@ -16,6 +16,7 @@ import SendVerificationCodeUserCasePort from "../../../domain/ports/driver/useca
 import VerifyCodeUseCasePort from "../../../domain/ports/driver/usecase/Users/VerifyCodeUseCasePort";
 import UpdateUserProfileUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdateUserProfileUseCasePort";
 import UpdateUserPerfilInterface from "../../../domain/types/endpoint/Users/UpdatePerfilInterface";
+import JWTUseCasePort from "../../../domain/ports/driver/usecase/Users/JWTUseCasePort";
 import UpdatePetNameUseCasePort from "../../../domain/ports/driver/usecase/Users/UpdatePetNameUseCasePort";
 import UpdatePetNameInterface from "../../../domain/types/endpoint/Users/UpdatePetNameInterface";
 
@@ -27,6 +28,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         private readonly createUserUseCase: CreateUserUseCasePort,
         private readonly getUserStrakeUseCase: GetUserStreakUseCasePort,
         private readonly loginUserUseCase: LoginUseCasePort,
+        private readonly jwtUseCase: JWTUseCasePort,
         private readonly deleteUserCascadaUseCase: DeleteUserCascadaUseCasePort,
         private readonly getTotalBalanceUseCase: GetTotalBalanceUseCasePort,
         private readonly getDaysSinceLastXPActivityUseCase: GetDaysSinceLastXPActivityUseCasePort,
@@ -55,6 +57,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         }
     }
     async createUser(req: Request, res: Response): Promise<void> {
+        
         let createUserInterface: CreateUserInterface | null = null;
 
         const body = req.body;
@@ -84,7 +87,15 @@ export default class UserControllerExpress implements UserControllerExpressPort 
 
         try {
             const createdUserId = await this.createUserUseCase.createUser(user);
-            res.status(200).json({ message: 'Success', data: createdUserId });
+
+            if (!createdUserId) {
+                res.status(400).json({ message: 'User not created' });
+                return;
+            }
+            
+            const tokenSesion = await this.jwtUseCase.singJWT(user.id_user, user.user_name);
+            res.status(200).json({ message: 'Success', data: createdUserId, token: tokenSesion });
+
         } catch (error) {
             console.error("Error creating user:", error);
             res.status(500).json({ message: 'Internal server error' });
@@ -132,11 +143,14 @@ export default class UserControllerExpress implements UserControllerExpressPort 
             }
 
             const response = await this.loginUserUseCase.login(username, password);
+
             if (!response) {
                 res.status(401).json({ message: 'Unauthorized' });
                 return;
             }
-            res.status(200).json({ success:true, data: response });
+
+            const tokenSesion = await this.jwtUseCase.singJWT(response.getIdUser(), response.getUserName());
+            res.status(200).json({ success:true, data: response, token: tokenSesion });
             
         } catch (error) {
             console.error("Error logging in user:", error);
@@ -307,7 +321,6 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         try {
             const { email } = req.body;
             
-            console.log("Email from request body:", email); // Debugging line
             if (!email) {
                 res.status(400).json({ message: 'Bad request body' });
                 return;
@@ -353,7 +366,7 @@ export default class UserControllerExpress implements UserControllerExpressPort 
     async updateUserProfile(req: Request, res: Response): Promise<void> {
         
         try {
-            let updateUserInterface: CreateUserInterface | null = null;
+            let updateUserInterface: UpdateUserPerfilInterface | null = null;
             const body = req.body;
             
         if (!body) {
@@ -391,6 +404,35 @@ export default class UserControllerExpress implements UserControllerExpressPort 
         } catch (error) {
             console.error("Error updating user:", error);
             res.status(500).send({ message: "Internal server error", error: error });
+        }
+    }
+
+    async isTokenValid(req: Request, res: Response): Promise<void> {
+        try {
+            const authHeader = req.headers.authorization;
+
+            if (!authHeader || !authHeader.startsWith('Bearer ')) {
+                res.status(400).json({ message: 'Authorization header is missing or malformed.' });
+                return;
+            }
+
+            const token = authHeader.split(' ')[1];
+
+            if (!token) {
+                res.status(400).json({ message: 'Token is missing.' });
+                return;
+            }
+            const isValid = await this.jwtUseCase.validateToken(token);
+
+            if (!isValid) {
+                res.status(401).json({ success: false, message: 'Invalid or expired token.' });
+                return;
+            }
+
+            res.status(200).json({ success: true, message: 'Token is valid.' });
+        } catch (error) {
+            console.error("Error validating token:", error);
+            res.status(500).json({ message: "Internal server error", error: error });
         }
     }
 
