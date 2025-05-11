@@ -1,6 +1,6 @@
 
 import GetDaysSinceLastXPActivityService from "../../../../application/service/Users/GetDaysSinceLastXPActivityService";
-import GetDaysSinceLastXPActivityServicePort from "../../../../domain/ports/driver/service/Users/getDaysSinceLastXPActivityServicePort";
+import GetDaysSinceLastXPActivityServicePort from "../../../../domain/ports/driver/service/Users/GetDaysSinceLastXPActivityServicePort";
 import UserRepositoryFactory from "../../repository/UserRepositoryFactory";
 
 export default class GetDaysSinceLastXPActivityServiceFactory {
