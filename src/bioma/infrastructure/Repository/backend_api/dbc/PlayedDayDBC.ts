@@ -65,6 +65,7 @@ export default class PlayedDayDBC {
         return result[0];
 
     }
+    
     public async getUserPlayStats(USERS_id_user: number): Promise<any> {
         await Database.getConnection();
         const query = "CALL GetUserPlayStats(?)";

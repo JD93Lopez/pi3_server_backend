@@ -16,6 +16,7 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
         private readonly deleteBiomeUseCase: DeleteBiomeUseCasePort,
          private readonly getBiomesByUserUseCase: GetBiomesByUserUseCasePort
     ) {}
+    
     async createBiome(req: Request, res: Response): Promise<void> {
         let createBiomeInterface = null;
 
@@ -95,6 +96,7 @@ export default class BiomeControllerExpress implements BiomeControllerExpressPor
             res.status(500).json({ message: 'Internal server error' });
         }
     }
+
     async deleteBiome(req: Request, res: Response): Promise<void> {
         let deleteBiomeInterface = null    
         const body = req.body;
