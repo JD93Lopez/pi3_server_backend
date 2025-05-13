@@ -8,16 +8,20 @@ export class TopicsByBiomeRetrieverService implements TopicByBiomeRetrieverServi
     constructor(private topicRepository: TopicRepositoryPort) {}
 
     async getTopicsByBiome(id_biome: number): Promise<AbstractTopic[]> {
+        try {
+            const topicHelper = new TopicHelper();
+            
+            const topics = await this.topicRepository.getByBiomeId(id_biome);
 
-        const topicHelper = new TopicHelper();
-        
-        const topics = await this.topicRepository.getByBiomeId(id_biome);
+            const abstractTopics = topics.map(async (topic) => {
+            return await topicHelper.databaseToDomainTopic(topic);
+            });
 
-        const abstractTopics = topics.map(async (topic) => {
-            return await topicHelper.databaseToDomainTopic(topic)
-        });
-
-        return await Promise.all(abstractTopics);
+            return await Promise.all(abstractTopics);
+        } catch (error) {
+            console.error('Error retrieving topics by biome:', error);
+            return [];
+        }
     }
 
 }

@@ -163,32 +163,32 @@ class TerminalCommandHandler {
     private torneoTestUsers(): void {
         console.log('Creando usuarios de prueba...');
 
-        const user1 = createTournamentTestUser(11, "Test User", RankName.BRONZE);
-        const user2 = createTournamentTestUser(2, "Test User", RankName.BRONZE);
-        const user3 = createTournamentTestUser(3, "Test User", RankName.BRONZE);
-        const user4 = createTournamentTestUser(4, "Test User", RankName.BRONZE);
-        const user5 = createTournamentTestUser(5, "Test User", RankName.BRONZE);
-        
-        const user6 = createTournamentTestUser(6, "Test User", RankName.SILVER);
-        const user7 = createTournamentTestUser(7, "Test User", RankName.SILVER);
-        const user8 = createTournamentTestUser(8, "Test User", RankName.SILVER);
-        const user9 = createTournamentTestUser(9, "Test User", RankName.SILVER);  
-      
-        const user10 = createTournamentTestUser(10, "Test User", RankName.GOLD);
+        const user1 = createTournamentTestUser(11, "Zaynex34", RankName.BRONZE);
+        const user2 = createTournamentTestUser(2, "Vexola_99", RankName.BRONZE);
+        const user3 = createTournamentTestUser(3, "Lunarion", RankName.BRONZE);
+        const user4 = createTournamentTestUser(4, "Krythic", RankName.BRONZE);
+        const user5 = createTournamentTestUser(5, "Mystroh", RankName.BRONZE);
+
+        const user6 = createTournamentTestUser(6, "Silvershade", RankName.SILVER);
+        const user7 = createTournamentTestUser(7, "Velociraptor_", RankName.SILVER);
+        const user8 = createTournamentTestUser(8, "Nexorion", RankName.SILVER);
+        const user9 = createTournamentTestUser(9, "Aetheria", RankName.SILVER);
+
+        const user10 = createTournamentTestUser(10, "Goldspire", RankName.GOLD);
         const user11 = createTournamentTestUser(1, "pepLimonuwu", RankName.GOLD);
         const user12 = createTournamentTestUser(12, "paola", RankName.GOLD);
-        const user13 = createTournamentTestUser(13, "Test User", RankName.GOLD);
-      
-        const user14 = createTournamentTestUser(14, "Test User", RankName.PLATINUM);
-        const user15 = createTournamentTestUser(15, "Test User", RankName.PLATINUM);
-        const user16 = createTournamentTestUser(16, "Test User", RankName.PLATINUM);
-        const user17 = createTournamentTestUser(17, "Test User", RankName.PLATINUM);
-      
-        const user18 = createTournamentTestUser(18, "Test User", RankName.DIAMOND);
-        const user19 = createTournamentTestUser(19, "Test User", RankName.DIAMOND);
-        const user20 = createTournamentTestUser(20, "Test User", RankName.DIAMOND);
-        const user21 = createTournamentTestUser(21, "Test User", RankName.DIAMOND);
-        const user22 = createTournamentTestUser(22, "Test User", RankName.DIAMOND);
+        const user13 = createTournamentTestUser(13, "GildedFox", RankName.GOLD);
+
+        const user14 = createTournamentTestUser(14, "PlatinumEdge", RankName.PLATINUM);
+        const user15 = createTournamentTestUser(15, "StealthNova", RankName.PLATINUM);
+        const user16 = createTournamentTestUser(16, "Crystalix", RankName.PLATINUM);
+        const user17 = createTournamentTestUser(17, "OrbitalX", RankName.PLATINUM);
+
+        const user18 = createTournamentTestUser(18, "DiaMonarch", RankName.DIAMOND);
+        const user19 = createTournamentTestUser(19, "Shadowloom", RankName.DIAMOND);
+        const user20 = createTournamentTestUser(20, "VoidSpark", RankName.DIAMOND);
+        const user21 = createTournamentTestUser(21, "Eclipseon", RankName.DIAMOND);
+        const user22 = createTournamentTestUser(22, "DynamoRift", RankName.DIAMOND);
 
         this.tournamentManager.inscribir(user1);    
         this.tournamentManager.inscribir(user2);

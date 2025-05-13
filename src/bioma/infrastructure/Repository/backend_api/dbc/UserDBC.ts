@@ -51,7 +51,8 @@ export default class UserDBC {
             
         } catch (error) {
             console.error("Error al actualizar la racha:", error);
-            throw new Error("No se pudo actualizar la racha");
+            // throw new Error("No se pudo actualizar la racha");
+            return;
         }
     }
 
@@ -67,8 +68,9 @@ export default class UserDBC {
                 throw new Error("Unexpected db result");
             }
             return res[key];
-        } catch (error) {
-            console.error("Error fetching user streak:", error);
+        } catch (error: any) {
+            // console.error("Error fetching user streak:", error);
+            console.log("Error fetching user streak:", error.message, "user_id:", user_id);
             return 0;
         }
     }
@@ -105,7 +107,8 @@ export default class UserDBC {
             return res[key];
         } catch (error) {
             console.error("Error updating user league:", error);
-            throw error;
+            // throw error;
+            return -1;
         }
     }
 
@@ -179,16 +182,22 @@ export default class UserDBC {
     }
 
     public async getSelectedItem(user_id: number): Promise<any> {
-        await Database.getConnection()
-        const query = "CALL GetSelectedItemByUser(?)"
-        const params = [user_id]
-        let res = await Database.executeQuery(query, params)
-        res = res[0]
-        const key = Object.keys(res)[0];
-        if (!key) {
-            throw new Error("Unexpected db result");
+        try {
+            await Database.getConnection();
+            const query = "CALL GetSelectedItemByUser(?)";
+            const params = [user_id];
+            let res = await Database.executeQuery(query, params);
+            
+            res = res[0];
+            const key = Object.keys(res)[0];
+            if (!key) {
+                throw new Error("Unexpected db result");
+            }
+            return res[key];
+        } catch (error: any) {
+            console.error("Error fetching selected item:", error.message);
+            return {};
         }
-        return res[key];
     }
 
     public async updateProfile(user: UserDoc): Promise<boolean> {

@@ -26,26 +26,29 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
 
     const body = req.body
     if(!body) {
-      res.status(400).json({ message: 'Bad request body' })  
+      res.status(400).json({ message: 'Bad request body' });
+      return;
     }
     let getOrganizedInterface = null
     try {
       getOrganizedInterface = body as GetOrganizedFlashcardsByTopicInterface
     } catch (error) {
-      res.status(400).json({ message: 'Bad request interface' })
+      res.status(400).json({ message: 'Bad request interface' });
+      return;
     }
     if(!getOrganizedInterface) {
-      res.status(400).json({ message: 'Bad request interface' })
-      return
+      res.status(400).json({ message: 'Bad request interface' });
+      return;
     }
     const id_topic = getOrganizedInterface.topic_id
     if(!id_topic) {
-      res.status(400).json({ message: 'Bad request id topic' })
+      res.status(400).json({ message: 'Bad request id topic' });
+      return;
     }
 
     const flashcards = await this.organizeUseCase.getOrganizedFlashcards(id_topic)
 
-    res.status(200).json({ message: 'Success', data: flashcards })
+    res.status(200).json({ message: 'Success', data: flashcards });
   }
 
   public async createFlashcards(req: Request, res: Response): Promise<void> {
@@ -73,7 +76,6 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
     
     res.status(200).json({ message: 'Success', data: ids })
   }
-
 
   public async updateFlashcards(req: Request, res: Response): Promise<void> {
     
@@ -169,19 +171,21 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
       res.status(500).json({ message: 'Internal server error', error: error });
     }
   }
-
   
   public async getOrganizedFlashcardsByBiome(req: Request, res: Response): Promise<void> {
     
     const body = req.body
+    
     if(!body) {
       res.status(400).json({ message: 'Bad request body' })  
+      return;
     }
     let getOrganizedInterface = null
     try {
       getOrganizedInterface = body as GetOrganizedFlashcardsByBiomeInterface
     } catch (error) {
       res.status(400).json({ message: 'Bad request interface' })
+      return;
     }
     if(!getOrganizedInterface) {
       res.status(400).json({ message: 'Bad request interface' })
@@ -190,12 +194,12 @@ export default class FlashcardControllerExpress implements FlashcardControllerEx
     const biome_id = getOrganizedInterface.biome_id
     if(!biome_id) {
       res.status(400).json({ message: 'Bad request id topic' })
+      return;
     }
 
     const flashcards = await this.getFlashcardsByBiomeUseCase.getOrganizedFlashcards(biome_id)
 
     res.status(200).json({ message: 'Success', data: flashcards })
   }
-
   
 }

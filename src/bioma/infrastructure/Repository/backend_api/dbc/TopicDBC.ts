@@ -2,20 +2,26 @@ import Database from "../../Database"
 
 export default class TopicDBC {
     public async createTopic(topic_name: String, topic_description: String, icon_id: number, biome_id: number ): Promise<any> {
-        await Database.getConnection()
-        const query = `select CreateTopic(
+        try {
+            await Database.getConnection()
+            const query = `select CreateTopic(
             '${topic_name}', 
             '${topic_description}', 
             ${icon_id}, 
             ${biome_id}
-        )`
-        let res = await Database.executeQuery(query)
-        res = res[0]
-        const key = Object.keys(res)[0];
-        if (!key) {
-            throw new Error("Unexpected db result");
+            )`
+            let res = await Database.executeQuery(query)
+            res = res[0]
+            const key = Object.keys(res)[0];
+            if (!key) {
+                throw new Error("Unexpected db result");
+            }
+            return res[key];
+        } catch (error:any) {
+            // console.error("Error in createTopic:", error);
+            console.log("Error in createTopic:", error.message, "biome_id:", biome_id);
+            return -1;
         }
-        return res[key];
     }
 
     public async getTopicsByBiome(biome_id: number): Promise<any> {
