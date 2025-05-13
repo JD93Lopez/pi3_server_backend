@@ -14,7 +14,7 @@ export default class ThemeRouterExpress extends RouterExpress implements ThemeRo
 
   public getThemeRoutes = (): void => {
     this.router.get(
-      "/v1.0/themes",
+      "/themes",
       this.themeController.getAllThemes.bind(this.themeController)
     );
   };

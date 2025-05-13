@@ -16,19 +16,19 @@ export default class TopicRouterExpress extends RouterExpress implements TopicRo
 
   public getTopicRoutes = (): void => {
     this.router.post(
-      '/v1.0/topic/creation',
+      '/topic/creation',
       this.topicController.createTopic.bind(this.topicController)
     ),
     this.router.post(
-      '/v1.0/topic/biome',
+      '/topic/biome',
       this.topicController.getTopics.bind(this.topicController)
     ),
     this.router.delete(
-      '/v1.0/topic/deletion',
+      '/topic/deletion',
       this.topicController.deleteTopic.bind(this.topicController)
     ),
     this.router.put(
-      '/v1.0/topic/update',
+      '/topic/update',
       this.topicController.updateTopic.bind(this.topicController)
     )
 

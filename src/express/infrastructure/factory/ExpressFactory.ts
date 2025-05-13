@@ -1,3 +1,4 @@
+import RouterExpress from '../../domain/RouterExpress'
 import Server from '../server/Server'
 import BiomeRouterFactory from './routers/BiomeRouterFactory'
 import FlashcardRouterFactory from './routers/FlashcardRouterFactory'
@@ -8,6 +9,7 @@ import ThemeRouterFactory from './routers/ThemeRouteFactory'
 import TopicRouterFactory from './routers/TopicRouterFactory'
 import TorneoRouterFactory from './routers/TorneoRouterFactory'
 import UserRouterFactory from './routers/UserRouterFactory'
+import UserRouterFactoryV2 from './routers/UserRouterFactoryV2'
 
 export default class ExpressFactory {
   public static readonly create = (): Server => {
@@ -21,14 +23,28 @@ export default class ExpressFactory {
     const userRouter = UserRouterFactory.create()
     const torneoRouter = TorneoRouterFactory.create()
     const itemRouter = ItemRouterFactory.create()
-    // TODO: validate routerF
+    const userRouterV2 = UserRouterFactoryV2.create()
 
-    const server = new Server([
-      flashcardRouter, topicRouter, biomeRouter, 
-      iconRouter, themeRouter, playedDayRouter, 
-      userRouter, torneoRouter, itemRouter
-    ])
-    // TODO: validate server
-    return  server
+        // Routers versión 1 (con middleware)
+    const v1Routers: RouterExpress[] = [
+      flashcardRouter,
+      topicRouter,
+      biomeRouter,
+      iconRouter,
+      themeRouter,
+      playedDayRouter,
+      userRouter,
+      torneoRouter,
+      itemRouter
+    ];
+
+     // Routers versión 2 (sin middleware)
+    const v2Routers: RouterExpress[] = [
+      userRouterV2
+    ];
+
+
+
+    return new Server(v1Routers, v2Routers);
   }
 }

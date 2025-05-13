@@ -15,15 +15,15 @@ export default class TorneoRouterExpres extends RouterExpress implements TorneoR
 
     async getTorneoRoutes() {
         this.router.post(
-            "/v1.0/torneo/suscribir",
+            "/torneo/suscribir",
             this.torneoController.inscribirTorneo.bind(this.torneoController)
         ),
         this.router.post(
-            "/v1.0/torneo/participando",
+            "/torneo/participando",
             this.torneoController.getParticipantesSala.bind(this.torneoController)
         ),
         this.router.post(
-            "/v1.0/torneo/inscrito",
+            "/torneo/inscrito",
             this.torneoController.getTiempoRestante.bind(this.torneoController)
         )
     }
