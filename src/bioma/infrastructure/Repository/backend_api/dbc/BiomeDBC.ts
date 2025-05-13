@@ -51,7 +51,8 @@ export default class BiomeDBC {
             return updatedBiomeId;
         } catch (error) {
             console.error("Error in updateBiome:", error);
-            throw new Error("Failed to update biome.");
+            // throw new Error("Failed to update biome.");
+            return -1
         }
     }
 
@@ -74,6 +75,7 @@ export default class BiomeDBC {
         } catch (error: any) {
             console.error("Error in deleteBiome:", error.message, "Biome ID:", idBiome);
             // throw new Error("Failed to delete biome.");
+            return -1;
         }
     }
 }
