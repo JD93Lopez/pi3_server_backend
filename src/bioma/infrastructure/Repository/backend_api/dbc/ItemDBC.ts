@@ -24,19 +24,24 @@ export default class ItemDBC{
         if (user_id === undefined || user_id === null) {
             throw new Error("user_id is required but is undefined or null");
         }
-    
-        await Database.getConnection();
-    
-        const query = "CALL getStoreItems(?)";
-        const result = await Database.executeQuery(query, [user_id]);
-    
-        if (!result || !Array.isArray(result)) {
-            throw new Error("Unexpected db result");
-        }
-        
-        const data = Object.values(result)[0];
 
-        return data;
+        try {
+            await Database.getConnection();
+
+            const query = "CALL getStoreItems(?)";
+            const result = await Database.executeQuery(query, [user_id]);
+
+            if (!result || !Array.isArray(result)) {
+            throw new Error("Unexpected db result");
+            }
+
+            const data = Object.values(result)[0];
+
+            return data;
+        } catch (error) {
+            console.error("Error fetching store items:", error);
+            return [];
+        }
     }
 
 

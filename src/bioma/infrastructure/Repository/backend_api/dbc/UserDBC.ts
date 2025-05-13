@@ -51,7 +51,8 @@ export default class UserDBC {
             
         } catch (error) {
             console.error("Error al actualizar la racha:", error);
-            throw new Error("No se pudo actualizar la racha");
+            // throw new Error("No se pudo actualizar la racha");
+            return;
         }
     }
 
@@ -106,7 +107,8 @@ export default class UserDBC {
             return res[key];
         } catch (error) {
             console.error("Error updating user league:", error);
-            throw error;
+            // throw error;
+            return -1;
         }
     }
 

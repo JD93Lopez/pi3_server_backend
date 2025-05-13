@@ -14,7 +14,11 @@ export default class FlashcardDBC {
             const res = await Database.executeQuery(query)
             return res[0]
         } catch (error) {            
-            throw new Error("Error getting flashcards by topic from database")
+            // throw new Error("Error getting flashcards by topic from database")
+            console.log(error);
+            return []
+
+            
         }
     }
 
@@ -60,11 +64,12 @@ export default class FlashcardDBC {
         } catch (error: any) {
             if (error.code === 'ER_SP_DOES_NOT_EXIST') {
                 console.error("Stored procedure not found:", error);
-                throw new Error(`Stored procedure GetFlashcardsByBiome does not exist.`);
+                // throw new Error(`Stored procedure GetFlashcardsByBiome does not exist.`);
             }
 
             console.error("Error getting flashcards by biome:", error);
-            throw new Error("Error getting flashcards by biome from database.");
+            // throw new Error("Error getting flashcards by biome from database.");
+            return [];
         }
 
     }
