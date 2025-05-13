@@ -15,11 +15,11 @@ export default class ItemRouterExpress extends RouterExpress implements ItemRout
 
     async getItemRoutes()  {
         this.router.post(
-            "/v1.0/item/buy",
+            "/item/buy",
             this.itemController.buyItem.bind(this.itemController)
         ),
         this.router.get(
-            "/v1.0/item/store/:user_id",
+            "/item/store/:user_id",
             this.itemController.getStoreItems.bind(this.itemController)
         )
     }        
