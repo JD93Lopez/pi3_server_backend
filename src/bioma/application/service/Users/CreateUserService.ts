@@ -29,7 +29,7 @@ export class CreateUserService implements CreateUserServicePort {
             received_xp: 0,
             streak: '',
             last_date_added: new Date(),
-            league: ''
+            league: 'BRONZE'
         };
 
         const idSavedUser = await this.userRepository.save(userDoc);
