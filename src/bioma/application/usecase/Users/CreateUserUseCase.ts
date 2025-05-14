@@ -14,11 +14,6 @@ export default class CreateUserUseCase implements CreateUserUseCasePort{
         if (exists === 0) {
             const userHelper = new UserHelper()
 
-            userClient.league = "BRONZE"
-            userClient.questions_learned = 0
-            userClient.time_played = 0
-            userClient.received_xp = 0
-
             const user = userHelper.endpointToDomainUser(userClient)
             return this.createUserService.createUser(user)
         }else if(exists === 1){
