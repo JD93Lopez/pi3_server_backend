@@ -103,4 +103,9 @@ export default class UserRepository implements UserRepositoryPort {
     async updatePetName(user_id: number, pet_name: string): Promise<void> {
         await this.userDBC.updatePetName(user_id, pet_name);
     }
+
+    async checkUserExists(user_name: string): Promise<number> {
+        const result = await this.userDBC.checkUserExists(user_name);
+        return result;
+    }
 }

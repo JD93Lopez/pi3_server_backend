@@ -16,19 +16,19 @@ export default class BiomeRouterExpress extends RouterExpress implements BiomeRo
 
   public getBiomeRoutes = (): void => {
     this.router.post(
-      '/v1.0/biome/creation',
+      '/biome/creation',
       this.biomeController.createBiome.bind(this.biomeController)
     ),
     this.router.put(
-      '/v1.0/biome/update',
+      '/biome/update',
       this.biomeController.updateBiome.bind(this.biomeController)
     ),
     this.router.delete(
-      '/v1.0/biome/deletion',
+      '/biome/deletion',
       this.biomeController.deleteBiome.bind(this.biomeController)
     ),
     this.router.post(
-      '/v1.0/biome/user',
+      '/biome/user',
       this.biomeController.getBiomesByUser.bind(this.biomeController)
     )
   }

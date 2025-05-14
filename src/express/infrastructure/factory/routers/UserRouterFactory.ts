@@ -1,12 +1,7 @@
-import { JWTService } from "../../../../bioma/application/service/Users/JWTService"
 import GetUserStreakUseCase from "../../../../bioma/application/usecase/Users/GetUserStreakUseCase"
-import LoginUseCase from "../../../../bioma/application/usecase/Users/LoginUseCase"
 import UpdateUserExperienceUseCase from "../../../../bioma/application/usecase/Users/UpdateUserExperienceUseCase"
-import CreateUserUseCase from "../../../../bioma/application/usecase/Users/CreateUserUseCase"
 import UserControllerExpress from "../../../../bioma/infrastructure/express/controller/UserControllerExpress"
 import UserRouterExpress from "../../../../bioma/infrastructure/express/router/UserRouterExpress"
-import CreateUserServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/CreateUserServiceFactory"
-import LoginServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/LoginServiceFactory"
 import UserGetStreakServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UserGetStreakServiceFactory"
 import UserUpdateExperienceServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UserUpdateExperienceServiceFactory"
 import RouterExpress from "../../../domain/RouterExpress"
@@ -20,12 +15,8 @@ import SaveSelectedItemServiceFactory from "../../../../bioma/infrastructure/fac
 import SaveSelectedItemUseCase from "../../../../bioma/application/usecase/Users/SaveSelectedItemUseCase"
 import GetSelectedItemServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/GetSelectedItemServiceFactory"
 import GetSelectedItemUseCase from "../../../../bioma/application/usecase/Users/GetSelectedItemUseCase"
-import SendVerificationCodeUserCase from "../../../../bioma/application/usecase/Users/SendVerificationCodeUserCase"
-import { EmailService } from "../../../../bioma/application/service/Users/EmailService"
-import VerifyCodeUseCase from "../../../../bioma/application/usecase/Users/VerifyCodeUseCase"
 import UpdateUserProfileServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdateUserProfileServiceFactory"
 import UpdateProfileUseCase from "../../../../bioma/application/usecase/Users/UpdateProfileUseCase"
-import JWTUseCase from "../../../../bioma/application/usecase/Users/JWTUseCase"
 import UpdatePetNameServiceFactory from "../../../../bioma/infrastructure/factory/service/Users/UpdatePetNameServiceFactory"
 import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/UpdatePetNameUseCase"
 
@@ -34,9 +25,6 @@ import UpdatePetNameUseCase from "../../../../bioma/application/usecase/Users/Up
 export default class UserRouterFactory {
 
     public static readonly create = (): RouterExpress => {
-        // --------- CREATE USER  ----------------
-        const userCreateService = CreateUserServiceFactory.create()
-        const userCreateUseCase = new CreateUserUseCase(userCreateService)
 
         // ----- User Update experience -----
         const userUpdateExService = UserUpdateExperienceServiceFactory.create()
@@ -55,14 +43,7 @@ export default class UserRouterFactory {
         const getTotalBalanceService = GetTotalBalanceServiceFactory.create()
         const getTotalBalanceUseCase = new GetTotalBalanceUseCase(getTotalBalanceService);
 
-
-        // --------- User Login  ----------------
-        const userValidationService = LoginServiceFactory.create()
-        const userLoginUseCase = new LoginUseCase(userValidationService)
-        // ---------- JWT ----------------
-        const userJwtService = new JWTService();
-        const jwtUseCase = new JWTUseCase(userJwtService);
-
+        
         // ---------- Days of inactivity ---------------
         const getDaysInactivity = GetDaysSinceLastXPActivityServiceFactory.create()
         const getDaysInactivityUseCase = new GetDaysSinceLastXPActivityUseCase(getDaysInactivity)
@@ -73,24 +54,20 @@ export default class UserRouterFactory {
 
         const getSelectedItemService = GetSelectedItemServiceFactory.create()
         const getSelectedItemUseCase = new GetSelectedItemUseCase(getSelectedItemService)
+        
 
-        // ---------- Send verification code ---------------
-        const emailService = new EmailService();
-        const sendVerificationCodeUseCase = new SendVerificationCodeUserCase(emailService);
-        const verifyCodeUseCase = new VerifyCodeUseCase(emailService);
-
+        
         const updateUserProfileService = UpdateUserProfileServiceFactory.create()
         const userUpdateProfileUseCase  = new UpdateProfileUseCase(updateUserProfileService);
-
+        
         const updatePetNameService = UpdatePetNameServiceFactory.create()
         const updatePetNameUseCase = new UpdatePetNameUseCase(updatePetNameService)
+
         
         const userController = new UserControllerExpress(
-          userUpdateExUseCase, userCreateUseCase, userGetStreakUseCase, 
-          userLoginUseCase , jwtUseCase, deleteUserCascadaUseCase, getTotalBalanceUseCase, 
-          getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, 
-          sendVerificationCodeUseCase, verifyCodeUseCase, userUpdateProfileUseCase, 
-          updatePetNameUseCase
+          userUpdateExUseCase, userGetStreakUseCase, deleteUserCascadaUseCase, getTotalBalanceUseCase, 
+          getDaysInactivityUseCase, saveSelectedItemUseCase, getSelectedItemUseCase, userUpdateProfileUseCase, 
+          updatePetNameUseCase, 
         )
 
 

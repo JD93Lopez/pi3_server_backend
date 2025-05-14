@@ -16,4 +16,5 @@ export interface UserRepositoryPort {
     getSelectedItem(user_id: number): Promise<ItemDoc>
     updateProfile(user: UserDoc): Promise<boolean>
     updatePetName(user_id: number, pet_name: string): Promise<void>
+    checkUserExists(user_name: string): Promise<number>
 }

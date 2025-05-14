@@ -4,7 +4,11 @@ import UserRouterExpressPort from "../../../domain/ports/driver/router/UserRoute
 
 export default class UserRouterExpress extends RouterExpress implements UserRouterExpressPort {
 
-    constructor(public userController: UserControllerExpressPort) {
+
+    constructor(
+        public userController: UserControllerExpressPort,
+
+    ) {
         super()
         this.routes()
     }
@@ -15,61 +19,41 @@ export default class UserRouterExpress extends RouterExpress implements UserRout
 
     async getUserRoutes() {
         this.router.put(
-            "/v1.0/user/update/experience",
+            "/user/update/experience",
             this.userController.updateUserExperience.bind(this.userController)
-        ),
+        )
         this.router.post(
-            '/v1.0/user/creation',
-            this.userController.createUser.bind(this.userController)
-        ),
-        this.router.post(
-            "/v1.0/user/streak",
+            "/user/streak",
             this.userController.getUserStreak.bind(this.userController)
         ),
         this.router.delete(
-            '/v1.0/user/:id',
+            '/user/:id',
             this.userController.deleteUserById.bind(this.userController)
         ),
         this.router.post(
-            "/v1.0/user/login",
-            this.userController.loginUser.bind(this.userController)
-        ),
-        this.router.post(
-            "/v1.0/user/balance",
+            "/user/balance",
             this.userController.getTotalBalance.bind(this.userController)
         ),
         this.router.post(
-            "/v1.0/user/inactivity",
+            "/user/inactivity",
             this.userController.getDaysSinceLastXPActivity.bind(this.userController)
-        ),
-        this.router.post(
-            "/v1.0/user/send/code",
-            this.userController.sendVerificationCode.bind(this.userController)
-        ),
-        this.router.post(
-            "/v1.0/user/verify/code",
-            this.userController.verifyCode.bind(this.userController)
         )
         this.router.post(
-            "/v1.0/user/selectedItem",
+            "/user/selectedItem",
             this.userController.saveSelectedItem.bind(this.userController)
         )
         this.router.get(
-            "/v1.0/user/selectedItem/:id",
+            "/user/selectedItem/:id",
             this.userController.getSelectedItem.bind(this.userController)
         )
         this.router.post(
-            "/v1.0/user/profile",
+            "/user/profile",
             this.userController.updateUserProfile.bind(this.userController)
         )
-        this.router.get(
-            "/v1.0/user/verfy/token",
-            this.userController.isTokenValid.bind(this.userController)
-        )
-        
         this.router.put(
-            "/v1.0/user/update/petName",
+            "/user/update/petName",
             this.userController.updatePetName.bind(this.userController)
         )
+
     }
 }

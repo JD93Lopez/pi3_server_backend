@@ -14,7 +14,7 @@ export default class IconRouterExpress extends RouterExpress implements IconRout
 
   public getIconRoutes = (): void => {
     this.router.get(
-      "/v1.0/icons",
+      "/icons",
       this.iconController.getAllIcons.bind(this.iconController)
     );
   };
