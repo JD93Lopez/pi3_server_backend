@@ -7,6 +7,7 @@ export default class CreateUserUseCase implements CreateUserUseCasePort{
     constructor(private createUserService: CreateUserServicePort){}
     createUser(userClient: UserInterface): Promise<number>{
         const userHelper = new UserHelper()
+        userClient.league = "BRONZE"
         const user = userHelper.endpointToDomainUser(userClient)
         return this.createUserService.createUser(user)
     }
