@@ -1,15 +1,15 @@
 import cors from 'cors';
 import express, { Application } from 'express';
-import https from 'https'; // 🔥 Importamos el módulo https
-import fs from 'fs'; // 🔥 Para leer los archivos del certificado
 import path from 'path';
 import RouterExpress from '../../domain/RouterExpress';
 import AuthMiddleware from '../authMiddleware';
 import AuthMiddlewareFactory from '../../../bioma/infrastructure/factory/repository/AuthMiddlewareFactory';
 
+
 export default class Server {
   private readonly app: Application;
   private readonly authMiddleware: AuthMiddleware;
+
 
   constructor(
     private readonly routersV1: RouterExpress[],
@@ -33,8 +33,10 @@ export default class Server {
   };
 
   public routes = (): void => {
+
     // ✅ Aplicamos middleware global solo a V1
     this.app.use('/api/v1.0/middleware', this.authMiddleware.isTokenValid.bind(this.authMiddleware));
+
 
     // API versión 1.0 (protegida)
     this.routersV1.forEach((routerConcreto) => {
@@ -50,16 +52,25 @@ export default class Server {
   public start = (): void => {
     const PORT = process.env['PORT'] ?? 3000;
     const HOST = process.env['HOST'] ?? 'localhost';
-
-    // 🔥 Leer los certificados
-    const options = {
-      key: fs.readFileSync(path.resolve(__dirname, '../../certs/server.key')),   // Ruta a tu llave privada
-      cert: fs.readFileSync(path.resolve(__dirname, '../../certs/server.cer')) // Ruta a tu certificado
-    };
-
-    // 🔥 Crear servidor HTTPS
-    https.createServer(options, this.app).listen(PORT, () => {
-      console.log(`Server is running on https://${HOST}:${PORT}`);
+    this.app.listen(PORT, () => {
+      console.log(`Server is running on http://${HOST}:${PORT}`);
     });
   };
+
+  // HTTPS
+  // public start = (): void => {
+  //   const PORT = process.env['PORT'] ?? 3000;
+  //   const HOST = process.env['HOST'] ?? 'localhost';
+
+  //   // 🔥 Leer los certificados
+  //   const options = {
+  //     key: fs.readFileSync(path.resolve(__dirname, '../../certs/server.key')),   // Ruta a tu llave privada
+  //     cert: fs.readFileSync(path.resolve(__dirname, '../../certs/server.cer')) // Ruta a tu certificado
+  //   };
+
+  //   // 🔥 Crear servidor HTTPS
+  //   https.createServer(options, this.app).listen(PORT, () => {
+  //     console.log(`Server is running on https://${HOST}:${PORT}`);
+  //   });
+  // };
 }
