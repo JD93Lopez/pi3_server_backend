@@ -18,7 +18,7 @@ export class JWTService {
     return jwt.sign(
       { id_user: userId, user_name: username },
       this.jwtSecret,
-      { expiresIn: '7h' }
+      { expiresIn: '7d' }
     );
   }
 
